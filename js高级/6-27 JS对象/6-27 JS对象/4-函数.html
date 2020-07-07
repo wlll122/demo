@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>函数</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<ul>
+			<li>li_1</li>
+			<li>li_2</li>
+			<li>li_3</li>
+			<li>li_4</li>
+			<li>li_5</li>
+			<li>li_6</li>
+			<li>li_7</li>
+			<li>li_8</li>
+		</ul>
+		
+		<script type="text/javascript">
+			"use strict"; // 启用严格模式，一般写在js代码第一行
+			
+			// 函数创建方式 	1.声明函数  2.函数表达式  3.构造函数
+			function fn(x){}
+			var fn1 = function(x,y){}
+			var fn2 = new Function("x,y,z", "console.log(x)");
+			
+			console.log(fn.name, fn1.name, fn2.name);
+			// 函数的 length 属性 => 函数的形参个数
+			console.log(fn.length, fn1.length, fn2.length);
+			
+			/* 函数的形参
+				形参个数 > 实参个数   多余的形参值为 undefined
+				参数个数 < 实参个数   多余的实参可以在arguments中找到
+				arguments: 实参的集合，是一个伪数组，不定参函数
+				arguments.callee   代表对原函数的引用，严格模式下不可用
+			*/
+			// function gn (a, b, c) {
+			// 	console.log(a,b,c);
+			// }
+			
+			// gn(1,2);
+			
+			/* 函数的默认参
+				当函数没有传 a,b 的时候，默认它们的值为 1
+				es6 赋值默认参  可以直接在形参后面跟上 = 赋值
+			*/
+			// 简单类型值赋值默认参
+			// function gn (a = 1, b = 1) {
+				// if(typeof a == "undefined"){
+				// 	a = 1;
+				// }
+				// if(typeof b == "undefined"){
+				// 	b = 1;
+				// }
+				
+				// a = a || 1;
+				// b = b || 1;
+				// console.log(a + b);
+			// }
+			
+			function gn (obj = { name: "张安", age: 12 }) {
+				// 判断对象的某属性是否存在
+				// obj = obj || {};
+				// obj.name = obj.name || "张安";
+				// obj.age = obj.age || 12;
+				
+				// 这种方式和es6默认参对象是一致的
+				// obj = obj || {
+				// 	name: "张安",
+				// 	age: 12
+				// }
+				
+				// 将传入的对象合并到默认对象上
+				obj = Object.assign({
+					name: "张安",
+					age: 12
+				}, obj);
+				console.log(obj.name, obj.age);
+			}
+			
+			gn({});
+			
+			
+			// 立即执行函数   佟骑龙、胡夏生
+			// 声明函数、匿名函数  函数表达式
+			// 作用：创建一个独立作用域空间，里面的变零和外界是不相干的
+			(function fn(){
+				console.log("具名函数的立即执行1，当函数要调用自己的时候");
+			})();
+			(function (i){
+				console.log("匿名函数的立即执行2", i);
+			}(1));
+			
+			var fn = function(){
+				console.log("函数表达式的立即执行");
+			}();
+			var fn = (function(){
+				console.log("函数表达式的立即执行1");
+			}());
+			var fn = (function(){
+				console.log("函数表达式的立即执行2");
+			})();
+			
+			// 忍者代码  a,b,c,d
+			+function (){
+				console.log("忍者级立即执行");
+			}();
+			
+			
+			var lis = document.querySelectorAll("li");
+			for(let i = 0; i < lis.length; i ++){
+				// lis[i].index = i;
+				// (function (i) {
+				// 	lis[i].onclick = function () {
+				// 		// console.log(this.index);
+				// 		console.log(i);
+				// 	}
+				// }(i))
+				
+				// lis[i].onclick = (function (i) {
+				// 	return function () {
+				// 		console.log(i);
+				// 	}
+				// }(i))
+				
+				lis[i].onclick = function () {
+					console.log(i);
+				}
+			}
+			
+			// var   es6:let const (块状作用域声明)
+			// var有声明提升，let和const没有
+			// let/const 不能重声明同一个变量
+			// const 声明的变量不能重新用等号赋值
+			
+			// i = 10;
+			// {
+			// 	var i = 0;
+			// }
+			// console.log(i); // 0
+			
+			
+			var a = 2;
+			function fnn () {
+				if(!a){
+					let a = 10;
+					console.log(a);
+				}else{
+					a = 20
+					console.log(a);
+				}
+			}
+			fnn(); // 20
+		</script>
+	</body>
+</html>

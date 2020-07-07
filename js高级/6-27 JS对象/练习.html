@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li>li_1</li>
+      <li>li_2</li>
+      <li>li_3</li>
+      <li>li_4</li>
+      <li>li_5</li>
+      <li>li_6</li>
+      <li>li_7</li>
+      <li>li_8</li>
+    </ul>
+    <script>
+      // arr = [1, 2, 4, 5];
+      // console.log(typeof arr);
+      // var obj = {
+      //   0: 1,
+      //   1: 2,
+      //   2: 3,
+      //   3: 4,
+      //   4: 5,
+      //   5: 1,
+      //   length: 6,
+      //   push: function (value) {
+      //     this[this.length] = value;
+      //     this.length++;
+      //   },
+      // };
+      // arr.push("hello");
+      // obj.push("hello");
+      // for (var i in arr) {
+      //   console.log("i===>", i, "arr[i]==>", arr[i]);
+      // }
+      // console.log("######");
+      // for (var j in obj) {
+      //   console.log("j====>", j, "obj[j]===>", obj[j]);
+      // }
+      // console.log(JSON.stringify(obj));
+      // var obj1 = {
+      //   name:'libai',
+      //   age:12
+      // }
+      // console.log("name" in obj1);//判断属性是否在对象中
+
+      // 数组的克隆
+      /*
+      var arr = [1, 2, 34, 5, 6, { name: "张三", friend: "李四" }];
+      var arr1 = arr;
+      function clone(arr) {
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+          newArr.push(arr[i]);
+        }
+        return newArr;
+      }
+      var arr1 = clone(arr);
+      console.log(arr1);
+      //  深克隆
+      function deepClone(params) {
+        if (params === null) {
+          return null;
+        }
+        var newObj = params instanceof Array ? [] : {};
+        for (var i in params) {
+          if (typeof paramsp[i] == "object") {
+            newObj[i] = deepClone(params[i]);
+          } else {
+            newObj[i] = params[i];
+          }
+        }
+        return newObj;
+      }
+
+      var obj2 = deepClone(obj);
+      var arr2 = deepClone(arr);
+      console.log(obj2.friend === obj.friend);*/
+
+      // function v() {
+      //   var a = 7;
+      //   function a() {}
+      //   console.log(a);
+      // }
+      // v();
+      // function v() {
+      //   console.log(a);
+      //   a = "aaa";
+      //   var a = "bbb";
+      //   console.log(a);
+      // }
+      // v();
+      "use strict";
+      //声明函数,函数表达式,构造函数
+      // function fn(x) {}
+      // var fn1 = function (x, y) {};
+      // var fn2 = new Function("x,y,z", "console.log(x)");
+      // console.log(fn.name, fn1.name, fn2.name);
+      // console.log(fn.length, fn1.length, fn2.length);
+      // arguments  实参的集合
+      // function gn(a, b, c) {
+      //   console.log(a, b, c);
+      // }
+      // gn(1, 2);
+      //参数值小于形参时显示未定义,undefined
+      // 简单类型的默认参数赋值
+      function gn(a = 1, b = 2) {
+        if (typeof a == "undefined") {
+          a = 1;
+        }
+      }
+    </script>
+  </body>
+</html>

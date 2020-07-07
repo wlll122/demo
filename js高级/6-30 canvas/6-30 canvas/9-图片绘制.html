@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>图片绘制</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				margin: 50px;
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cvs" width="600" height="300"></canvas>
+		
+		<!-- <img src="../lib/image/HC/avatar.jpg" alt=""> -->
+		
+		<script type="text/javascript">
+			// 获取绘图上下文
+			var ctx = cvs.getContext("2d");
+			// 绘制路径：移动到起点，规划到终点，描边
+			// 宽高直接写在标签上的时候，可以通过 元素.width/height获取它的宽高
+			for(var i = 50; i < cvs.width; i += 50){
+				ctx.beginPath();
+				ctx.moveTo(i, 0);
+				ctx.lineTo(i, cvs.height);
+				ctx.stroke();
+				ctx.closePath();
+			}
+			
+			for(var j = 50; j < cvs.width; j += 50){
+				ctx.beginPath();
+				ctx.moveTo(0, j);
+				ctx.lineTo(cvs.width, j);
+				ctx.stroke();
+				ctx.closePath();
+			}
+			
+			// 图片绘制
+			// 简单使用 imgEle, x , y
+			// var imgEle = document.querySelector("img");
+			// 在canvas上使用图片绘制，需要等图片加载完毕
+			// 如果不在页面上显示图片，需要生成图片元素
+			// var imgEle = document.createElement("img");
+			var imgEle = new Image();
+			// imgEle.src = "../lib/image/HC/avatar.jpg";
+			imgEle.src = "../lib/image/HC/shark2.png";
+			// imgEle.onload = function () {
+			// 	ctx.drawImage(imgEle, 50, 50);
+			// }
+			
+			// 设置图片宽高  imgEle, x,y, width,height
+			// imgEle.onload = function () {
+			// 	// this  =>  在js绑定的事件中指向事件的绑定者，在行内绑定，指向window
+			// 	// this  =>  在对象的方法中，指向函数的调用者，注意call、bind、apply方法
+			// 	// this  =>  在定时器的回调函数中，指向window
+				
+			// 	ctx.drawImage(this, 50,50, 100,100);
+			// }
+			
+			// 设置裁剪 imgEle, 裁剪图片的起始位置x,y 裁剪图片的大小swidth,sheight 放图片的位置坐标x,y  显示图片的大小width,height
+			imgEle.onload = function () {
+				// ctx.drawImage(this, 0,0, 110,110, 50,50, 50,50);
+				
+				// 裁剪可以实现图片的帧动画
+				var count = 0;
+				setInterval(function () {
+					if(count == 3276){
+						count = 0;
+					}
+					// 清除画布 clearRect(清除的矩形区域的起点坐标x,y, 清除区域的大小width,height)
+					ctx.clearRect(0,0, cvs.width, cvs.height);
+					ctx.drawImage(imgEle, 0,count, 516,273, 0,0, 516,273);
+					count += 273;
+				}, 100);
+			}
+			
+			
+		</script>
+	</body>
+</html>

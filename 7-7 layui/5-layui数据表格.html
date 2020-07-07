@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>数据表格</title>
+		<link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css"/>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container">
+			
+			<table id="demo" lay-filter="test"></table>
+		</div>
+		
+		<!-- layui.js 是按模块引入 all.js 是全部引入 -->
+		<!-- <script src="../lib/layui/layui.js" type="text/javascript" charset="utf-8"></script> -->
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/html" id="buttonHtml">
+			<button class="layui-btn layui-btn-sm" lay-event="detail">查看详情 {{ d.longtime }}</button>
+		</script>
+		
+		<script type="text/javascript">
+			/*
+				layui使用js有两种模式：
+					1. 模块化使用，减小js体积
+					2. 全部引用，引入所有预定义的模块
+			*/
+			// 使用模块方式
+			// layui.use("模块名", 回调函数)   layui.use(["模块1","模块2"...], 回调函数)
+			// console.log(layui.table);
+			// layui.use("table", function () {
+			// 	console.log(layui.table);
+			// })
+			// layui.use(["table", "form"], function () {
+			// 	console.log(layui.table);
+			// 	console.log(layui.form);
+			// });
+			var table = layui.table;
+			
+			//执行渲染
+			table.render({
+				elem: document.querySelector("#demo"),
+				url: "http://www.bufantec.com/api/douban/movie/in_theaters",
+				parseData: function(res){ //res 即为原始返回的数据
+					console.log(res);
+				    return {
+				      "code": 0, //解析接口状态
+				      "msg": "success", //解析提示文本
+				      "count": res.data.totalRow, //解析数据长度
+				      "data": res.data.list //解析数据列表
+				    };
+				},
+				// toolbar: true,
+				cols: [[
+					// 每一对象表示一列
+					{
+						title: "序号",
+						type: "numbers"
+					},
+					{
+						title: "电影名称",
+						field: "title"
+					},
+					{
+						title: "电影时长",
+						field: "longtime"
+					},
+					{
+						title: "电影类型",
+						field: "genres"
+					},
+					{
+						title: "电影导演",
+						field: "director"
+					},
+					{
+						title: "电影编剧",
+						field: "scriptwriter"
+					},
+					{
+						title: "操作",
+						// 1. script标签改type类型为 text/html 加id在下边使用id  在标签内可以使用 {{ d.xx }} 来添加行内数据  d表示渲染时行内数据
+						// toolbar: "#buttonHtml"
+						
+						// toolbar不能使用函数转义的方式添加自定义工具条
+						// templet: function(data){
+						// 	return `<button class="layui-btn layui-btn-sm" lay-event="detail">查看详情 ${ data.longtime }</button>`;
+						// },
+						
+						toolbar: `<div><button class="layui-btn layui-btn-sm" lay-event="detail">查看详情 {{ d.longtime }}</button></div>`
+					}
+				]],
+				width: 600,
+				height: 300,
+				done: function(){
+					console.log("数据渲染完成的回调函数");
+				},
+				// data: 如果是一个本地数据可以使用data，直接将数据渲染到页面
+				page: true,
+				limit: 10, // 定义起始每页的个数，要求必须从limits中选择
+				limits: [10, 20], // 定义可选的页内数据的个数
+				
+			});
+			
+			// 添加的行内工具条的事件
+			table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+			  var data = obj.data; //获得当前行数据
+			  var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+			  var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+			 
+			  if(layEvent === 'detail'){ //查看
+			    //do somehing
+				console.log(data);
+			  } 
+			});
+			
+			/*
+				js 同步，异步
+				同步：表示只能执行一件事情  1. 烧水 10min 2. 1执行完成，切西红柿 3. 打鸡蛋  4. 下面条
+				异步：表示可以同时两件以上的事情  1. 烧水 10min 2. 10min内 执行上述234
+				不知道什么时候会发生或者执行的操作，都是异步操作
+				首先创建环境，然后声明提前，按顺序执行内容  （事件循环机制）
+			*/
+		
+		</script>
+	</body>
+</html>

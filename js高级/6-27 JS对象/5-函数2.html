@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>函数2</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			"use strict";
+			/*
+				简单类型值当实参时: 函数内部改变形参的值，外边的变量值不会更改
+				引用类型值当实参时: 函数内部改变形参的值，外边的变量值会更改
+				形参跟实参的关系，拷贝值    形参 = 实参
+				形参相当于在函数中声明了变量
+			*/
+			/* var x = { name: "李四" };
+			function fn (x) {
+				var a = {};
+				a = x;
+				var b = a;
+				b = {};
+				var c = b;
+				c.name = "zhangsan";
+			}
+			
+			fn(x);
+			console.log(x); // {name: "zhangsan"} */
+			
+			/*
+				高阶函数：函数作为参数使用的函数
+				回调函数：函数执行完执行的函数就是回调函数
+			*/
+			function fn (a, b, callback) {
+				var c = a + b;
+				
+				// if(typeof callback == 'function'){
+				// 	callback(c);
+				// }
+				callback && callback(c);
+			}
+		
+			
+			fn(1,2, function(n){
+				console.log(n*2);
+			})
+		</script>
+	</body>
+</html>

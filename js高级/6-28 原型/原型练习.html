@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(){
+
+        }
+        console.log(fn.prototype);
+        console.log(fn.prototype.constructor);
+        console.log(fn.prototype.constructor);
+        var f= new fn();
+        console.log(f.__proto__);
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+            this.sayName = function(){
+                //实例共用一个方法
+                console.log(this.name);
+            }
+        }
+        var peraon1 = new Person("tome",30);
+        var peraon2 = new Person('ton',33);
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../layui-v2.5.6/layui-v2.5.6/layui/css/layui.css"  media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+  <style>
+      *{
+          padding: 0;
+          margin: 0;
+      }
+      .main{
+        width: 1200px;
+          height: 200px;
+          background-color: coral;
+          margin: 0 auto;
+      }
+      .layui-container{
+          width: 1200px;
+          /* background-color: darkgoldenrod; */
+          
+          
+      }
+      .main .title{
+          width: 100%;
+          height: 100%;
+          background-color: deeppink;
+          height: 200px;
+      }
+      .layui-row{
+          padding: 0px;
+      }
+      .nei{
+          background-color: dimgrey;
+      }
+  </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="layui-container layui-col-space10">
+            <!-- layui-col-space1 设置整体盒子的偏移量 -->
+            <div class="layui-row ">
+                
+                  <div class="layui-col-xs12 layui-col-sm6 layui-col-md4  layui-col-space2">
+                    <div class="nei layui-row grid-demo">
+                        <div class="layui-col-md3">
+                            内部列
+                          </div>
+                          <div class="layui-col-md9">
+                            内部列
+                          </div>
+                          <div class="layui-col-md12">
+                              <!-- 内部嵌套的盒子直接可以定义不同的方式 -->
+                            内部列
+                          </div>
+                    </div>
+                  
+                  </div>
+                  <div class="layui-col-xs12 layui-col-sm6 layui-col-md4 ">
+                    <div class="title">
+                        标题
+                    </div>
+                  </div>
+                  <div class="layui-col-xs12 layui-col-sm6 layui-col-md4 ">
+                    <div class="title">
+                        标题
+                    </div>
+                  </div>
+            </div>
+          </div>   
+    </div>
+
+</body>
+</html>

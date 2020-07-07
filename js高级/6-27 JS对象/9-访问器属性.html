@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>访问器属性</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+			访问器属性也包含4个描述符
+				configurable： 是否可配置，是否可删除
+				enumerable：是否可遍历
+				get：是一个函数，返回值是读取此属性的值
+				set：是一个函数，默认接受一个参数：用户重写的值
+				
+			对象本身包含一个 getter和setter函数，描述一个属性的读写，不能这两个函数中操作自身属性
+			
+			对象的数据属性和访问器属性不能共存
+			
+			带下划线的属性表示不能被其它开发者更改的属性 _xxx
+			*/
+		   
+			var obj = {
+				lastName: "李",
+				firstName: "太白",
+				// get fullName(){
+				// 	return this.lastName + this.firstName;
+				// },
+				// set fullName(v){
+				// 	this.lastName = v[0];
+				// 	// substr substring slice 
+				// 	this.firstName = v.slice(1);
+				// }
+				// zAge 周岁
+				// xAge 虚岁
+			}
+			
+			/*es6 对象可以直接通过 属性名(){} 来定义方法，作用等同于： 属性名: function(){}*/
+			
+			Object.defineProperty(obj, "fullName", {
+				configurable: true,
+				enumerable: true,
+				get(){
+					return this.lastName + this.firstName;
+				},
+				// set: function(v){
+				// 	this.lastName = v[0];
+				// 	this.firstName = v.slice(1);
+				// },
+				// writable: false
+			})
+			
+			Object.defineProperty(obj, "xAge", {
+				enumerable: true,
+				get(){
+					return obj._age;
+				},
+				set(v){
+					obj._age = v;
+				}
+			})
+			
+			Object.defineProperty(obj, "zAge", {
+				enumerable: true,
+				get(){
+					return obj._age - 1;
+				}
+			})
+			
+			Object.defineProperty(obj, "_age", {
+				value: 10,
+				writable: true
+			})
+			
+			delete obj.fullName;
+			
+			console.log(obj.fullName);
+			
+			obj.fullName = "苏东坡";
+			console.log(obj);
+			
+			
+			for(var i in obj){
+				console.log(obj[i], i);
+			}
+		</script>
+	</body>
+</html>

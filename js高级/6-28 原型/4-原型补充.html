@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>原型补充</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			// 原型的动态性：先创建构造函数的实例，然后再给原型添加属性或者方法，那么
+			//实例依然可以访问新添加的属性和方法，要写添加的方法或属性后面使用
+			function Cat (name) {
+				this.name = name;
+			}
+			
+			
+			
+			// Cat.prototype.skill = ["抓", "挠", "咬"];
+			// Cat.prototype.run = function () {
+			// 	console.log("run ...");
+			// }
+			console.log("obj === Cat.prototype", obj === Cat.prototype); // true
+			
+			// 当我们使用字面量形式给构造函数的原型对象添加属性和方法的时候，原型的动态性失效，
+			//因为它被重写了，所以失去了对系统添加的原型的引用。可以手动将contructor赋值，不影响使用
+			// Cat.prototype = {
+			// 	constructor: Cat,
+			// 	skill: ["抓", "挠", "咬"],
+			// 	run(){
+			// 		console.log("run ...");
+			// 	}
+			// }
+			
+			
+			// 在不更改原型对象的情况下用字面量形式添加内容
+			Cat.prototype.extends = function (obj){
+				for(var i in obj){
+					if(!(i in Cat.prototype)){
+						Cat.prototype[i] = obj[i];
+					}
+				}
+			}
+			
+			Cat.prototype.extends({
+				skill: ["抓", "挠", "咬"],
+				run(){
+					console.log("run ...");
+				}
+			})
+			
+			console.log("obj === Cat.prototype", obj === Cat.prototype); // false
+
+			var cat1 = new Cat("警长");
+			
+			console.log("cat1.skill",cat1.skill);
+			cat1.run();
+			
+			
+			console.log("cat.skill", cat.skill);
+			cat.run();
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>call</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				call: 调用一个对象的某一个方法，用另外一个对象替换当前对象执行此方法
+				语法：func.call(thisObj, arg1,arg2...);
+				调用一个函数，用第一个参数作为函数中的this使用此函数
+			*/
+			var name = "window";
+			
+			var user = {
+				name: "张三",
+				sayName(){
+					console.log(this.name);
+				}
+			}
+			
+			// user.sayName();
+			// user.sayName.call(window);
+			
+			// 如果第一个参数不传，默认是window
+			user.sayName.call();
+			
+			function fn (word) {
+				console.log(this.name + " say: " + word);
+			}
+			
+			// fn("hello");
+			fn.call(user, "hello");
+			
+			function Cat () {
+				this.name = "Tom";
+			}
+			
+			var cat = new Cat();
+			// cat 有一个属性 name， __proto__ ==> Cat.prototype
+			// 创建一个新对象，将新对象的原型指向Cat构造函数的原型对象，调用了构造函数，将构造函数中的this指向自己,将新对象返回
+			var obj = {};
+			// obj.__proto__ = Cat.prototype;
+			Object.setPrototypeOf(obj, Cat.prototype);
+			Cat.call(obj);
+			console.log("obj",obj);
+			console.log("cat",cat);
+			
+			
+			// 新的鉴别类型的方式    吴星楠
+			// 调用对象的toString方法，使用call方法其它变量代替对象，显示出相应的类型
+			// string/number/boolean/undefined/null   object array function
+			console.log(obj.toString());
+			console.log(obj.toString.call([]));
+			console.log(obj.toString.call(NaN));
+			console.log(obj.toString.call(Infinity));
+			console.log(obj.toString.call(true));
+			console.log(obj.toString.call("hello"));
+			console.log(obj.toString.call(undefined));
+			console.log(obj.toString.call(null));
+			console.log(obj.toString.call(fn));
+			
+			function fn () {
+				
+			}
+		</script>
+	</body>
+</html>

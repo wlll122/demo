@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>绘制矩形</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				margin: 50px;
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cvs" width="400" height="300"></canvas>
+		
+		<script type="text/javascript">
+			// 获取绘图上下文
+			var ctx = cvs.getContext("2d");
+			// 绘制路径：移动到起点，规划到终点，描边
+			// 宽高直接写在标签上的时候，可以通过 元素.width/height获取它的宽高
+			for(var i = 50; i < cvs.width; i += 50){
+				ctx.beginPath();
+				ctx.moveTo(i, 0);
+				ctx.lineTo(i, cvs.height);
+				ctx.stroke();
+				ctx.closePath();
+			}
+			
+			for(var j = 50; j < cvs.width; j += 50){
+				ctx.beginPath();
+				ctx.moveTo(0, j);
+				ctx.lineTo(cvs.width, j);
+				ctx.stroke();
+				ctx.closePath();
+			}
+			
+			// 绘制矩形(长方形、正方形)路径
+			// ctx.rect(50, 50, 150, 100);
+			// 快速描边矩形
+			ctx.lineWidth = 20;
+			
+			ctx.fillStyle = "hsla(125,80%,60%,1)";
+			// ctx.strokeRect(50,50,150,100);
+			ctx.fillRect(50,50,150,100);
+			
+			// 填充颜色的色值
+			// ctx.fillStyle = "hsla(125,80%,60%,1)";
+			// ctx.strokeStyle = "hsla(125,80%,60%,1)";
+			// 填充颜色 会自动闭合路径
+			// ctx.fill();
+			// ctx.stroke();
+			
+		</script>
+	</body>
+</html>

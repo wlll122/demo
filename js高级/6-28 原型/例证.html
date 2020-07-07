@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const target = {a:1};
+        const source = {b:2,a:3};
+        Object.assign(target,source)
+        console.log(Object.assign(target,source));
+        // 此方法主要为合并对象的属性,第一个参数为目的对象,第二个为源属性
+        // 有多个参数时均为源属性,后面的会覆盖前面的源属性
+        // 只有字符串类型可传入
+        
+
+    </script>
+</body>
+</html>

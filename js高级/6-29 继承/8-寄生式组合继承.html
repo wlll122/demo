@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>组合继承</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			function Parent (age) {
+				this.age = age;
+				this.friend = [];
+			}
+			
+			Parent.prototype.run = function () {
+				console.log("run ...");
+			}
+			
+			var parent1 = new Parent(10);
+			var parent2 = new Parent(20);
+			
+			// 建立一个空的构造函数，它的原型指向父类原型，子类的原型指向它的实例
+			function Temp () {}
+			Temp.prototype = Parent.prototype;
+			
+			
+			function Child (name, age) {
+				this.name = name;
+				Parent.call(this, age);
+			}
+			
+			Child.prototype = new Temp();
+			Child.prototype.constructor = Child;
+			
+			var child1 = new Child("狗蛋",12);
+			var child2 = new Child("二毛", 16);
+			
+			
+			function Child1 () {
+				
+			}
+			Child1.prototype = new Parent();
+			
+			console.log(child1);
+			console.log(child2);
+			
+			console.log("child1.friend === child2.friend", child1.friend === child2.friend); 
+			
+			// 最佳实现
+		</script>
+	</body>
+</html>

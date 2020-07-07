@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>canvas</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				/* background-color: red; */
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 默认宽高：300*150 -->
+		<canvas width="400" height="300">
+			你的浏览器不支持canvas，请升级浏览器.浏览器不支持 
+		</canvas>
+		
+		<span>hello canvas</span>
+		<img src="../lib/image/HC/avatar.jpg" alt="">
+		
+		<script type="text/javascript">
+			// 获取canvas元素
+			var cvs = document.querySelector("canvas");
+			
+			// 使用canvas.getContext("2d")，获取平面画笔工具
+			var ctx = cvs.getContext("2d");
+			
+			// console.log(ctx);
+			// 移动画笔到某个位置
+			ctx.moveTo(50, 50);
+			// 让画笔移动到某个位置，规划线的路径
+			ctx.lineTo(150, 50);
+			// lineTo后lineTo 相当从上一个线链接到此
+			// ctx.lineTo(150, 150);
+			
+			// 如果是重新划线，那么需要重新移动画笔到新的位置
+			ctx.moveTo(50,150);
+			ctx.lineTo(150,150);
+			
+			// 设置描边颜色  默认黑色
+			ctx.strokeStyle = "red";
+			// 根据路径描边
+			ctx.stroke();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>面向对象生成多个小球</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				margin: 50px;
+				border: 1px solid red;
+				background-color: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cvs" width="2000" height="1000"></canvas>
+		
+		<script type="text/javascript">
+			
+			;(function (w) {
+				function Ball (select, n) {
+					this.cvs = document.querySelector(select);
+					this.ctx = this.cvs.getContext("2d");
+					this.n = n; // 小球的个数
+					
+					// 生成ball对象
+					this.balls = [];
+					
+					this.init();
+				}
+				
+				Ball.prototype.extends = function(obj){
+					for(var i in obj){
+						if(!Ball.prototype[i]){
+							Ball.prototype[i] = obj[i];
+						}
+					}
+				}
+				
+				Ball.prototype.extends({
+					init(){
+						this.createBall();
+						this.move();
+					},
+					// 生成小球
+					createBall(){
+						for(var i = 0; i < this.n; i ++){
+							
+							var r = this.rdNumber(15,30);
+							
+							var ball = {
+								r: r,
+								startX: r,
+								startY: r,
+								stepX: this.rdNumber(1,9),
+								stepY: this.rdNumber(1,9),
+								color: `hsl(${ this.rdNumber(0,360) }, 80%, 70%)`
+							}
+							
+							this.balls.push(ball);
+							
+							this.ctx.arc(r, r, r, 0, 2*Math.PI);
+							this.ctx.fillStyle = ball.color;
+							this.ctx.fill();
+						}
+					},
+					// 小球运动
+					move(){
+						var cvs = this.cvs;
+						var ctx = this.ctx;
+						var balls = this.balls;
+						
+						setInterval(function () {
+							// 清除上一次画的小球
+							ctx.clearRect(0,0, cvs.width, cvs.height);
+							for(var i = 0; i < balls.length; i ++){
+								var ball = balls[i];
+								ctx.beginPath();
+								// 运动 起点+步长
+								ball.startX += ball.stepX;
+								ball.startY += ball.stepY;
+								// 判断临界值，改变运动方向
+								if(ball.startX < ball.r){
+									ball.startX = ball.r;
+									ball.stepX = -ball.stepX;
+								}else if(ball.startX + ball.r > cvs.width){
+									ball.startX = cvs.width - ball.r;
+									ball.stepX = -ball.stepX;
+								}
+								
+								if(ball.startY < ball.r){
+									ball.startY = ball.r;
+									ball.stepY = -ball.stepY;
+								}else if(ball.startY + ball.r > cvs.height){
+									ball.startY = cvs.height - ball.r;
+									ball.stepY = -ball.stepY;
+								}
+								
+								ctx.moveTo(ball.startX, ball.startY);
+								ctx.arc(ball.startX, ball.startY, ball.r, 0, 2*Math.PI);
+								ctx.fillStyle = ball.color;
+								ctx.fill();
+								
+								// 小球连线   ball => balls[i]   距离50
+								for(var j = i+1; j < balls.length; j ++){
+									// 两个圆心之间的距离 - 两个圆的半径 = 两个圆之间的距离
+									// 两个圆心之间距离 = 开根号 (x2-x1)² + (y2-y1)²
+									if(Math.pow( (Math.pow(balls[j].startX - ball.startX , 2) + Math.pow( balls[j].startY - ball.startY, 2)) ,1/2) - balls[j].r - ball.r < 50){
+										ctx.moveTo(balls[j].startX, balls[j].startY);
+										ctx.lineWidth = 10;
+										ctx.lineTo(ball.startX, ball.startY);
+										ctx.strokeStyle = ball.color;
+										ctx.stroke();
+									}
+								}
+							}
+						}, 1000/60);
+					},
+					rdNumber(min, max){
+						// Math.round(Math.random() * (max-min)) + min;
+						return Math.floor(Math.random() * (max-min+1)) + min;
+					}
+				})
+				
+				
+				w.Ball = Ball;
+			}(window))
+			
+			
+			var ball = new Ball("#cvs", 20);
+		</script>
+	</body>
+</html>

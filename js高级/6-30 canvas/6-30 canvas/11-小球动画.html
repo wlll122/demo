@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>小球动画</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				margin: 50px;
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cvs" width="500" height="400"></canvas>
+		
+		<script type="text/javascript">
+			// 画一个随机大小，随机颜色的小球
+			
+			var ctx = cvs.getContext("2d");
+			
+			var r = rdNumber(10,20);
+			var startX = r;
+			var startY = r;
+			var stepX = rdNumber(2,5);
+			var stepY = rdNumber(2,5);
+			var color = `hsl(${ rdNumber(0,360) }, 80%, 70%)`;
+			
+			setInterval(function () {
+				// 清除上一次画的小球
+				ctx.clearRect(0,0, cvs.width, cvs.height);
+				ctx.beginPath();
+				// 运动 起点+步长
+				startX += stepX;
+				startY += stepY;
+				// 判断临界值，改变运动方向
+				if(startX < r){
+					startX = r;
+					stepX = -stepX;
+				}else if(startX + r > cvs.width){
+					startX = cvs.width - r;
+					stepX = -stepX;
+				}
+				
+				if(startY < r){
+					startY = r;
+					stepY = -stepY;
+				}else if(startY + r > cvs.height){
+					startY = cvs.height - r;
+					stepY = -stepY;
+				}
+				
+				ctx.moveTo(startX, startY);
+				ctx.arc(startX, startY, r, 0, 2*Math.PI);
+				ctx.fillStyle = color;
+				ctx.fill();
+			}, 1000/60);
+			
+			
+			function rdNumber (min, max) {
+				// 王彬 5  原杰   何鑫
+				// Math.round(Math.random() * (max-min)) + min;
+				return Math.floor(Math.random() * (max-min+1)) + min;
+			}
+		</script>
+	</body>
+</html>

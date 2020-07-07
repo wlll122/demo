@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>对象属性的数据属性</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script type="text/javascript">
+		"use strict";
+		/*
+			对象属性的数据特性包含：
+			configurable： 表示属性是否可配置，是否可删除
+			enumerable：表示属性是否可枚举
+			writable：表示属性是否可写
+			value：表示属性的值，默认是undefined
+			
+			属性如果是通过字面量形式添加的，那么它的上述四个特性的默认值都是true和设定的值，如果是通过Object.definedProperty()定义的，那么默认值就是false和设定的值
+			
+			当configurable为false的时候，元素的其它特性将不能被更改,通过字面量形式添加的属性，只当writable为false的时候，不能被重新配置
+		*/
+
+		var obj = {
+			name: "张三",
+			age: 13
+		}
+
+		// obj.name = "lisi";
+		Object.defineProperty(obj, "tel", {
+			value: 123465
+		});
+
+		// 输出对象的属性的描述符
+		console.log(Object.getOwnPropertyDescriptor(obj, "tel"));
+		console.log(Object.getOwnPropertyDescriptor(obj, "name"));
+		console.log(Object.getOwnPropertyDescriptor(obj, "address"));
+
+		// Object.defineProperty(obj, "tel", {
+		// 	writable: true
+		// })
+
+		Object.defineProperty(obj, "name", {
+			configurable: false
+		})
+
+		Object.defineProperty(obj, "name", {
+			enumerable: false,
+			
+			
+		})
+
+
+		// delete obj.name;
+		// obj.name = "lisi";
+		for (var i in obj) {
+			console.log("i ==> ", i, "obj[i] ==> ", obj[i]);
+		}
+	</script>
+</body>
+
+</html>

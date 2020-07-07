@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>对象</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var arr = [1,2,3,4];
+			
+			var obj = {
+				0: 1,
+				1: 2,
+				2: 3,
+				3: 4,
+				length: 4,
+				push: function(value){
+					this[this.length] = value;
+					this.length ++;
+				}
+			}
+			arr.push("hello");
+			obj.push("hello");
+			
+			for(var i in arr){
+				console.log("i ==> ", i, " arr[i] ==> ", arr[i]);
+			}
+			console.log(" ========= ");
+			for(var j in obj){
+				console.log("j ==> ", j, " obj[j] ==> ", obj[j]);
+			}
+			
+			console.log(arr.length, obj.length);
+			
+			
+			// object => JSON (由双引号包裹的键值对组成对象的字符串形式，数字、布尔值或者数组可以不用双引号包裹)
+			console.log(JSON.stringify(obj));
+			// JSON => object
+			console.log(JSON.parse(JSON.stringify(obj)));
+			
+			// 判断某属性是否在对象中
+			var obj1 = {
+				name: "Libai",
+				age: 13
+			}
+			// 判断 name / tel 是否在对象中  key in object 操作符，判断某属性是否在对象中
+			console.log("name" in obj1); // true
+			console.log("tel" in obj1);  // false
+			
+			// 如何删除对象属性   delete object.key 用来删除对象的某个属性，属性如果不存在，不影响原对象
+			delete obj1.name;
+			delete obj1.age;
+			// obj1 = del(obj1, "age");
+			console.log("obj1 ", obj1);
+			function del (obj, key) {
+				var newObj = {}
+				for(var i in obj){
+					if(i !== key){
+						newObj[i] = obj[i];
+					}
+				}
+				return newObj;
+			}
+		</script>
+	</body>
+</html>

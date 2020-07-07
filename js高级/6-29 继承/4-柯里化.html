@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>柯里化</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				curry 柯里化是一项将函数 f(a,b,c) => f(a)(b)(c) 的技术
+				高级柯里化是一项保留原函数功能同时可以任意制作偏函数的技术
+			*/
+		   
+			function sum (a, b, c, d) {
+				return a + b + c + d;
+			}
+			
+			// 制作高级柯里化函数的函数
+			function curry (func) {
+				return function curried(...args) {
+					// arguments
+					// 当参数的个数与原函数一致，或者比原函数形参要多，调用原函数
+					if(args.length >= func.length){
+						return func.apply(this, args);
+					}else{
+						// 如果参数个数少于原函数，返回原函数的偏函数
+						// return func.bind(this, ...args);
+						return function (...args1) {
+							return curried.apply(this, args.concat(args1));
+						}
+					}
+				}
+			}
+			
+			var csum = curry(sum);
+			
+			console.log(csum(1,2,3,4));
+			console.log(csum(1,2)(3,4,6));
+			// 传两层以上的参数，偏函数的制作有问题
+			console.log(csum(1,2)(3)(4,6));
+			console.log(csum(1)(2)(3)(4,6));
+		</script>
+	</body>
+</html>

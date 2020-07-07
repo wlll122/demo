@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>栅格化布局</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			/*
+			@media mediatype and (media feature) and (another media feature) ... {
+				CSS-Code;
+			}
+			mediatype: 媒体类型 --- screen
+			media feature: max/min-width  max/min-height  orientation(屏幕的横屏或竖屏) aspect-ratio(屏幕宽高比 16:25)
+			*/
+			
+			.box{
+				width: 200px;
+				height: 200px;
+				/* 屏幕大于1200显示蓝色   大于992，小于1200显示红色   小于992显示绿色 */
+				/*
+					按照标准我们将屏幕大小分成四个等级：lg>1200    992< md <1200   768< sm < 992（平板）     xs < 768  （移动端）
+				*/
+				background-color: blue;
+			}
+			
+			@media only screen and (min-width: 1200px){
+				.box{
+					background-color: blue;
+				}
+			}
+			@media screen and (min-width: 992px) and (max-width: 1200px){
+				.box{
+					background-color: red;
+				}
+			}
+			@media (max-width: 992px){
+				.box{
+					background-color: green;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 响应式布局：页面可以像变形金刚一样根据屏幕的大小调节内容的显示 -->
+		<!-- 栅格系统是将页面等分成12份，根据元素所占列数加上相应的预定义类，即可实现响应式布局 -->
+		<div class="box"></div>
+		
+		<script type="text/javascript">
+			
+		</script>
+	</body>
+</html>

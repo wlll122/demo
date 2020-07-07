@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>正则表达式的创建</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+			1. 字面量形式   /pattern/attribute
+			2. 构造函数形式 new RegExp(pattern, attribute)
+			*/
+			var reg = /a/;
+			var reg2 = /a/g;
+			var reg5 = /a/gim;
+			console.log(reg);
+			console.log(reg2);
+			console.log(reg5);
+			console.log(typeof reg);
+			console.log(Object.prototype.toString.call(reg));
+			
+			
+			
+			var reg3 = new RegExp("a");
+			var reg4 = new RegExp("a", "g");
+			// 后面的属性不分先后顺序
+			var reg6 = new RegExp("a", "gim");
+			console.log(reg3);
+			console.log(reg4);
+			console.log(reg6);
+			
+			// 什么时候需要使用构造函数的形式创建正则：当正则表达式的内容（pattern）是一个变量的时候
+			var str = "hello";
+			var reg7 = /str/;
+			var reg8 = new RegExp(str);
+			console.log(reg7);
+			console.log(reg8);
+		</script>
+	</body>
+</html>

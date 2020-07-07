@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>bind</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			// bind：用另一个对象代替当前对象拥有某个函数，夺取函数
+			// var bindFunc = func.bind(thisObj);
+			var name = "window";
+			
+			var user = {
+				name: "张三"
+			}
+			
+			function sayName (word) {
+				console.log(this.name + " say: ", word);
+			}
+			
+			// sayName();
+			// sayName.call(user);
+			var sayZs = sayName.bind(user);
+			
+			// sayZs("hello");
+			// window.sayZs("hello");
+			
+			// var bound = func.bind(thisObj, arg1, arg2, ...);
+			// 在原有函数的基础上创建出一个新函数，同时将部分参数换成固定值。
+			// 求乘积
+			function mul (a, b, c) {
+				return a * b * c;
+			}
+			
+			// console.log(mul(1,2,3));
+			// console.log(mul(6,2,2));
+			
+			// 求任意数的2倍乘积
+			// var mul2x = mul.bind(null, 2);
+			var mul12x = mul.bind(null, 2, 6);
+			
+			console.log(mul12x(4));
+			console.log(mul12x(2));
+			
+			
+			function say (time, word) {
+				console.log(`[${time}] ${this.name}： ${word}`)
+			}
+			var date = new Date();
+			say(date.toLocaleString(), "hello world");
+			
+			// var sayNow = say.bind(user, date.getHours() +":"+date.getMinutes());
+			user.sayNow = make(say, date.getHours() +":"+date.getMinutes());
+			user.sayNow("太阳当空照");
+			user.sayNow("花儿对我笑");
+			
+			// 制作偏函数
+			function make (func, ...args) {
+				// return func.bind(this, ...args);
+				return function (...arg1) {
+					// func.call(this, ...args, ...arg1);
+					func.apply(this, args.concat(arg1));
+				}
+			}
+			
+		</script>
+	</body>
+</html>

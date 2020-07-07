@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>正则的使用</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				str.search(pattern/reg)  搜索，并返回对应的下标，如果没有查找到，返回-1，总是查找第一个匹配项
+			*/
+		   
+			var str = "hello world hahahah, I'm coming!";
+			
+			console.log(str.search("hee"));
+			console.log(str.search(/world/));
+			
+			/*
+				RegExp.test(string) 检验字符串是否有符合正则条件的字符串片段，返回 true/false
+				str.search(RegExp) !== -1
+			*/
+			var reg = /world/;
+			console.log("reg.test(str)",reg.test(str)); // true
+			console.log("/hee/.test(str)", /hee/.test(str)); // false
+			
+			
+			/*
+			 str.match(RegExp)  找到字符串中符合正则表达式的片段
+				正则没有 g 属性：返回的数组包含查找到的第一项片段以及它对应的下标和其它的信息
+				正则有 g 属性：返回一个数组，包含匹配的所有内容，没有额外信息
+				如果一个匹配的内容都没有，返回 null
+			*/
+			console.log("str.match(/ha/)",str.match(/ha/));
+			console.log("str.match(/ha/g)",str.match(/ha/g));
+			console.log("str.match(/haa/g)",str.match(/haa/g));
+			
+			
+			/*
+				RegExp.exec(string)  检索字符串中指定的值。返回找到的值，并确定其位置
+				它始终从 RegExp.lastIndex 指示的下标位置开始查询
+				RegExp.lastIndex 指示正则开始工作的起始下标，是一个可读写的属性
+				如果正则有 g 属性，那么下标匹配到的内容的后面一位
+				如果没有 g 属性，那么下标每次重置为 0
+			*/
+			var str2 = "hahahahahahehe";
+			var reg1 = /ha/;
+			var reg2 = /ha/g;
+			
+			console.log("reg1.lastIndex", reg1.lastIndex);
+			reg1.lastIndex = 5; // 让正则开始的位置变成下标5的位置, 没有g 属性会忽略这个设置， 有 g 属性会从这个设置的位置开始查找
+			console.log("没有 g 属性 ", reg1.exec(str2), reg1.lastIndex);
+			console.log("没有 g 属性 ", reg1.exec(str2), reg1.lastIndex);
+			console.log("没有 g 属性 ", str2.match(reg1));
+			
+			reg2.lastIndex = 5;
+			console.log("reg2.lastIndex", reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			console.log("有 g 属性 ", reg2.exec(str2), reg2.lastIndex);
+			
+			
+			/*
+			`y` 修饰符意味着搜索应该并且只能在属性 `regexp.lastIndex` 指定的位置查找匹配项。
+			提高搜索效率
+			加上全局属性 g ，y 失效
+			*/
+			var reg3 = /hello/y;
+			reg3.lastIndex = 3;
+			console.log("str.match(reg3)",str.match(reg3));
+			
+			
+			/*
+				str.split(RegExp|substr, limit)
+			*/
+			console.log(str.split(" "));
+			console.log(str.split(/ /));
+			
+			var str3 = "ab1as4df2ad9as6fe5ty";
+			console.log(str3.split(/\d/));
+			
+			/*
+				str.replace(substr|reg, newstr|func)
+				newstr 可以使用特殊字符： $$ 表示插入 $ 符号，没什么用
+				$&: 表示真个匹配项  $`：匹配项前面的所有内容  $'：表示匹配项后面的所有内容 $n：n是一个正整数，表示捕获组中的内容
+				
+				func(匹配的字符串, 捕获组1..n, 匹配的字符对应的下标, 匹配字符串的原串)  函数的返回值即替换的值
+			*/
+			console.log(str.replace("hahaha", "hehehe"));
+			console.log("====>",str.replace("ha", "he"));
+			console.log(str.replace(/hahaha/, "hehehe"));
+			console.log("====>",str.replace(/ha/g, "he"));
+			
+			var str4 = "John Doe, John Smith and John Bull buy ￥3 的包子";
+			// console.log(str4.replace("￥", "$$"));
+			// console.log(str4.replace(/John/g, "Mr.$&"));
+			// console.log(str4.replace(/hn/, "$`"));
+			// console.log(str4.replace(/Bull/, "$'"));
+			// console.log(str4.replace(/(John) (\w+)/, "$2 $1"));
+			
+			
+			var str5 = str4.replace(/(Joh)n/g, function (mtr, p1, index, s) {
+				console.log("匹配到的字符为: ", mtr);
+				console.log("假如有捕获组的话：p1对应的第一个圆括号", p1);
+				console.log("匹配到的字符对应的下标为: ", index);
+				console.log("匹配到的字符对应的原串为: ", s);
+				return "娃哈哈";
+			})
+			console.log("str5 ===>", str5);
+		</script>
+	</body>
+</html>

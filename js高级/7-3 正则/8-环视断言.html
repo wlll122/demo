@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>环视断言</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				x(?=y) 前瞻肯定断言  表示后面跟着y的x
+				x(?!y) 前瞻否定断言  表示后面不跟着y的x
+				
+				(?<=y)x 后瞻肯定断言  表示前面跟着y的x
+				(?<!y)x 后瞻否定断言  表示前面不跟着y的x
+			*/
+		   
+			var str = "260w rice price $360";
+			
+			// 选取后面跟着w的数字
+			var reg = /\d+(?=w)/g;
+			// 选取后面不跟着w的数字
+			// var reg1 = /\d+(?!w)\b/g;
+			var reg1 = /\d+(?!\d*w)/g;
+			
+			// 选取前面跟着 $ 的数字  $是特殊字符，需要转义
+			var reg2 = /(?<=\$)\d+/g;
+			// 选取前面不跟着 $ 的数字  $是特殊字符，需要转义
+			var reg3 = /(?<!\$\d*)\d+/g;
+			
+			console.log(str.match(reg)); // ["2"]
+			console.log(str.match(reg1)); // ["30"]
+			console.log(str.match(reg2)); // ["30"]
+			console.log(str.match(reg3)); // ["2"]
+		</script>
+	</body>
+</html>

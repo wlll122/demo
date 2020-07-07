@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>canvas</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				margin: 50px;
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 默认宽高：300*150 -->
+		<canvas width="400" height="300">
+			你的浏览器不支持canvas，请升级浏览器.浏览器不支持 
+		</canvas>
+		
+		
+		<script type="text/javascript">
+			// 获取canvas元素
+			var cvs = document.querySelector("canvas");
+			
+			// 使用canvas.getContext("2d")，获取平面画笔工具
+			var ctx = cvs.getContext("2d");
+			
+			// 设置线条的宽度为 20
+			ctx.lineWidth = 20;
+			
+			// console.log(ctx);
+			// 移动画笔到某个位置
+			ctx.moveTo(50, 50);
+			// 让画笔移动到某个位置，规划线的路径
+			ctx.lineTo(300, 50);
+			// 设置线的首末端样式
+			ctx.lineCap = "butt";
+			
+			// 根据路径描边
+			ctx.stroke();
+			
+			// 表示重新开始绘图，将样式进行区分管理
+			ctx.beginPath();
+			// 如果是重新划线，那么需要重新移动画笔到新的位置
+			ctx.moveTo(50,100);
+			ctx.lineTo(200,100);
+			// 设置线的首末端样式
+			ctx.lineCap = "round";
+			// 根据路径描边
+			ctx.stroke();
+			
+			// 表示重新开始绘图，将样式进行区分管理
+			ctx.beginPath();
+			// 如果是重新划线，那么需要重新移动画笔到新的位置
+			ctx.moveTo(50,150);
+			ctx.lineTo(200,150);
+			ctx.lineTo(100, 200);
+			// 设置线的首末端样式
+			ctx.lineCap = "square";
+			// 设置线的拐角类型
+			// ctx.lineJoin = "miter"; // 尖角
+			// ctx.lineJoin = "bevel"; // 平角
+			ctx.lineJoin = "round"; // 圆角
+			
+			// 设置描边颜色  默认黑色
+			ctx.strokeStyle = "red";
+			// 根据路径描边
+			ctx.stroke();
+			
+			
+			// 表示重新开始绘图，将样式进行区分管理
+			ctx.beginPath();
+			// 移动画笔到某个位置
+			ctx.moveTo(50, 230);
+			// 让画笔移动到某个位置，规划线的路径
+			ctx.lineTo(300, 230);
+			// 设置线的首末端样式
+			ctx.lineCap = "butt";
+			
+			// 设置虚线样式，接受一个数组
+			ctx.setLineDash([10]);
+			
+			// 根据路径描边
+			ctx.stroke();
+			
+			// 表示重新开始绘图，将样式进行区分管理
+			ctx.beginPath();
+			// 移动画笔到某个位置
+			ctx.moveTo(50, 255);
+			// 让画笔移动到某个位置，规划线的路径
+			ctx.lineTo(300, 255);
+			// 设置线的首末端样式
+			ctx.lineCap = "butt";
+			
+			// 设置虚线样式，接受一个数组
+			ctx.setLineDash([10, 20]);
+			
+			// 根据路径描边
+			ctx.stroke();
+			
+			// 表示重新开始绘图，将样式进行区分管理
+			ctx.beginPath();
+			// 移动画笔到某个位置
+			ctx.moveTo(50, 280);
+			// 让画笔移动到某个位置，规划线的路径
+			ctx.lineTo(300, 280);
+			// 设置线的首末端样式
+			ctx.lineCap = "butt";
+			// 设置线的偏移  正数向左，负数向右
+			ctx.lineDashOffset = -10;
+			
+			// 设置虚线样式，接受一个数组
+			ctx.setLineDash([10, 20, 30]);
+			
+			console.log(ctx.getLineDash());
+			
+			// 根据路径描边
+			ctx.stroke();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>捕获组</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				正则可以在捕获的子链之中分出更多的细节，我们使用捕获组这一能力做这样的事情
+				捕获组使用量词
+				(?:xxx) 表示将xxx当成一个整体，但是结果中不将捕获组显示
+			*/
+			var str = "hahehchdhfhg";
+			var reg = /(he)(hc)(hd)/;
+			
+			var str1 = "hahaaahaaaaha";
+			var reg1 = /ha+/g;
+			var reg2 = /(ha)+/g;
+			var reg3 = /(ha)+/;
+			var reg4 = /(?:ha)+/;
+			
+			console.log(str.match(reg));
+			console.log(str1.match(reg1)); // ["ha","haaa","haaaa","ha"]
+			console.log(str1.match(reg2)); // ["haha","ha","ha"]
+			console.log(str1.match(reg3)); // ["haha", "ha", ...]
+			console.log(str1.match(reg4)); // ["haha",  ...]
+		</script>
+	</body>
+</html>

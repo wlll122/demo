@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        canvas{
+            margin: 50px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="cvs" width="500" height="400"></canvas>
+    <script>
+        //画一个大小随机的圆
+        var ctx = cvs.getContext('2d');
+
+        //生成随机半径
+        var r = rdNumber(10,20);
+        var starX = r;
+        var starY = r;
+        var stepX = rdNumber(2,5);
+        var stepY = rdNumber(2,5);
+        var color = `hsl(${rdNumber(0,360)},80%,70%)`;
+        setInterval(function(){
+            ctx.clearRect(0,0, cvs.width, cvs.height);
+            ctx.beginPath();//规划开始的空间
+            starX += stepX;
+            starY += stepY;
+            if (starX<r) {
+                starX = r;
+                stepX = -stepX;
+            } else if(starX+r>cvs.width){
+                starX = cvs.width -r;
+                stepX = -stepX;
+            }
+            if (starY<r) {
+                starY = r;
+                stepY = -stepY;
+            } else if(starY+r>cvs.height){
+                starY = cvs.height -r;
+                stepY = -stepY;
+            }
+            ctx.moveTo(starX,starY);
+            ctx.arc(starX,starY,r,0,2*Math.PI)
+           ctx.fillStyle = color;
+           ctx.fill();
+        },1000/60)
+        //生成一个随机数
+        function rdNumber(min,max){
+            return Math.floor(Math.random()*(max-min+1))+min;
+        }
+    </script>
+</body>
+</html>

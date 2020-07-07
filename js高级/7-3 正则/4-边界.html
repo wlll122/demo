@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>边界</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				^ 以某串开头，匹配的行开头
+				$ 以某串就位
+				^ 在 [] 组合中表示非，非所有的内容
+			*/
+			
+			var str = "hello\nhalo\nhehe";
+			
+			// var str = "hello\
+			// 	haha\
+			// 	hehe";
+			
+			// var str = `hello
+			// ha
+// he`;
+			
+			// m 匹配多行文本
+			var reg = /^h/gm;
+			
+			var reg1 = /o$/m;
+			
+			// 选取所有非 a 的内容
+			var reg2 = /[^a]/g;
+			var reg3 = /[^hal]/g; // 选取的内容是 ^h 和 ^a
+			
+			console.log(str.match(reg));
+			console.log(str.match(reg1));
+			console.log(str.match(reg2));
+			console.log(str.match(reg3));
+		</script>
+	</body>
+</html>

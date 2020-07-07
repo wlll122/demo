@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var name = "window";
+        var user = {
+            name:'张三',
+            sayName(){
+                console.log(this.name);
+                
+            }
+        }
+        user.sayName();
+        user.sayName.call();//
+        function fn (word){
+            console.log(this.name+"say:"+word);
+            console.log(this);
+        }
+        fn.call(user,"hello")//改变this指向,由window指向user
+
+        function Cat (){
+            this.name = "Tom";
+
+        }
+        var cat = new Cat();
+        var obj = {};
+        obj.__proto__ = Cat.prototype;
+        Cat.call(obj);
+        console.log(obj);
+        console.log(cat);//new新对象通过call方法继承了实例原型上的属性
+
+        console.log(obj.toString.call([]));
+        // apply方法,方式与call相同,第二个参数为数组/伪数组等方式
+        
+
+    </script>
+</body>
+</html>

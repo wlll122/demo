@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>创建对象的演化</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var obj1 = new Object();
+			obj1.name = "zhasngan",
+			obj1.age = 12;
+			
+			var obj2 = {
+				name: "张三",
+				age: 12
+			}
+			var obj3 = {
+				name: "lisi",
+				age: 10
+			}
+			var obj4 = {
+				name: "wangwu",
+				age: 11
+			}
+			var obj5 = {
+				name: "zhaoliu",
+				age: 12
+			}
+			
+			// 创建很多个类似的对象，字面量也很难胜任，因此封装函数。又被称为工厂模式
+			function createPerson (name, age) {
+				// var obj = {
+				// 	name: name,
+				// 	age: age
+				// }
+				// es6 对象中如果属性名和代表属性值的变量的名字一致，那么可以简写成一个单词
+				var obj = {
+					name,
+					age
+				}
+				return obj;
+			}
+			obj2 = createPerson("zhgnsan", 12);
+			
+			function createCat (name, age) {
+				return {
+					name,
+					age
+				}
+			}
+			
+			var cat = createCat("Tom", 3);
+			
+			// 工厂模式无法为生产的内容提供类型检测，构造函数模式
+			function Cat (name, age) {
+				this.name = name;
+				this.age = age;
+			}
+			var cat1 = new Cat("英短", 6);
+			
+			function Dog (name, age) {
+				this.name = name;
+				this.age = age;
+				this.sayName = function () {
+					console.log(this.name);
+				}
+			}
+			var dog1 = new Dog("哈巴", 2);
+			var dog2 = new Dog("流浪", 3);
+			
+			// 构造函数模式无法为实例提供共享的属性和方法
+			// 构造函数+原型模式，实例单独的属性或方法写在构造函数中，共享的内容写在构造函数的原型上
+			function Tiger (name, age) {
+				this.name = name;
+				this.age = age;
+			}
+			Tiger.prototype.skill = ["Tree climbing", "run"];
+			Tiger.prototype.shot = function () {
+				console.log("吼~~~~");
+			}
+			
+			var tiger1 = new Tiger("东北", 6);
+			var tiger2 = new Tiger("山西", 1);
+			console.log(tiger1.shot === tiger2.shot);
+			console.log(tiger1.skill === tiger2.skill);
+		</script>
+	</body>
+</html>

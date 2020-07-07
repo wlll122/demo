@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            width: 1200px;
+            margin: 100px auto;
+            border: 1px solid red;
+        }
+
+        .btns {
+            display: flex;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .btns .btn {
+            width: 200px;
+            line-height: 50px;
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid red;
+            margin-right: 20px;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+
+        .act {
+            background-color: rgb(11, 112, 95);
+            color: white;
+        }
+
+        .pagination {
+            margin-top: 10px;
+            width: 660px;
+            height: 30px;
+            /* background-color: sandybrown; */
+            justify-content: flex-start;
+            margin-right: 3px;
+            display: flex;
+        }
+
+        .pagination div {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid rosybrown;
+            box-sizing: border-box;
+            /* font-size: 25px; */
+            /* margin-right: 5px; */
+        }
+
+        .content {
+            margin-top: 3px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border-top: 3px solid red;
+        }
+
+        .item {
+            display: flex;
+            width: 24%;
+            height: 200px;
+            margin-top: 15px;
+            justify-content: space-between;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .content::after {
+            content: "";
+            width: 50%;
+        }
+
+        .item img {
+            width: 45%;
+            height: 200px;
+        }
+
+        .item div {
+            width: 50%;
+            line-height: 30px;
+        }
+
+        .item p {
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="btns">
+            <div data-type="in_theaters" class="btn act">正在热映</div>
+            <div data-type="coming_soon" class="btn">即将上映</div>
+            <div data-type="top250" class="btn">top250</div>
+        </div>
+        <div class="pagination">
+            <div>1</div>
+        </div>
+        <div class="content"></div>
+    </div>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+        // 获取数据
+        
+        var initnumb = $(".btns").children().eq(0).attr("data-type");
+        getMovies(initnumb);
+      
+      
+        // if (condition) {
+            
+        // }
+        $(".btns")
+            .children()
+            .eq(0)
+            .click(function () {
+                $(this).siblings().removeClass("act");
+                $(this).addClass("act");
+
+                var type = $(this).attr("data-type");
+                getMovies(type);
+            });
+        $(".btns")
+            .children()
+            .eq(1)
+            .click(function () {
+                $(this).siblings().removeClass("act");
+                $(this).addClass("act");
+                var type = $(this).attr("data-type");
+                getMovies(type);
+            });
+        $(".btns")
+            .children()
+            .eq(2)
+            .click(function () {
+                $(this).siblings().removeClass("act");
+                $(this).addClass("act");
+                var type = $(this).attr("data-type");
+                getMovies(type);
+            });
+
+        // 此处应该获取点击的元素,不是事件触发元素,点击分页元素\
+            $(".pagination").click(function(){
+                console.log($(event.target).index());
+                $(event.target).addClass('act');
+                $(event.target).siblings().removeClass("act");
+                 
+                
+            })
+            
+       
+         
+        //更换分页
+        // function changePag(){
+        //     $('.pags').index();
+        //     console.log(object);
+        // }
+        function getMovies(start) {
+            $.getJSON("http://bufantec.com/api/douban/movie/" + type+"?start="+ (start ? start : 1) +"&limit=11", function (json) {
+                var main = json.data.list;
+                //生成分页
+                var pgNu = json.data.totalPage;
+                if (!start) {
+                    
+                    var pagstr = "";
+                    for (var j = 0; j < pgNu; j++) {
+                        pagstr += `<div class="pags">${j + 1}</div>`;
+                    }
+                    $(".pagination").html(pagstr);
+                }
+                var str = "";
+                for (let i = 0; i < main.length; i++) {
+                    str += `
+                <div class="item">
+				<img src="${main[i].small}" alt="" onerror="loadError()">
+                <div><p>名称：${main[i].title}</p>
+                <p>时长：${main[i].longtime}</p>
+                <p>类型：${main[i].longtime}</p>
+			    <p>平均分：${main[i].rating_average}</p>
+			    <p>导演：${main[i].director}</p>
+                <p>编剧：${main[i].scriptwriter}</p></div></div></div>`;
+                }
+                $(".content").html(str);
+            });
+        }
+
+        function loadError() {
+            event.target.src = "./error.jpg";
+            console.log(1);
+        }
+    </script>
+</body>
+
+</html>

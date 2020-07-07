@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 1226px;
+            height: 460px;
+            margin: 50px auto;
+            position: relative;
+            border: 1px solid red;
+        }
+        .swiper{
+            width: 400%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .swiper .item{
+            float: left;
+            width: 25%;
+            height: 100%;
+        }
+        .box .arrow{
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 50px;
+            height: 80px;
+            font-size: 60px;
+            margin-top: -40px;
+            cursor: pointer;
+            background-color: slategray;
+        }
+        .box .l{
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="swiper">
+            <div class="item"><img src="../6-28 原型/img/m1.jpg" alt=""></div>
+            <div class="item"><img src="../6-28 原型/img/m2.jpg" alt=""></div>
+            <div class="item"><img src="../6-28 原型/img/m3.jpg" alt=""></div>
+            <div class="item"><img src="../6-28 原型/img/m4.jpg" alt=""></div>
+        </div>
+        <div class="arrow l"> < </div>
+        <div class="arrow">></div>
+        
+    </div>
+    <script>
+        var a = 10;
+        var swiper = new swiper(".box",{
+            loop:true,
+            pagination:true,
+            autoPlay:true,
+            duration:3000
+        })
+        // 分号为保护立即执行函数
+        ;
+        (function (w){
+            function Swiper(select ,setting){
+                //此函数为传入的参数
+                this.ele = document.querySelector(select+" .swiper");
+                this.arrows = document.querySelectorAll(select+" .arrow");
+                this.setting = Object.assign({
+                    //此函数主要传入默认参数,后续外面传入的会覆盖默认参数
+                    loop:false,
+                    pagination:false,
+                    autoPlay:false,
+                    duration:2000
+                },setting);
+                this.count = 0;
+                this.w = this.ele.parentNode.childrenWidth;
+                // 定义轮播使用的定时器
+                this.timer = null;
+                this.init();
+            }
+            
+
+
+
+            w.Swiper = Swiper;//将构造函数暴漏露给window对象
+        }(window))
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>原型介绍</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			// 创建任意一个函数，js会自动为该函数添加同一个prototype属性指向它的原型对象
+			// 函数的原型对象上默认会有一个 constructor 属性指向函数本身
+			function fn(){
+				
+			}
+			console.log(fn.prototype);
+			console.log(fn.prototype.constructor);
+			
+			// 当创建函数的实例的时候，实例会有一个 [[prototype]] 指针指向构造函数的原型对象，一般来说该指针无法访问。但是 firfox/safari/chrome 提供了 __proto__ 让我们可以访问
+			var f = new fn();//new的新的实例
+			console.log(f.__proto__);
+			console.log(f.__proto__ === fn.prototype); // true
+			
+			// 为了跟普通函数作区分，一般将函数的首字母改成大写形式
+			function Gn(){
+				this.name = "zhangsan";
+				this.age = 10;
+				// return this  被忽略
+			}
+			
+			Gn.prototype.age = 13;
+			Gn.prototype.friend = ['李四'];
+			Gn.prototype.sayName = function (){
+				console.log(this.name);
+			}
+			
+			// 原型上添加的任意的属性和方法在实例上都是共享的
+			// 当实例上找不到某个属性或方法的时候会顺着原型链去找，当自己和原型都有某个属性的时候，会先用自己的。
+			var g = new Gn();
+			var g1 = new Gn();
+			
+			console.log(g.age); // 10
+			console.log("g.friend === g1.friend ",g.friend === g1.friend); // true
+			
+			// 当一个原型对象是另一个构造函数的实例的时候，__proto__指针就会指向另一个构造函数的原型对象，形成链式结构，称为原型链
+			console.log(g.__proto__.__proto__ === Object.prototype);
+		</script>
+	</body>
+</html>

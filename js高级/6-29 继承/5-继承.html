@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>原型链继承</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			function Parent (age) {
+				this.age = age;
+				this.friend = [];
+			}
+			
+			Parent.prototype.run = function () {
+				console.log("run ...");
+			}
+			
+			var parent1 = new Parent(10);
+			var parent2 = new Parent(20);
+			
+			console.log("parent1.friend === parent2.friend", parent1.friend === parent2.friend); // false
+			
+			function Child (name) {
+				this.name = name;
+			}
+			
+			// 继承了animal的实例属性以及原型属性
+			Child.prototype = new Parent(12);
+			
+			var child1 = new Child("东北");
+			var child2 = new Child("华南");
+			//继承了父类的原型发生共享
+			console.log(child1);
+			console.log(child2);
+			console.log("child1.friend === child2.friend", child1.friend === child2.friend); 
+			
+			// 无法在实例化父类构造函数的单独传参
+			// 父类构造函数的实例属性或者原型属性都会被子类的实例共享
+		</script>
+	</body>
+</html>

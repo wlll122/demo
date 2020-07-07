@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            margin-left: 50px;
+            margin-top: 40px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="400" height="300"> </canvas>
+</body>
+    <script>
+        var cvs = document.querySelector("canvas");
+        var ctx = cvs.getContext('2d');
+        ctx.moveTo(50,50);
+        ctx.lineTo(150,200);
+        ctx.strokeStyle = "black";//增加颜色
+        ctx.stroke();//路径描线
+        ctx.lineWidth = 20;
+        ctx.moveTo(50,50);
+        ctx.lineCap = 'butt';
+        ctx.beginPath()//终点分割绘制区域
+        ctx.moveTo(50,100);
+        ctx.lineTo(200,100);
+        ctx.lineCap = "square";
+        ctx.lineJoin = "round";
+        ctx.stroke();
+
+
+
+        
+        ctx.beginPath();
+        ctx.moveTo(50,280);
+        ctx.lineTo(300,280);
+        ctx.lineCap = "butt";
+        ctx.lineDashOffset = -10;
+        ctx.setLineDash([10,20,30]);
+        ctx.stroke();
+    </script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //     var name = 'window';
+    //     function fn(a,b,c){
+    //         console.log(this.name +"算结果:",a+b+c);
+    //     }
+    //     var user = {
+    //         name :"张三"
+    //     }
+    //     fn(1,2,4);
+    //     fn.call(user,1,2,3);//改变了this的指向
+    //     // 求不定参数的和
+    // function sum (...args){
+    //     var count = 0;
+    //     console.log(args);
+    //     console.log(arguments);//打印的为伪数组
+    //     for (let i = 0; i < args.length; i++) {
+    //         count += args[i];
+            
+    //     }
+    //     return count;
+    // }
+    // console.log(sum(1,2,3,4,5,6));
+    // // 求不定参数的2倍和
+    // function sum2(...args){
+    //     return sum.apply(this,args)*2;
+
+    // }
+    // console.log(sum2(1,2,2,4,7,5,5));
+    // #################################
+    // bind方法
+    var name= "window";
+    var user = {
+        name:"张三"
+    }
+    function sayName(word){
+        console.log(this.name+"say:",word);
+    }
+    sayName("大声")
+    sayName.call(user,"大声")//改变this指向,
+    var sayZs = sayName.bind(user);
+    
+    // 在原函数创建参数
+    // 将部分参数换位固定值
+    function mul(a,b,c){
+        return a*b*c;
+    }
+    console.log(mul(1,2,3));
+
+    //求任意数的二倍积
+    var mul2x  = mul.bind(null,2,6);//2,6作为固定参数传入函数内部
+    console.log(mul2x);
+    console.log(mul2x(4));
+    function say (time,word){
+        console.log(`[${time}] ${this.name}:${word}`);
+
+    }
+    var date = new Date();
+    say(date.toLocaleDateString(),"hello world");
+    
+    </script>
+</body>
+</html>

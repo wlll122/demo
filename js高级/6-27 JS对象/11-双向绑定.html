@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>双向绑定</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="ipt" value="张三" />
+
+    <script type="text/javascript">
+      var obj = {
+        name: "张三",
+      };
+      Object.defineProperty(obj,"name")
+      Object.defineProperty(obj, "name", {
+        get() {
+          return ipt.value;
+        },
+        set(v) {
+          ipt.value = v;
+        },
+      });
+
+      setTimeout(function () {
+        obj.name = "萨瓦拉黑";
+      }, 2000);
+    </script>
+  </body>
+</html>

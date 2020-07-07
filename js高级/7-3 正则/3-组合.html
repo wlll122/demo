@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>组合</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var str = "ab94cdEfeFACKDLUIR856ghijk23lm0n 17";
+			
+			/*
+				正则表达式中的[]表示组合，在组合内的内容只要出现就会被匹配到
+			*/
+			var reg = /[0123456789]/g;
+			var reg1 = /[0-9]/g;
+			var reg2 = /[6-9]/g;
+			var reg3 = /[a-f]/g;
+			var reg4 = /[A-Z]/g;
+			var reg5 = /[A-z]/g;
+			var reg6 = /[a-z]/gi;
+			console.log(str.match(reg));
+			console.log(str.match(reg1));
+			console.log(str.match(reg2));
+			console.log(str.match(reg3));
+			console.log(str.match(reg4));
+			console.log(str.match(reg5));
+			console.log(str.match(reg6));
+		</script>
+	</body>
+</html>

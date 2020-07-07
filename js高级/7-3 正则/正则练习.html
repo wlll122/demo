@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <script>
+        // var reg = /a/;
+        // var reg2 = /a/g;
+        // var reg5 = /a/gim;
+        // console.log(typeof reg);
+        // console.log(reg2);
+        // console.log(Object.prototype.toString.call(reg));
+        // // str.search(reg)//搜索返回相应的下标,无此值返回-1
+        // var str = "hello world hahahah, I'm coming!";
+        // console.log(str.search("ha"));
+        // console.log(str.search(/world/));//返回此字符串的位置
+
+        // // regExp.test检验字符串是否有正则条件的片段返回true或false
+        // var reg = /world/;
+        // console.log(reg.test(str));
+        // console.log(/hee/.test(str));//不包含返回false
+
+        // // str.match(RegExp);找到字符串中符合正则表达式的片段
+        // //没有g属性则返回查找到的第一个片段及他对应的下表
+        // //包含g属性:返回一个数组,包含所有内容
+
+        // console.log(str.match(/ha/));
+        // console.log(str.match(/ha/g));//此方法返回数组
+
+        // RegExp.exec(String)  检索字符串中的值,返回找到的值,确定其位置
+        // 从其index只是的位置开始查询,如果有g属性,下表匹配到内容的后一位
+        // 没有g,下表重置为0
+
+
+
+        // var str2 = "hahahahahahehe";
+        // var reg1 = /ha/;
+        // var reg2 = /ha/g;
+        // console.log(reg1.lastIndex);
+
+        // // 正则的起始位置更改
+        // reg1.lastIndex = 5;
+        // console.log("没有G属性",reg1.exec(str2),reg1.lastIndex);
+        // console.log(str2.match(reg1));
+        // reg2.lastIndex =5;
+        // console.log();
+
+
+
+        // ^ 以某串开头,匹配的开头
+        // $ 以某串进行结尾
+        // ^在[]内使用表示非
+        var str1 = "hello\nhalo\nhehe";
+        var reg = /^h/gm;
+        var reg2 = /o$/m
+        console.log(str1.match(reg));
+        console.log(str1.match(reg2));
+    </script>
+</body>
+</html>

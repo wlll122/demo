@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <input type="text" placeholder="请输入姓名" value="" v-module="name" />
+    <input type="text" placeholder="请输入年龄" value="" v-module="age" />
+    <input type="text" placeholder="请输入电话" value="" v-module="tel" />
+    <input type="text" placeholder="请输入年龄" value="" />
+    <script>
+      var data = {};
+      var ipts = document.querySelectorAll("input[v-module]");
+      for (let i = 0; i < ipts.length; i++) {
+        var key = ipts[i].getAttribute("v-module");
+        Object.defineProperty(data, key, {
+          get() {
+            return ipts[i].value;
+          },
+          set(v) {
+            ipts[i].value = v;
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

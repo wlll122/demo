@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>对象克隆</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			// 数组克隆
+			var arr = [1,2,3,4, { name: "张三", friend: [] }];
+			// var arr1 = arr;  复制了arr的地址，两个值指向同一个堆
+			// console.log(arr1);
+			// arr1.push(5);
+			// console.log(arr);
+			
+			// function clone (arr) {
+			// 	var newArr = [];
+			// 	for (var i = 0; i < arr.length; i++) {
+			// 		newArr.push(arr[i]);
+			// 	}
+			// 	return newArr;
+			// }
+			// var arr1 = clone(arr);
+			// console.log(arr1);
+			// arr1.push(5);
+			// console.log(arr1, arr);
+			
+			// slice(startIndex, endIndex);
+			// splice(start, end, tihuan);
+			// var arr1 = arr.slice(); // 不会改变原数组
+			// var arr1 = arr.splice(0); // 改变原数组
+			var arr1 = [].concat(arr); // 不会改变原数组
+			arr1.push("hello");
+			console.log(arr1, arr);
+			
+			var obj = {
+				name: "李白",
+				age: 13,
+				friend: ["汪伦", "杜甫"],
+				sayName: function(){
+					console.log("aaa");
+				}
+			}
+			// var obj1 = obj;
+			// 写一个函数遍历，创建一个新对象接受，返回新对象
+			// function clone (obj) {
+			// 	var newObj = {};
+			// 	for (var i in obj) {
+			// 		newObj[i] = obj[i];
+			// 	}
+			// 	return newObj;
+			// }
+			// obj1 = clone(obj);
+			
+			// 合并对象，返回合并后的对象   Object.assign(obj, concatobj1, ...); 将第二或者更多的参数对象的属性合并到第一个参数对象上去，如果对象的属性名重复，后面的对象的属性值会覆盖前面的属性值
+			var obj1 = Object.assign({}, obj, {name: "王安石"});
+			console.log(obj1);
+			
+			
+			// 以上为浅克隆，下边是深克隆（对象深克隆表示对象里面所有的引用类型值都是独立的）
+			// 将对象改成JSON字符串，再将JSON字符串改成对象，也可实现对象的深克隆，缺陷就是会丢失对象的方法
+			function deepClone (params) {
+				if(params === null){
+					return null;
+				}
+				
+				// 判断是数组还是对象
+				var newObj = params instanceof Array ? [] : {};
+				for(var i in params){
+					// i ==> key   params[i] ==> value
+					// 判断对象或者数组中的属性值是否是一个引用类型值，如果是，那就对这个属性值进行深克隆
+					if(typeof params[i] == "object"){ // array object null
+						newObj[i] = deepClone(params[i]);
+					}else{
+						newObj[i] = params[i];
+					}
+				}
+				return newObj;
+			}
+			
+			var obj2 = deepClone(obj);
+			var arr2 = deepClone(arr);
+			console.log(obj2.friend === obj.friend);
+			
+			
+			var obj3 = JSON.parse(JSON.stringify(obj));
+			console.log(obj3 === obj); // false
+			console.log(obj3.friend === obj.friend); // false
+		</script>
+	</body>
+</html>

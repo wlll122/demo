@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>昨天的练习</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var arrs = [ [1, 2, 2], [3, 4, 5, 5, 5], [6,7,7,7, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
+			
+			deal1(arrs);
+			
+			function deal (array) {
+				// 进行数组的拷贝
+				// var arr = array.slice();
+				// var arr = [].concat(array);
+				
+				// 扁平化
+				var arr = flat(array);
+				
+				// 去重   indexOf !== lastIndexOf object属性法  [].push
+				delSame(arr);
+				
+				// 排序
+				arr.sort(function (a, b) {
+					return a - b;
+				})
+				
+				// 返回新数组
+				console.log(arr);
+				return arr;
+			}
+			
+			function deal1 (array) {
+				var arr = [];
+				// 链式操作：每步操作都返回原对象
+				array
+					.toString()
+					.split(",")
+					.sort(function (a,b) {
+						return a - b;
+					})
+					.forEach(function (item) {
+						item = ~~item;
+						if(!arr.includes(item)){
+							arr.push(item);
+						}
+					});
+				console.log(arr);
+				return arr;
+			}
+			
+			function flat (array) {
+				var arr = [];
+				// 创建一个新数组，然后给新数组添加内容，遍历旧数组中的每一项，如果是数组，则重新调用flat函数，如果不是，直接往数组中 push
+				for(var i = 0; i < array.length; i ++){
+					// Object.prototype.toString.call(array[i]).indexOf("Array") !== -1
+					if(array[i] instanceof Array){
+						arr = arr.concat(flat(array[i]));
+
+						// arr = [...arr, ...flat(array[i])];
+					}else{
+						arr.push(array[i]);
+					}
+				}
+				return arr;
+			}
+			
+			function delSame (array) {
+				// 对象法常用来计算数组中的某项出现次数
+				// var obj = {};
+				for(var i = 0; i < array.length; i ++){
+					// 如果从前往后与从后往前查的下标不一致，重复，删除
+					if(i !== array.lastIndexOf(array[i])){
+						array.splice(i, 1);
+						i --;
+					}
+					
+					// if(obj[array[i]]){
+					// 	obj[array[i]] ++;
+					// }else{
+					// 	obj[array[i]] = 1;
+					// }
+				}
+				// console.log(obj);
+				// console.log(Object.keys(obj));
+			}
+			
+			
+			
+			/*
+			创建一个函数delay(func, time)，将每次调用 func 延迟 time 毫秒。
+			*/
+		   
+			function fn (str) {
+				console.log("fn函数执行 ",this);
+				console.log(str);
+			}
+			
+			function delay (func, time) {
+				return function (...args) {
+					// var args = arguments;
+					// console.log("f1000 ==> ", this);
+					var that = this;
+					setTimeout(function () {
+						func.apply(that, args);
+					}, time);
+				}
+			}
+			
+			var obj = {
+				name: "obj"
+			}
+			obj.f1000 = delay(fn, 1000);
+			let f1500 = delay(fn, 1500);
+			
+			obj.f1000("hello"); // 在 1000 ms 后展示 "hello"
+			f1500("world"); // 在 1500 ms 后展示 "world"
+		</script>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="referrer" content="never">
+	<title>get发送请求</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		li {
+			padding: 10px 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<button id="btn1">获取正在热映列表</button>
+	<button id="btn2">获取即将上映列表</button>
+	<button id="btn3">获取top250列表</button>
+
+	<ul id="ulEle"></ul>
+
+	<script type="text/javascript">
+		/*
+				电影url
+					正在热映： http://bufantec.com/api/douban/movie/in_theaters
+					即将上映： http://bufantec.com/api/douban/movie/coming_soon
+					top250： http://bufantec.com/api/douban/movie/top250
+				总数据是 240，分页，每页显示 10 条数据，数据要按响应式显示
+			*/
+
+		btn1.onclick = function () {
+			getMovie("in_theaters");
+		}
+
+		btn2.onclick = function () {
+			getMovie("coming_soon");
+		}
+
+		btn3.onclick = function () {
+			getMovie("top250");
+		}
+
+
+		function getMovie(type) {
+			// 1. 声明实例
+			var xhr = new XMLHttpRequest();
+			// 2. 监听过程
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					// 输出响应内容
+					console.log(xhr.responseText);
+					var data = JSON.parse(xhr.responseText).data;
+					var str = ``;
+					for (var i = 0; i < data.list.length; i++) {
+						// 当图片加载不出来的时候，要添加一个默认图片
+						str += `<li>${ data.list[i].title }
+								<img src="${ data.list[i].small }">
+							</li>`;
+					}
+					ulEle.innerHTML = str;
+				}
+			}
+			// 电影列表接受两个参数： start 起始页  limit 每页的数量  240
+			// get接受参数的形式为 url?name=value&name1=value1...
+			// 3. open 
+			xhr.open("GET", "http://bufantec.com/api/douban/movie/" + type + "?start=1&limit=10");
+			// 4. send
+			xhr.send(null);
+		}
+	</script>
+</body>
+
+</html>

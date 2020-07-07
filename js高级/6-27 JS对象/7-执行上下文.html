@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>执行上下文</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			// 执行上下文会先提升函数，在提升变量，最后按步骤执行
+			// 函数作用域提升函数的，全局环境提升全局，函数优先使用自己内部的变量
+			
+			
+			// var foo = 1;
+			// function bar() {
+			// 	var foo
+			//     if (!foo) {
+			//         foo = 10;
+			//     }
+			//     alert(foo); // 10
+			// }
+			// bar();
+			
+			
+			var a = 1;
+			function b() {
+			    a = 10;
+			    return;
+			    function a() {}
+			}
+			b();
+			alert(a);  // 1
+		</script>
+	</body>
+</html>

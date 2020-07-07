@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      .box {
+        position: relative;
+        width: 1226px;
+        height: 460px;
+        margin: 100px auto;
+        overflow: hidden;
+      }
+      .box .swiper {
+        position: absolute;
+        width: 500%;
+        height: 100%;
+        border: 1px solid red;
+        top: 0;
+        left: 0;
+      }
+      .box .swiper .item {
+        float: left;
+        width: 20%;
+        height: 100%;
+      }
+      img {
+        width: 100%;
+        height: 100%%;
+      }
+      .arrow {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 50px;
+        height: 80px;
+        font-size: 60px;
+        color: #fff;
+        text-align: center;
+        line-height: 80px;
+        margin-top: -40px;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .arrow.l {
+        left: 0;
+      }
+      .pagination {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        list-style: none;
+      }
+      .pagination li {
+        float: left;
+        width: 10px;
+        height: 10px;
+        margin-left: 10px;
+        background-color: red;
+        border-radius: 50%;
+      }
+      .pagination li.act {
+        background-color: springgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="swiper">
+        <div class="item"><img src="img/m1.jpg" alt="" /></div>
+        <div class="item"><img src="img/m2.jpg" alt="" /></div>
+        <div class="item"><img src="img/m3.jpg" alt="" /></div>
+        <div class="item"><img src="img/m4.jpg" alt="" /></div>
+        <div class="item"><img src="img/m5.jpg" alt="" /></div>
+      </div>
+      <div class="arrow l"><</div>
+      <div class="arrow">></div>
+    </div>
+
+    <script>
+      (function (w) {
+        function Swiper(select, setting) {
+          this.ele = document.querySelector(select + " .swiper");
+          this.arrows = document.querySelectorAll(select + " .arrow");
+          this.setting = Object.assign(
+            {
+              loop: false,
+              pagination: false,
+              autoPlay: false,
+              duration: 2000,
+            },
+            setting
+          );
+          // 设定一个计数器
+          this.count = 0;
+          //获取父类宽度
+          this.w = this.ele.parentNode.clientWidth;
+          // 自动轮播的计时器
+          this.timer = null;
+          //执行原型初始化的函数
+          this.init();
+        }
+
+        Swiper.prototype.extends = function (obj) {
+          for (var i in obj) {
+            Swiper.prototype[i] = obj[i];
+          }
+        };
+        //整个轮播图的内容
+        Swiper.prototype.extends({
+          init() {
+            this.initWidth();
+            this.initClick();
+            if (this.setting.pagination) {
+              this.initDots();
+            }
+            if (this.setting.autoPlay) {
+              this.auto();
+            }
+          },
+          //初始化轮播图宽度
+          initWidth() {
+            //宽度由元素个数决定
+            var items = this.ele.children;
+
+            // 循环与非循环为两个不同的计数
+            if (this.setting.loop) {
+              this.ele.appendChild(items[0].cloneNode(true));
+            }
+            this.ele.style.width = 100 * items.length + "%";
+            // 每一个items的宽度
+            for (var i = 0; i < items.length; i++) {
+              items[i].style.width = 100 / items.length + "%";
+            }
+          },
+          //初始化箭头的点击事件
+          initClick() {
+            // 事件内读取不到this
+            var that = this;
+            this.arrows[0].onclick = function () {
+              if (that.count == 0) {
+                if (that.setting.loop) {
+                  that.count = that.ele.children.length - 1;
+                  that.ele.style.left = -that.count * that.w + "px";
+                } else {
+                  that.count = that.ele.children.length;
+                }
+              }
+              that.count--;
+              that.move();
+              that.changeAct();
+            };
+            this.arrows[1].onclick = function () {
+              if (that.count == that.ele.children.length - 1) {
+                if (that.setting.loop) {
+                  that.count = 0;
+                  that.ele.style.left = "0px";
+                } else {
+                  that.count = -1;
+                }
+              }
+              that.count++;8
+              that.move();
+              that.changeAct();
+            };
+          },
+          //初始化小圆点
+          initDots() {
+            var that = this;
+            var str = `<ul class="pagination">`;
+            var length = this.ele.children.length;
+            // 判断是否循环播放
+            length = this.setting.loop ? length - 1 : length;
+            for (var i = 0; i < length; i++) {
+              str += `<li class="${
+                i == 0 ? "act" : ""
+              }" data-index="${i}"></li>`;
+            }
+            str += `</ul>`;
+            this.ele.insertAdjacentHTML("afterEnd", str);
+            //获取下一个兄弟节点
+
+            var ulEle = this.ele.nextElementSibling;
+            ulEle.onclick = function () {
+              if ((event, target.tagName === "LI")) {
+                that.count = event.target.dataset.index;
+                that.changeAct();
+                that.move();
+              }
+            };
+          },
+          //切换小点的样式
+          changeAct() {
+            //获取激活的圆点去除他的样式
+            console.log(this.count);
+            document.querySelector(".pagination .act").classList.remove("act");
+            var i = this.count;
+            if (this.setting.loop) {
+              i = i % (this.ele.children.length - 1);
+            }
+            document.querySelectorAll(".pagination li")[i].classList.add("act");
+          },
+          auto() {
+            var that = this;
+            fn();
+            function fn() {
+              that.timer = setInterval(() => {
+                that.arrows[1].click();
+              }, that.setting.duration);
+            }
+            this.ele.parentNode.onmouseenter = function () {
+              clearInterval(that.timer);
+            };
+            this.ele.parentNode.onmouseleave = function () {
+              fn();
+            };
+          },
+
+          //运动函数
+          move() {
+            var ele = this.ele;
+            var target = -this.count * this.w;
+            if (ele.timer) {
+              clearInterval(ele.timer);
+            }
+            ele.timer = setInterval(() => {
+              var start = ele.offsetLeft;
+              var step = (target - start) / 10;
+              if (Math.abs(step) < 1) {
+                step = step > 0 ? 1 : Math.floor(step);
+              }
+              ele.style.left = start + step + "px";
+              if (start + step === target) {
+                clearInterval(ele.timer);
+                ele.timer = null;
+              }
+            }, 1000 / 60);
+          },
+        });
+
+        w.Swiper = Swiper; //将构造函数暴露给window对象
+      })(window);
+
+      var swiper = new Swiper(".box", {
+        loop: true, // 是否开启无缝
+        pagination: true, // 是否添加小点
+        autoPlay: true, // 是否开启自动轮播
+        duration: 3000, // 用户自定义自动轮播间隔时长
+      });
+    </script>
+  </body>
+</html>

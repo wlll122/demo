@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>绘制矩形</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				margin: 50px;
+				border: 1px solid red;
+                /* background-color: darkblue; */
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cvs" width="400" height="300"></canvas>
+		
+		<script type="text/javascript">
+			// 获取绘图上下文
+			var ctx = cvs.getContext("2d");
+			// 绘制路径：移动到起点，规划到终点，描边
+			// 宽高直接写在标签上的时候，可以通过 元素.width/height获取它的宽高
+            // rad = deg*Math.PI/180;
+           var  arr = [0,20,30,50,100,110,50];
+        //    var arr = [{deg:90,color:'red'},{deg:60,color:'blue'},{deg:40,color:'darkblue'}];
+           var  color=[]
+           var str = 0;
+           var end = 0;//
+           for (let i = 0; i < arr.length-1; i++) {
+            ctx.beginPath();//颜色分区管理
+               var star = arr[i]*Math.PI/180;
+               var endl = arr[i+1]*Math.PI/180;
+              str += star;
+              end += endl;
+               ctx.moveTo(100, 100);
+			  ctx.arc(100,100, 80, str, end, false);
+               console.log (ctx.fillStyle);
+             
+            // 填充颜色 会自动闭合路径
+            
+            ctx.fill();
+            ctx.fillStyle = "hsla("+(30+i*20) +",80%,60%,1)";
+            
+           }
+        //    console.log(object);
+		</script>
+	</body>
+</html>

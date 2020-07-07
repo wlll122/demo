@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .box {
+            position: relative;
+            width: 1226px;
+            height: 460px;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        .box .swiper {
+            position: absolute;
+            width: 500%;
+            height: 100%;
+            border: 1px solid red;
+            top: 0;
+            left: 0;
+        }
+
+        .box .swiper .item {
+            float: left;
+            width: 20%;
+            height: 100%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%%;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 50px;
+            height: 80px;
+            font-size: 60px;
+            color: #fff;
+            text-align: center;
+            line-height: 80px;
+            margin-top: -40px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .arrow.l {
+            left: 0;
+        }
+
+        .pagination {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            list-style: none;
+        }
+
+        .pagination li {
+            float: left;
+            width: 10px;
+            height: 10px;
+            margin-left: 10px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .pagination li.act {
+            background-color: springgreen;
+        }
+
+        .box .progress {
+            position: absolute;
+            width: 25%;
+            height: 20px;
+            background-color: brown;
+            top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="swiper">
+            <div class="item"><img src="img/m1.jpg" alt="" /></div>
+            <div class="item"><img src="img/m2.jpg" alt="" /></div>
+            <div class="item"><img src="img/m3.jpg" alt="" /></div>
+            <div class="item"><img src="img/m4.jpg" alt="" /></div>
+            <div class="item"><img src="img/m5.jpg" alt="" /></div>
+        </div>
+        <div class="arrow l">
+            <</div> <div class="arrow">>
+        </div>
+        <!-- 进度条 -->
+
+    </div>
+    <script>
+        (function (w) {
+            function Swiper(select,setting){
+                this.ele = document.querySelector(select + " .swiper");
+                this.arrows = document.querySelectorAll(select+" .arrow");
+                this.setting = Object.assign
+            }
+            w.Swiper = Swiper; //将构造函数暴露给window对象
+        })(window);
+    </script>
+</body>
+
+</html>

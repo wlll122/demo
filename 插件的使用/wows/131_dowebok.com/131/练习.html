@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../131/css/animate.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100%;
+            height: 2000px;
+        }
+        .wow{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin: 0 auto;
+        }
+        .slideInLeft{
+            left: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="wow slideInLeft"></div>
+    <div class="wow slideInRight"></div>
+
+    <script src="../131/js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</body>
+</html>

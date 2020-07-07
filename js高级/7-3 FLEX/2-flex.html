@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>flex</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				/* 变成弹性容器：宽高起作用，元素独占一行 */
+				display: flex;
+				/* justify-content: 控制弹性盒子内部元素(当成一个整体)的主轴排列方式
+				值：flex-start | flex-end | center | space-between | space-around | space-evenly(实验属性); */
+				/* justify-content: space-evenly; */
+				
+				/* align-items: 控制单行弹性元素在交叉轴的排列方式 
+				值：flex-start | flex-end | center | baseline | stretch当弹性容器没有设置高度的时候，让弹性元素的高度等于它所在的行的高度的最大值;
+				*/
+				/* align-items: center; */
+				
+				/* flex-wrap: 控制弹性元素的换行
+				值： wrap 、 no-wrap  wrap-reverse：换行，第一行在下方
+				*/
+			    /* flex-wrap: wrap; */
+				
+				/* align-content: 控制多行弹性元素（当成一个整体）的交叉轴排列方式
+				 值：stretch | flex-start | flex-end | center | space-between | space-around | space-evenly
+				 */
+				/* align-content: space-between; */
+				
+				/* flex-direction: 控制弹性容器的主轴排列方向
+				值：row | row-reverse | column | column-reverse;
+				交换了主轴的排列方向，需要注意 justify-content 与 align-content 的控制方向也发生了翻转
+				*/
+				/* flex-direction: column; */
+				
+				/*  复合属性： flex-flow: flex-direction flex-wrap */
+				/* flex-flow: row-reverse wrap; */
+				
+				width: 600px;
+				height: 400px;
+				margin: 30px;
+				border: 1px solid red;
+			}
+			.inner{
+				/* float: left; */
+				width: 150px;
+				height: 150px;
+				font-size: 30px;
+				color: #fff;
+				text-align: center;
+				line-height: 150px;
+				background-color: orange;
+				/* order: -2; */
+				
+				/*
+				flex-grow: 定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。无多余宽度时，flex-grow无效。
+				*/
+				/* flex-grow: 1; */
+				
+				/*
+				flex-shrink: 定义项目的缩小比例，默认为1。如果为0，则不缩小
+				*/
+				/* flex-shrink: 3; */
+				
+				
+				/*flex-basis: 定义了在分配多余空间之前，项目占据的主轴空间，当我们更改了主轴排列方向之后，flex-basis 优先级降低了，低于line-height;
+				*/
+			    /* flex-basis: 60px; */
+				
+				/*
+					flex: flex-grow flex-shrink flex-basis;
+					auto(1 1 auto) none(0 0 auto);
+				*/
+			    flex: 1;
+			}
+			
+			.inner:nth-child(2){
+				/* 单独设置一个弹性元素的交叉轴排列方式 */
+				/* align-self: flex-end; */
+				
+				/* order 定义弹性元素的排列顺序，默认从0开始，数值越小，排列越靠前 */
+				/* order: -1; */
+				
+				/* flex-grow: 3; */
+				/* flex-shrink: 3; */
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="box">
+			<div class="inner">1</div>
+			<div class="inner">2</div>
+			<div class="inner">3</div>
+			<!-- <div class="inner">4</div>
+			<div class="inner">5</div>
+			<div class="inner">6</div>
+			<div class="inner">7</div>
+			<div class="inner">7</div>
+			<div class="inner">7</div>
+			<div class="inner">7</div>
+			<div class="inner">7</div>
+			<div class="inner">7</div>
+			<div class="inner">7</div> -->
+			
+		</div>
+		
+		<span>浮动下面的一行文字，撑长度xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
+		
+		<script type="text/javascript">
+			
+		</script>
+	</body>
+</html>

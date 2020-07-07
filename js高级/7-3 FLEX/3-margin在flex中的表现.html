@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>margin在flex中的表现</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				display: flex;
+				width: 600px;
+				height: 450px;
+				margin: 20px;
+				/* justify-content: space-evenly; */
+				/* align-items: flex-end; */
+				border: 1px solid red;
+			}
+			.inner{
+				width: 100px;
+				height: 100px;
+				/*
+					margin 模仿 justify-content: space-around;
+				*/
+			    /* margin: 0 auto; */
+				
+				/*
+					margin 模仿 justify-content: space-between;
+				*/
+				/* margin-right: auto; */
+				
+				/*
+					margin 模仿 justify-content: space-evenly;
+				*/
+				/* margin-left: auto; */
+				/* margin: auto; */
+				
+				/*
+					margin 模仿 align-items: flex-end center; align-content;
+				*/
+			   /* margin-top: auto;
+			    margin-bottom: auto; */
+				
+				background-color: orange;
+			}
+			
+			.inner:last-child{
+				/* margin-right: 0; */
+				
+				/* margin-right: auto; */
+			}
+			
+			.inner:first-child{
+				/* margin-left: auto; */
+			}
+		</style>
+	</head>
+	<body>
+		margin在flex中设置auto会剥夺flex容器的剩余空间，让布局属性和放大属性失效
+		<div class="box">
+			<div class="inner"></div>
+			<!-- <div class="inner"></div>
+			<div class="inner"></div> -->
+		</div>
+		<script type="text/javascript">
+			
+		</script>
+	</body>
+</html>

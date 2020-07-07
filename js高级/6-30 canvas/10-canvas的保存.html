@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>canvas的保存</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			canvas{
+				margin: 50px;
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cvs" width="600" height="300"></canvas>
+		
+		<button id="btn">点击保存</button>
+		<script type="text/javascript">
+			// 获取绘图上下文
+			var ctx = cvs.getContext("2d");
+			// 绘制路径：移动到起点，规划到终点，描边
+			// 宽高直接写在标签上的时候，可以通过 元素.width/height获取它的宽高
+			for(var i = 50; i < cvs.width; i += 50){
+				ctx.beginPath();
+				ctx.moveTo(i, 0);
+				ctx.lineTo(i, cvs.height);
+				ctx.stroke();
+				ctx.closePath();
+			}
+			
+			for(var j = 50; j < cvs.width; j += 50){
+				ctx.beginPath();
+				ctx.moveTo(0, j);
+				ctx.lineTo(cvs.width, j);
+				ctx.stroke();
+				ctx.closePath();
+			}
+			
+			btn.onclick = function () {
+				// 将canvas保存成图片 toDateURL => 将canvas转换成base64格式的图片
+				// 一个参数可以规定转成图片的格式，默认是png，可以设置 image/jpeg
+				var url = cvs.toDataURL("image/png");
+				console.log(url);
+				// 以流的格式下载   octet-stream 将文件保存成流的形式
+				// 用a标签的形式下载
+				var aEle = document.createElement("a");
+				aEle.download = "file";
+				aEle.href = url;
+				document.body.appendChild(aEle);
+				aEle.click();
+				aEle.remove();
+			}
+			
+			
+		</script>
+	</body>
+</html>

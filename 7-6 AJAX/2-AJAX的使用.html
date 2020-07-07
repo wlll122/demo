@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>AJAX的使用</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<button id="btn">点击获取用户信息</button>
+		
+		<script type="text/javascript">
+			btn.onclick = function () {
+				// 1. 声明XMLHttpRequest对象
+				var xhr = new XMLHttpRequest();
+				// console.log(xhr);
+				// 需要知道请求的地址，以及请求的方式，发出请求的参数
+				
+				// 2. 监听请求的过程
+				xhr.onreadystatechange = function () {
+					// 标识请求的过程
+					// console.log(xhr.readyState);
+					// console.log(xhr.statusText);
+					if(xhr.readyState == 4 && xhr.status == 200){
+						// 获取响应文本
+						console.log(xhr.responseText);
+						var user = JSON.parse(xhr.responseText);
+						console.log(user);
+						btn.insertAdjacentHTML("afterEnd", `<p>姓名：${ user.name }，年龄：${ user.age }，他的朋友有：${ user.friend }</p>`);
+					}
+				}
+				
+				console.log(xhr.readyState);
+				
+				// 3. 打开请求  .open(Method (GET/POST), URL, ifAsync(同步被淘汰，默认是异步，因此可忽略此参数))
+				xhr.open("GET", "./user.json");
+				// 4. 发送请求  不发送任何数据的时候，规范写法：send(null)
+				xhr.send(null);
+				
+			}
+		</script>
+	</body>
+</html>

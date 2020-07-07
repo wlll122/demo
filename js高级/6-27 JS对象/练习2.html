@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict"; //开启严格模式
+      var obj = {
+        name: "张三",
+      };
+
+      for (var i in obj) {
+        console.log("i==>", i, "obj[i]", obj[i]);
+      }
+
+      // obj.name = "李四";//增加属性值
+
+      Object.defineProperty(obj, "name", {
+        configurable: false, //当此值改为false后无法被修改删除,当元素configurable
+        // 为false其他值无法被修改,不可以重新定义其他特性
+      });
+      Object.defineProperty(obj, "name", {
+        writable: false, //当此值改为false后无法被写入
+      });
+
+      // delete obj.name; //原值被删除
+      // obj.name = "李四";
+      console.log(obj.name);
+    </script>
+  </body>
+</html>

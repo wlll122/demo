@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>元字符</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				正则中的元字符，表示某个领域、区间、类型
+			*/
+		   
+			var str = "asdfaa\n87aDG DGD 98af天空asd/a;j3r''joinsa";
+			
+			console.log(str.match(/./g));
+			console.log(str.match(/\s/g)); // 空格和换行
+			console.log(str.match(/\S/g)); // 所有非空格
+			console.log(str.match(/\w/g)); // 所有单词字符 英文+数字
+			console.log(str.match(/\W/g)); // 所有非单词字符
+			console.log(str.match(/\d/g)); // 所有数字
+			console.log(str.match(/\D/g)); // 所有非数字
+			
+			var str1 = "hello world, good ;wood how de";
+			console.log(str1.match(/\bw/g)); // w为前边界的
+			console.log(str1.match(/d\b/g)); // w为前边界的
+			console.log(str1.match(/\Bw/g)); // w为非前边界的
+			console.log(str1.match(/d\B/g)); // w为非后边界的
+		</script>
+	</body>
+</html>

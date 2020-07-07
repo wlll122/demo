@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>原型对象的方法</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			function Fn () {
+				this.name = "张三";
+			}
+			
+			Fn.prototype.name = "李四";
+			Fn.prototype.age = 10;
+			
+			var f = new Fn();
+			
+			// 实例.hasOwnProperty(属性名) 方法可以检测一个属性是存在于实例中，还是存在于原型中。只在给定属性存在于对象实例中时，才会返回 true 。
+			console.log(f.hasOwnProperty("name")); // true
+			console.log(f.hasOwnProperty("age")); // false
+			
+			// Prototype.isPrototypeOf(实例) 判断一个对象是否是某个实例的原型对象
+			// 原型链上的原型对象都是原型链底层的函数的实例的原型
+			console.log(Fn.prototype.isPrototypeOf(f)); // true
+			console.log(Object.prototype.isPrototypeOf(f)); // true
+			console.log("f instanceof Fn", f instanceof Fn); // true
+			console.log("f instanceof Object",f instanceof Object); // true
+			
+			var arr = [];
+			console.log("arr instanceof Array",arr instanceof Array);
+			console.log("arr instanceof Object",arr instanceof Object);
+			
+			// Object.getPrototypeOf(实例) 获取一个实例的原型对象
+			console.log(Object.getPrototypeOf(f));
+			console.log(Object.getPrototypeOf(Object.getPrototypeOf(f)));
+			console.log(Object.getPrototypeOf(Object.prototype)); // null
+		</script>
+	</body>
+</html>

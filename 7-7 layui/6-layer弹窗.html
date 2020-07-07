@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>layer弹窗</title>
+		<link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css" />
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			.self-pink .layui-layer-title{
+				background:#c00; color:#fff; border: none;
+			}
+			.self-pink .layui-layer-btn{
+				border-top: 3px solid #E9E7E7;
+			}
+			
+			p{
+				width: 100px;
+				margin: 30px auto;
+			}
+		</style>
+	</head>
+	<body>
+
+		<p id="pEle">hello world</p>
+		
+		
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+				layer 是layui的弹窗模块，因为是一个独立模块所以可以直接使用
+			*/
+			// console.log(layui.table);
+			// console.log(layer);
+			// console.log(layui.layer);
+			// layui携带了一个$
+			var $ = layui.$;
+			
+			// 全局弹窗配置，可以被弹窗内部设置覆盖
+			layer.config({
+				time: 2000
+			})
+			
+			pEle.onclick = function () {
+				// layer.open({
+				// 	content: "pEle.onclick",
+				// 	time: 4000
+				// })
+				
+				// 快捷方式询问
+				layer.confirm('Are you OK?', {icon: 3, title:'提示'}, function(index){
+				  //do something
+				  alert("Yes, I'm OK");
+				  layer.close(index);
+				}, function () {
+					alert("No, feel bad");
+				});
+			}
+
+			window.ondblclick = function () {
+				
+				var i = layer.open({
+					// type 弹窗类型  0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）。 
+					type: 1,
+					// title 可以是字符串   [标题，标题样式]    true => "信息"
+					// title: ["弹窗", "font-size: 20px; color: red"],
+					// icon: 2,
+					// content接受一个jq对象，而不能是一个dom对象
+					// jq => DOM   $(xx)[0]/$(xx).get(0)   DOM => $(DOM)
+					// content: ["tips出现的内容", pEle],
+					content: $(pEle),
+
+					// skin  设置皮肤  lan molv  自定义名字
+					// skin: "self-pink"
+					
+					// area 定义大小   一个值表示宽  [宽，高]
+					// area: ["500px", "300px"]
+					
+					// offset 控制出现的方向  "l t r b"  "上边距"  [上边距，左边距]
+					// offset: ["100px", "30px"]
+					
+					// icon 图标   加载层 0-2   信息窗图标 0-6
+					// icon: 6
+					
+					// btn 显示的底部按钮，可以写多个，第一个按钮点击的回调函数是yes设置的函数，之后的回调函数以btn位置信息标识，不写就不会执行相应的内容。yes回调函数不会自动关闭弹窗，需要手动关闭，通过函数的参数index以及layer.close()
+					// btn: ["OK", "NO", "Think"],
+					// yes: function (index) {
+					// 	// index 是关闭弹窗的标识,是当前弹窗的标识符，可以通过layer.close(index)关闭当前弹窗
+					// 	console.log("点击了OK");
+					// 	// layer.close(index);
+						
+					// 	// 关闭所有弹窗
+					// 	layer.closeAll(); 
+					// },
+					// btn2: function () {
+					// 	console.log("点击了NO");
+					// },
+					// btn3: function () {
+					// 	console.log("点击了Think");
+					// },
+					
+					// 右上角叉号的样式
+					// closeBtn: 1
+					
+					// shade 遮罩  "黑色的透明度 .3" true/false  [透明度, "遮罩的颜色"]
+					// shade: [.8, "#393D49"],
+					
+					// 是否可以通过点击遮罩层关闭，默认false
+					// shadeClose: true,
+					
+					// time 设定自动关闭的毫秒值
+					// time: 3000,
+					
+					// anim: 3
+					
+					// tips number 表示方向（上右下左1-4） [方向，背景颜色]
+					// tips: [3, "red"]
+				})
+			}
+			
+		</script>
+	</body>
+</html>

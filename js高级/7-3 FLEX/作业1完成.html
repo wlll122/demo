@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .box{
+                width: 800px;
+                height: 100px;
+                margin: 100px auto;
+                background-color: #347C64;
+                display: flex;
+                justify-content: space-between;
+            }
+            .inner{
+                display: flex;
+                justify-content: space-between;
+                width: 400px;
+            }
+            .inner .inner-box{
+                flex-shrink: 2;
+                color: white;
+                line-height: 100px;
+                font-size: 20px;
+            }
+            .iner{
+                width: 80px;
+                color: white;
+                font-size: 20px;
+                line-height: 100px;
+            }
+        </style>
+</head>
+<body>
+    <div class="box">
+        <div class="inner">
+            <div class="inner-box">导航A</div>
+            <div class="inner-box">导航B</div>
+            <div class="inner-box">导航c</div>
+            <div class="inner-box">导航D</div>
+        </div>
+        <div class="iner">登录</div>
+
+    </div>
+</body>
+</html>

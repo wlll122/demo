@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>量词</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				* 表示某个内容出现次数 >= 0
+				+ 表示某个内容出现次数 >= 1
+				? 表示某个内容出现次数 0 || 1
+				{n} 表示某个内容出现次数 n
+				{n,} 表示某个内容出现次数 >= n
+				{n,m} 表示某个内容出现次数 n <= x <= m
+				x|y 表示选择x或者y
+				打破贪婪匹配 量词后面跟 ? 能匹配少，不匹配多
+				
+				贪婪匹配：能匹配多次就不匹配少次
+			*/
+		   
+			var str = "haaaaaaaaaaaaa";
+			
+			var reg = /a/g;
+			var reg1 = /a*/g;
+			var reg2 = /a+/g;
+			var reg3 = /a?/g;
+			var reg4 = /a{3}/g;
+			var reg5 = /a{3,}/g;
+			var reg6 = /a{3,5}/g;
+			var reg7 = /a|h/g;
+			var reg8 = /a{3,5}?/g;
+			
+			console.log(str.match(reg)); // [a,a,a,a,a...]
+			console.log(str.match(reg1));
+			console.log(str.match(reg2));
+			console.log(str.match(reg3)); // ["", "a",*13, ""]
+			console.log(str.match(reg4)); // ["3a",*4]
+			console.log(str.match(reg5)); // ["13a"]
+			console.log(str.match(reg6)); // ["5a","5a","3a"]
+			console.log(str.match(reg7)); // ["h","a"*13]
+			
+			console.log(str.match(reg8)); // ["3a"*4]
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+    //   function Fn() {
+    //     this.name = "张三";
+    //   }
+    //   Fn.prototype.name = "李四";
+    //   Fn.prototype.age = 10;
+    //   // 通过原型添加的属性
+    //   var f = new Fn(); //实例化除一个对象
+    //   console.log(f.hasOwnProperty("name")); //属性存在于实例中
+    //   console.log(f.hasOwnProperty("age"));
+    //   console.log(Fn.prototype.isPrototypeOf(f)); //true
+    //   //判断对象是否是某个实例的对象
+    //   var arr = [];
+    //   console.log(arr instanceof Array);
+    //   console.log(Object.getPrototypeOf(f)); //获取一个实例的原型对象
+    //   // 创建对象###########################
+
+    //   function createPerson(name, age) {
+    //     var obj = {
+    //       name: name,
+    //       age: age,
+    //     };
+    //     return obj;
+    //   }
+    //   obj2 = createPerson("zhangsan", 12);
+
+    //   function Cat(name, age) {
+    //     this.name = name;
+    //     this.age = age;
+    //     console.log(this);
+    //     this.shack = function () {
+    //       console.log(this.name);
+    //       console.log("函数内部的this===>", this); //0指向的是cat
+    //     };
+    //   }
+    //   var cat1 = new Cat("长毛", 7).shack();
+    //   function Tiger(name, age) {
+    //     this.name = name;
+    //     this.age = age;
+    //   }
+    //   Tiger.prototype.skill = ["Tree climbing", "run"];
+    //   Tiger.prototype.shot = function () {
+    //     console.log("吼!!!!!");
+    //   };
+    //   var tiger1 = new Tiger("山东", 6);
+    //   var tiger2 = new Tiger("华北", 1);
+    //   console.log(tiger1.shot === tiger2.shot);
+    //   console.log(tiger1.skill === tiger2.skill); //指向同一个原型
+    //   //   原型对象的补充
+      // 原型的动态性
+    //   新的实例化的对象可以访问新增加的属性和方法;
+      function Cat(name) {
+        this.name = name;
+      }
+   
+      Cat.prototype.skill = ["抓","条","走"];
+      Cat.prototype.run = function(){
+          console.log("run........");
+      }
+      var obj = Cat.prototype;
+      console.log(obj === Cat.prototype);
+      var cat = new Cat("tom");
+      cat.run();//使用原型添加属性时先添加后才可以使用
+    //   在不改变原型的情况下使用字面量形式添加
+    Cat.prototype.extends = function (obj){
+        for(var i in obj){
+            if(!(i in Cat.prototype)){
+                Cat.prototype[i] = obj[i];
+            }
+        }
+    }
+    Cat.prototype.extends({
+        skill:["抓","条","走"],
+        run(){
+            console.log("run.........");
+        }
+    })
+    console.log(obj === Cat.prototype);
+    var cat1 = new Cat("警长")
+    console.log(cat1.skill);
+    cat1.run();
+    </script>
+  </body>
+</html>

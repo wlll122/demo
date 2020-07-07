@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>calc</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				/* calc 使用 + - 的时候，符号的两端要加上空格 */
+				/* width: calc(20% + 5% * 2); */
+				
+				/* 也常用来实现响应式效果 */
+				/* width: calc(100% - 100px); */
+				
+				/* px +/- px px +/- %  数字不能用来加减 */
+				width: calc(100px * 2%);
+				height: 200px;
+				/* margin: 0 auto; */
+				background-color: red;
+			}
+			
+			.box1{
+				width: 20%;
+				height: 200px;
+				background-color: blue;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+		<div class="box1"></div>
+		
+		<script type="text/javascript">
+			
+		</script>
+	</body>
+</html>

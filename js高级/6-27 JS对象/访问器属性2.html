@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // configurable :是否可配置
+      // enumerable:是否可遍历
+      // get :是一个,返回读取此属性的值
+      // set:是一个函数,默认接受一个参数,用户重写的值
+      // getter  setter  :描述属性的读写
+
+      var obj = {
+        lastName: "李",
+        firstName: "太白",
+        // get fullName() {
+        //   return this.lastName + this.firstName;
+        // },
+        // set fullName(v) {
+        //   this.lastName = v[0];
+        //   this.firstName = v.slice(1);
+        // },
+      };
+
+      //数据属性和访问器属性不可同时拥有
+      Object.defineProperty(obj, "fullName", {
+        configurable: true, //表示可以被删除
+        enumerable: true,
+        get() {
+          return this.lastName + this.firstName;
+        },
+        set(v) {
+          this.lastName = v[0];
+          this.firstName = v.slice(1);
+        },
+      });
+      console.log(obj.fullName);
+      obj.fullName = "苏东坡";
+    </script>
+  </body>
+</html>

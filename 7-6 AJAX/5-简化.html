@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="referrer" content="never"/>
+		<title>豆瓣电影-简化</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.container{
+				width: 1200px;
+				margin: 0 auto;
+			}
+			
+			button{
+				margin-right: 100px;
+				padding: 12px 40px;
+				font-size: 16px;
+				letter-spacing: .1rem;
+				background-color: #fff;
+				border-radius: 3px;
+				border: 1px solid red;
+				outline: none;
+			}
+			button.act{
+				color: #fff;
+				background-color: red;
+			}
+			
+			.pagination{
+				display: flex;
+				margin: 30px 0;
+				list-style: none;
+			}
+			.pagination li{
+				width: 26px;
+				height: 26px;
+				margin-right: 10px;
+				text-align: center;
+				line-height: 26px;
+				border: 1px solid red;
+				cursor: pointer;
+			}
+			.pagination li.act{
+				color: #fff;
+				background-color: red;
+			}
+			
+			.content{
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				border-top: 3px solid red;
+			}
+			.item{
+				display: flex;
+				/* width: 22%; */
+				width: 24%;
+				height: 200px;
+				margin-top: 15px;
+				/* margin-right: 4%; */
+				justify-content: space-between;
+				border: 1px solid #eee;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+			/* .item:nth-child(4n){
+				margin-right: 0;
+			} */
+			.item:nth-last-child(-n + 2){
+				height: 0;
+				border: 0;
+				margin-top: 0;
+			}
+			.item img{
+				width: 45%;
+			}
+			.item div{
+				width: 50%;
+				line-height: 30px;
+			}
+			.item p{
+				width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.mask{
+				position: fixed;
+				top: 0;
+				left: 0;
+				display: none;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,.8);
+			}
+			.mask-content{
+				width: 600px;
+				/* height: 200px; */
+				margin: auto;
+				padding: 20px 40px;
+				background-color: #fff;
+				border-radius: 5px;
+			}
+			.movie-title{
+				font-size: 26px;
+				font-weight: bold;
+			}
+			.movie-intro{
+				line-height: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			
+			<div class="nav">
+				<button data-type="in_theaters" class="act">正在热映</button>
+				<button data-type="coming_soon">即将上映</button>
+				<button data-type="top250">top250</button>
+			</div>
+			
+			<ul class="pagination">
+				<!-- <li class="act">1</li> -->
+			</ul>
+			
+			<div class="content">
+				
+			</div>
+			
+		</div>
+		
+		<div class="mask">
+			<div class="mask-content">
+				<p class="movie-title">标题：</p>
+				<p class="movie-intro">简介：</p>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			/*
+				1. 进入页面获取 正在热映 类型的电影
+				2. 点击切换类型，切换电影，添加分页
+				3. 点击分页，切换相应的类型的电影为当前分页显示内容
+				4. 添加电影点击事件，出现遮罩层，显示电影详情  (subject?mId=xxx)
+			*/
+			// 网络基地址
+			var host = "http://www.bufantec.com/api/douban/movie/";
+			
+			var nav = document.querySelector(".nav");
+			var content = document.querySelector(".content");
+			var pagination = document.querySelector(".pagination");
+			var mask = document.querySelector(".mask");
+			var movieTitle = document.querySelector(".movie-title");
+			var movieIntro = document.querySelector(".movie-intro");
+			
+			// 进入页面获取电影
+			getMovie();
+			
+			// 点击更换电影类型事件
+			nav.onclick = function () {
+				if(event.target.tagName === "BUTTON"){
+					// 更换激活样式，重新发出请求
+					this.querySelector(".act").classList.remove("act");
+					event.target.classList.add("act");
+					// 获取类型
+					// var type = event.target.dataset.type;
+					getMovie();
+				}
+			}
+			
+			// 点击分页更换电影
+			function changePage (pageNumber) {
+				pagination.querySelector(".act").classList.remove("act");
+				event.currentTarget.classList.add("act");
+				getMovie(pageNumber);
+			}
+			
+			// 点击电影获取详情
+			function getDetail (mid) {
+				// 打开遮罩层，发出详情的请求，显示到页面上
+				mask.style.display = "flex";
+				ajax(host + "subject?mId=" + mid, function (res) {
+					movieTitle.innerText = res.data.title;
+					movieIntro.innerText = res.data.summary;
+				})
+			}
+			
+			// 点击关闭遮罩层
+			mask.onclick = function () {
+				this.style.display = "none";
+			}
+			mask.children[0].onclick = function () {
+				// 阻止冒泡  event.cancelBubble = true;
+				event.stopPropagation();
+			}
+		   
+			// 共享函数：获取电影
+			function getMovie (start) {
+				
+				var type = document.querySelector(".nav .act").dataset.type;
+				var url = host + type + "?start="+ (start ? start : 1) +"&limit=11";
+				
+				ajax(url, function (res) {
+					// 如果点击的是分页那么就不需要重新生成分页
+					if(!start){
+						// 添加分页
+						var pageStr = "";
+						for(var j = 0; j < res.data.totalPage; j ++){
+							pageStr += `<li onclick="changePage(${ j + 1 })">${ j + 1 }</li>`;
+						}
+						pageStr = pageStr.replace("li", `li class="act"`);
+						pagination.innerHTML = pageStr;
+					}
+					
+					// 添加电影
+					var str = "";
+					for(var i = 0; i < res.data.list.length; i ++){
+						var movie = res.data.list[i];
+						str += `
+						<div class="item" onclick="getDetail(${ movie.mId })">
+							<img src="${ movie.small }" alt="" onerror="loadError()">
+							<div>
+								<p>名称：${ movie.title }</p>
+								<p>时长：${ movie.longtime }</p>
+								<p>类型：${ movie.genres }</p>
+								<p>平均分：${ movie.rating_average }</p>
+								<p>导演：${ movie.director }</p>
+								<p>编剧：${ movie.scriptwriter }</p>
+							</div>
+						</div>
+						`;
+					}
+					// 解决flex最后一行最好的方式：添加n列-2个空元素
+					content.innerHTML = str + `<div class="item"></div><div class="item"></div>`;
+				})
+			}
+			
+			function ajax (url, success) {
+				// 1. 实例化
+				var xhr = new XMLHttpRequest();
+				// 2. 设置监听进程函数
+				xhr.onreadystatechange = function () {
+					// 0 初始化 1 open 2 send 3 部分获取 4 完整数据
+					if(xhr.readyState == 4 && xhr.status == 200){
+						// 服务器返回的数据
+						// console.log(xhr.responseText);
+						var res = JSON.parse(xhr.responseText);
+						console.log(res);
+						// 判断成功后的回调函数是存在，存在就执行此函数，将服务器返回的数据当成参数传入函数
+						success && success(res);
+					}
+				}
+				
+				// 3. open
+				xhr.open("GET", url);
+				// 4. send
+				xhr.send(null);
+			}
+			
+			// 图片加载失败的函数
+			function loadError () {
+				event.target.src = "./error.jpg";
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Parent(age) {
+            this.age = age;
+            this.friend = [];
+
+        }
+        Parent.prototype.run = function () {
+            console.log("run...........");
+        }
+        var parent1 = new Parent(10);
+        var parent2 = new Parent(20);
+        //在对象实例化时各自生成相应的父类的属性,原型属性会共享
+        console.log(parent1);
+        console.log(parent2);
+        console.log("parent1.friend === parent2.friend",parent1.friend === parent2.friend);
+        function Child (name){
+            this.name = name;
+
+        } 
+        Child.prototype = new Parent(12);
+        Child.prototype = new Parent(12);
+			
+			var child1 = new Child("东北");
+			var child2 = new Child("华南");
+			//继承了父类的原型发生共享
+			console.log(child1);
+			console.log(child2);
+			console.log("child1.friend === child2.friend", child1.friend === child2.friend); 
+			
+    </script>
+</body>
+</html>

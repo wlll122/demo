@@ -1,0 +1,72 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 、已知如下数组，编写一个函数将数组扁平化并去除其中重复部分数据，最终得
+    到一个升序且不重复的数组> var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 
+    8, 9, [11, 12, [12, 13, [14] ] ] ], 10]; -->
+
+    <script>
+    //     var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 
+    // 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
+       
+    //         //常数
+    //         var str1 = [];
+    //         //数组
+    //         var str2 = [];
+            
+    //         for(var i = 0;i<arr.length;i++){
+    //             if (arr[i] instanceof Array) {
+    //                str1.push(arr[i]);
+    //             }else{
+    //               str2.push(arr[i]);
+    //             }
+    //         }
+    //         console.log(str1);
+    //         console.log(str2);
+            
+            // 使用递归方法来实现
+            // 递归跳出条件   
+             var arrl = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
+             
+             function l1(arry){
+                var str1 = [];
+             var str2 = [];
+                for (let i = 0; i < arry.length; i++) {
+                  
+                    if (arry[i] instanceof Array) {
+                        str1.push(arry[i]);
+                         
+                    }else{
+                        str2.push(arry[i]);
+                    }                             
+                }
+                
+                return{
+                    Arr:str1,
+                    int:str2
+                }
+            }
+          //定义一个空值接收
+            arrI = l1(arrl).int;//一维
+            arrA = l1(arrl).Arr;//多维
+            
+        // 二次调用
+            l1(arrA);
+            console.log(l1(arrA).Arr);
+           
+           
+            
+            
+            
+
+
+            
+    </script>
+    </body>
+    </html>

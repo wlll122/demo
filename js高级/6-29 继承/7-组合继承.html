@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>组合继承</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			function Parent (age) {
+				this.age = age;
+				this.friend = [];
+			}
+			
+			Parent.prototype.run = function () {
+				console.log("run ...");
+			}
+			
+			var parent1 = new Parent(10);
+			var parent2 = new Parent(20);
+			
+			console.log("parent1.friend === parent2.friend", parent1.friend === parent2.friend); // false
+			
+			function Child (name, age) {
+				this.name = name;
+				Parent.call(this, age);
+			}
+			
+			
+			// 直接让子类的原型 = 父类的原型会导致两个共享同一个堆地址，给子类添加方法，父类原型会添加上
+			// Child.prototype = Parent.prototype;
+			Child.prototype = new Parent();
+			Child.prototype.say = function () {
+				console.log("子类的方法say");
+			}
+			
+			var child1 = new Child("狗蛋",12);
+			var child2 = new Child("二毛", 16);
+			
+			
+			function Child1 () {
+				
+			}
+			Child1.prototype = new Parent();
+			
+			console.log(child1);
+			console.log(child2);
+			
+			console.log("child1.friend === child2.friend", child1.friend === child2.friend); 
+			
+			
+			// 组合继承使用时：父类构造函数的实例属性会被声明两次
+			// 原型链层级会改变
+		</script>
+	</body>
+</html>

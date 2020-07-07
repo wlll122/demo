@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>借用构造函数继承</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			function Parent (age) {
+				this.age = age;
+				this.friend = [];
+			}
+			
+			Parent.prototype.run = function () {
+				console.log("run ...");
+			}
+			
+			var parent1 = new Parent(10);
+			var parent2 = new Parent(20);
+			
+			console.log("parent1.friend === parent2.friend", parent1.friend === parent2.friend); // false
+			
+			function Child (name, age) {
+				this.name = name;
+				Parent.call(this, age)
+				
+			}
+			
+			var child1 = new Child("狗蛋",12);
+			var child2 = new Child("二毛", 16);
+			
+			console.log(child1);
+			console.log(child2);
+			
+			console.log("child1.friend === child2.friend", child1.friend === child2.friend); 
+			
+			// 借用构造函数继承实现了 子类不共享父类的实例属性，并且能给父类实例属性传参
+			// 但是它不能继承父类原型上的方法
+		</script>
+	</body>
+</html>

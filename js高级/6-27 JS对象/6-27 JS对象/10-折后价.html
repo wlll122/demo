@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>折后价</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var book = {
+				name: "西游记",
+				price: 100,
+				percent: 0.85
+			}
+			
+			Object.defineProperty(book, "cut", {
+				enumerable: true,
+				get(){
+					return this.price * this.percent;
+				}
+			})
+			
+			console.log(book.cut);
+			book.price = 150;
+			console.log(book.cut);
+			book.percent = 0.6;
+			console.log(book.cut);
+		</script>
+	</body>
+</html>

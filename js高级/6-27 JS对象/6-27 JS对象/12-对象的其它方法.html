@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>对象的其它方法</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var obj = {};
+			
+			// defineProperties将属性名和属性描述符以键值对的形式表示
+			Object.defineProperties(obj, {
+				name: {
+					value: "张丹"
+				},
+				age: {
+					enumerable: true,
+					get(){
+						return this._age;
+					},
+					set(v){
+						this._age = v;
+					}
+				},
+				_age: {
+					writable: true,
+					value: 10
+				}
+			})
+			
+			console.log(obj.name, obj.age);
+			
+			/*
+			Object.getOwnPropertyNames  获取对象所有属性，无论是否可枚举
+			Object.keys 获取对象所有可枚举属性
+			*/
+		   
+			console.log(Object.getOwnPropertyNames(obj));
+			console.log(Object.keys(obj));
+		</script>
+	</body>
+</html>

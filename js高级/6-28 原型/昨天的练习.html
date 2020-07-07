@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>昨天的练习</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" placeholder="请输入姓名" value="" v-module="name">
+		<input type="text" placeholder="请输入年龄" value="" v-module="age">
+		<input type="text" placeholder="请输入电话" value="" v-module="tel">
+		<input type="text" placeholder="请输入年龄" value="">
+		
+		<script type="text/javascript">
+			// sum(a)(b) = a + b;
+			function sum (x) {
+				return function (y) {
+					return x + y;
+				}
+			}
+			
+			// arr.sort(byField("name"))
+			// 有一组需要排序的对象
+			let users = [
+			  { name: "John", age: 20, surname: "Johnson" },
+			  { name: "Pete", age: 18, surname: "Peterson" },
+			  { name: "Ann", age: 19, surname: "Hathaway" }
+			];
+			
+			// users.sort(function(a, b){ return a.name > b.name ? 1 : -1 });
+			users.sort(byField('name'));
+			
+			console.log(users);
+			function byField (type) {
+				return function (a, b) {
+					return a[type] > b[type] ? 1 : -1;
+				}
+			}
+			
+			// 给任意 input 元素添加 v-module 属性，在 data 中添加相应属性，并实现双向数据绑定，生成的属性不可枚举。
+			var data = {};
+			var ipts = document.querySelectorAll("input[v-module]");
+			for (let i = 0; i < ipts.length; i++) {
+				var key = ipts[i].getAttribute("v-module");
+				// Object.defineProperties(data, {
+				// 	[key]: {
+				// 		get(){
+				// 			return ipts[i].value;
+				// 		},
+				// 		set(v){
+				// 			ipts[i].value = v;
+				// 		}
+				// 	}
+				// })
+				
+				Object.defineProperty(data, key, {
+					get(){
+						return ipts[i].value;
+					},
+					set(v){
+						ipts[i].value = v;
+					}
+				})
+			}
+		</script>
+	</body>
+</html>

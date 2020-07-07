@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="t1" type="text" placeholder="请输入姓名" value="" />
+    <script>
+      var data = {
+        name: "李白",
+      };
+      Object.defineProperty(data, "vmodule", {
+        get() {
+          // return (t1.value.innerText = data.name);
+          return data;
+        },
+        set: function (newVal) {
+          document.getElementById("t1").value = newVal;
+        },
+      });
+      document.addEventListener("keyup", function (e) {
+        data.vmodule = e.target.value;
+      });
+      console.log(data);
+    </script>
+  </body>
+</html>

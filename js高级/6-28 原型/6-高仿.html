@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>高仿</title>
+		<link rel="stylesheet" type="text/css" href="lib/swiper.css"/>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="swiper">
+				<div class="item"><img src="../lib/image/banner/m1.jpg" alt=""></div>
+				<div class="item"><img src="../lib/image/banner/m2.jpg" alt=""></div>
+				<div class="item"><img src="../lib/image/banner/m3.jpg" alt=""></div>
+				<div class="item"><img src="../lib/image/banner/m4.jpg" alt=""></div>
+			</div>
+			
+			<div class="arrow l"><</div>
+			<div class="arrow">></div>
+			
+			
+		</div>
+		
+		<script src="lib/swiper.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 插件的一般封装方法
+			var a = 10
+			
+			var swiper = new Swiper(".box", {
+				loop: true, // 是否开启无缝
+				pagination: true, // 是否添加小点
+				// autoPlay: true, // 是否开启自动轮播
+				// duration: 3000 // 用户自定义自动轮播间隔时长
+			});
+		</script>
+	</body>
+</html>

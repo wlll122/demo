@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="never">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .main {
+            width: 1600px;
+            height: 1410px;
+            margin: 100px auto;
+            border: 1px solid black;
+        }
+
+        .main .btn {
+            width: 600px;
+            height: 50px;
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .main .btns {
+            width: 150px;
+            text-align: center;
+            line-height: 50px;
+            margin-left: 20px;
+            border: 1px solid red;
+        }
+
+        .active {
+            background-color: red;
+            color: white;
+        }
+
+        .box {
+            width: 1600px;
+            height: 1200px;
+        }
+
+        ul {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        li {
+            width: 25%;
+            height: 33%;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            border: 1px solid rgba(96, 96, 96, .5);
+        }
+
+        li img {
+            width: 60%;
+            height: 100%;
+        }
+
+        li .text {
+            text-align: left;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 20px;
+        }
+
+        li .text p {
+            margin-left: 4px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-weight: bolder;
+        }
+
+        #ulEle::after {
+            content: '';
+            width: 50%;
+        }
+
+        .list {
+            width: 100%;
+            height: 60px;
+            /* background-color: rosybrown; */
+            margin-top: 10px;
+        }
+        #ulEle2{
+            width: 80%;
+            height: 100%;
+
+        }
+        #ulEle2 div{
+            box-sizing: border-box;
+            border: 2px solid red;
+            text-align: center;
+            line-height: 60px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .active1 {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="btn">
+            <div class="btns btn1 active">获取正在热映列表</div>
+            <div class="btns btn2">获取即将上映列表</div>
+            <div class="btns btn3">获取top250列表</div>
+        </div>
+        <div class="list">
+            <ul id="ulEle2">
+              
+            </ul>
+        </div>
+        <div class="box">
+            <ul id="ulEle">
+            </ul>
+        </div>
+
+    </div>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+        /*
+				电影url
+					正在热映： http://bufantec.com/api/douban/movie/in_theaters
+					即将上映： http://bufantec.com/api/douban/movie/coming_soon
+					top250： http://bufantec.com/api/douban/movie/top250
+				总数据是 240，分页，每页显示 10 条数据，数据要按响应式显示
+			*/
+
+        //获取按钮 
+        var btn = document.querySelectorAll(".btns");
+        // var lis = document.querySelector('.list');
+        getMovie("in_theaters");
+        btn[0].onclick = function () {
+            getMovie("in_theaters");
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+           
+
+        }
+        btn[1].onclick = function () {
+            getMovie("coming_soon");
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+        }
+        btn[2].onclick = function () {
+            getMovie("top250");
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+        }
+
+
+        function getMovie(type,pags=1) {
+            
+            //声明实例
+            var xhr = new XMLHttpRequest();
+            //监听过程
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    
+                    // 输出响应内容
+                    var data = JSON.parse(xhr.responseText).data;
+                    var page = data.totalPage;
+                    var str1 ='';
+
+                    for(let j = 0;j<page;j++){
+                        str1 += `<div style="width: ${100/page}%;" class="numb ">${j+1}</div>`;  
+                    }
+                    ulEle2.innerHTML = str1;
+                    var str = ``;
+                    for (var i = 0; i < data.list.length; i++) {
+                        // 当图片加载不出来的时候，要添加一个默认图片
+                        str += `  <li>
+                    <img src="${ data.list[i].small }" onerror ="fn()" >
+                    <div class="text">
+                        <p>名称:${ data.list[i].title }</p>
+                        <p>时长:${ data.list[i].longtime }</p>
+                        <p>类型:${ data.list[i].type }</p>
+                        <p>平均分:${ data.list[i].rating_average }</p>
+                        <p>导演:${ data.list[i].director }</p>
+                        <p>编剧:${ data.list[i].director }</p></div> </li>`;
+
+                    }
+                    ulEle.innerHTML = str;
+                    // var str1 ='';
+                    // for(let j = 0;j<data.totalPage.length;j++){
+                        
+                    //     str1 += `<li>${j}</li>`;
+                    //     console.log(j);
+                        
+                    // }
+                    // ulEle2.innerHTML = str1;
+                }
+            
+                $('.numb').click(function(){
+                    getMovie(type,$(this).index()+1);
+                    
+                    $(this).siblings().removeClass("active1");
+                    $(this).addClass('active1');  
+                    console.log($(this));
+                })
+            }
+            xhr.open("GET", "http://bufantec.com/api/douban/movie/" + type + "?start="+pags+"&limit=10");
+            //send
+            xhr.send(null);
+           
+        }
+        function fn(){
+            $(this).attr("src", "../img/img.jpg");
+            console.log($(this));
+        }
+    </script>
+
+</body>
+
+</html>
