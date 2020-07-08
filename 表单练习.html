@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="//demo/layui.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .text-center{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-container">
+        <button class="layui-btn add">添加学员</button>
+
+        <table id="tableEle" class="layui-table" lay-filter="tableDemo"></table>
+    </div>
+
+    <script src="/demo/layui.all.js"></script>
+    <script src="/demo/api.js"></script>
+    <script>
+        var table = layui.table,
+            $ = layui.$,
+            form = layui.form,
+            userId = null;
+        table.render({
+            elem:"#tableDemo",
+            url:api.list,
+            request:{
+                pageName:'start'
+            },
+            parseData:function(res){
+                return{
+                    code:0,
+                    msg:'success',
+                    count:res.data.totalRow,
+                    data:res.data.list
+                }
+            },
+            cols: [
+					[{
+							title: "序号",
+							type: "numbers"
+						},
+						{
+							title: "昵称",
+							field: "name"
+						},
+						{
+							title: "年龄",
+							field: "age"
+						},
+						{
+							title: "性别",
+							field: "sex"
+						},
+						{
+							title: "地址",
+							field: "address"
+						},
+						{
+							title: "学校",
+							field: "school"
+						},
+						{
+							title: "操作",
+							toolbar: `
+						<div>
+							<button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit">修改</button>
+							<button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del">删除</button>
+						</div>
+						`
+						}
+					]
+				],
+                page:{
+                    limit:5,
+                    limits:[5,10,15]
+                }
+        })
+
+        //
+    </script>
+</body>
+</html>

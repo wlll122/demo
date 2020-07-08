@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="../layui-v2.5.6/layui-v2.5.6/layui/css/layui.css">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+
+		}
+
+		.box {
+			margin: 100px auto;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- 插入表单 -->
+	<div class="box">
+		<div class="layui-container">
+			<button class="layui-btn add">添加学员</button>
+
+			<table id="tableEle" class="layui-table" lay-filter="tableDemo"></table>
+		</div>
+
+	</div>
+
+	<script src="../layui-v2.5.6/layui-v2.5.6/layui/layui.all.js"></script>
+	<script src="api.js"></script>
+
+	<script>
+		var table = layui.table;
+		console.log(table);
+		var $ = layui.$;
+		var layer = layui.layer;
+		form = layui.form,
+			userId = null;
+		//第一个实例
+		tableIns = table.render({
+			elem: "#tableEle",
+			url: api.list,
+			request: {
+				pageName: 'start'
+			},
+			parseData: function (res) {
+
+				for (var i = 0; i < res.data.list.length; i++) {
+					res.data.list[i].sex = res.data.list[i].sex == "1" ? "女" : "男";
+				}
+				return {
+					code: 0,
+					msg: "success",
+					count: res.data.totalRow,
+					data: res.data.list
+				}
+			},
+			cols: [
+				[{
+						title: "序号",
+						type: "numbers"
+					},
+					{
+						title: "昵称",
+						field: "name"
+					},
+					{
+						title: "年龄",
+						field: "age"
+					},
+					{
+						title: "性别",
+						field: "sex"
+					},
+					{
+						title: "地址",
+						field: "address"
+					},
+					{
+						title: "学校",
+						field: "school"
+					},
+					{
+						title: "操作",
+						toolbar: `
+						<div>
+							<button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit">修改</button>
+							<button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del">删除</button>
+						</div>
+						`
+					}
+				]
+			],
+			page: {
+				limit: 5,
+				limits: [5, 10, 15]
+			}
+		})
+		//添加学院事件
+		$(".add").click(function () {
+			console.log(1);
+			openFrom();
+
+		})
+
+		//打开表单事件
+		function openFrom(value) {
+
+
+			var str = `<div class="layui-form" lay-filter="formEle">`;
+			// 如果是修改，不添加if语句中的内容
+			if (!value) {
+				str +=
+					`<div class="layui-form-item">
+							<label class="layui-form-label">登录名</label>
+							<div class="layui-input-block">
+								<input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">密码</label>
+							<div class="layui-input-block">
+								<input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input" value="123456">
+							</div>
+						</div>`;
+			}
+			str +=
+				`<div class="layui-form-item">
+							<label class="layui-form-label">昵称</label>
+							<div class="layui-input-block">
+								<input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">年龄</label>
+							<div class="layui-input-block">
+								<input type="text" name="age" placeholder="请输入" autocomplete="off" class="layui-input" value="12">
+							</div>
+						</div>
+						<div class="layui-form-item">
+						    <label class="layui-form-label">性别</label>
+						    <div class="layui-input-block">
+						      <input type="radio" name="sex" value="0" title="男">
+						      <input type="radio" name="sex" value="1" title="女" checked>
+						    </div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">学校</label>
+							<div class="layui-input-block">
+								<input type="text" name="school" placeholder="请输入" autocomplete="off" class="layui-input" value="诗歌培养基地">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">地址</label>
+							<div class="layui-input-block">
+								<input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input" value="敦煌莫高窟">
+							</div>
+						</div>
+						<div class="layui-form-item text-center">
+							<button class="layui-btn" lay-submit lay-filter="sub">提交表单</button>
+						</div>
+					</div>
+					`;
+			// 打开弹窗
+			layer.open({
+				type: 1,
+				content: str,
+				shade: [.8, "#393D49"],
+				shadeClose: true
+			})
+			
+			// 动态添加表单，需要将 select、checkbox、radio重绘
+			form.render("radio", "formEle");
+			if (value) {
+					value.sex = value.sex == "男" ? 0 : 1;
+					form.val("formEle", value);
+				}
+
+		}
+
+		//表单提交事件
+		form.on('submit(sub)', function (obj) {
+			var data = obj.field;
+			// 获取值
+			// 校验用户名
+			// 获取用户名:
+			var userNa = data.username;
+			console.log(userNa);
+			$.ajax({
+				url: api.check,
+				method: "post",
+
+				data: 'username=' + userNa,
+				success: function (res) {
+					// 成功后返回的文本,进行用户名校验
+
+					res.code;
+					console.log(res.code);
+					//返回值为fail,此时为表示重复,关闭弹窗,提示以存在
+					if (res.code === 'fail') {
+						console.log(1);
+						layer.msg("用户名已存在", {
+							icon: 2,
+							time: 1500
+						})
+					} else {
+						data.userId = userId;
+						userId = null;
+						$.ajax({
+								url: api.add,
+								method: "post",
+								data: data,
+								success: function (res) {
+									console.log(res);
+								},
+
+							}),
+
+							layer.closeAll();
+						// 刷新数据表格  表格重载
+						tableIns.reload();
+						layer.msg("添加完成", {
+							icon: 3,
+							time: 1500
+						})
+					}
+
+				},
+
+			})
+
+		});
+		//修改按钮
+
+		table.on('tool(tableDemo)', function (obj) {
+			var data = obj.data;
+
+			var layEvent = obj.event;
+
+			if (layEvent === 'edit') {
+				userId = data.userId;
+				openFrom(data);
+
+				console.log(data);
+			} else if (layEvent === 'del') {
+				console.log(layEvent);
+				layer.confirm("确定要i删除吗?", {
+						icon: 3
+					},
+					function (index) {
+						layer.close(index);
+						$.ajax({
+							url: api.del,
+							method: 'get',
+							data: data.userId,
+							success: function (res) {
+								// res.code === 'fail'
+
+								if (res.code === 'success') {
+									layer.msg("删除成功", {
+										time: 1500
+									});
+									tableIns.reload();
+								} else {
+									layer.msg("删除失败", {
+										time: 1500
+									});
+								}
+							},
+						})
+					})
+			}
+		})
+	</script>
+
+</body>
+
+</html>
