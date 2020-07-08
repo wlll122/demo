@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>layuiform表单</title>
+		<link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css"/>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container">
+			
+			<!-- url?name=value&name1=value1... 
+				form标签上有action属性，那么点击form提交，会将form中的内容以name=value的形式将所有表单元素用默认的get方式提交到action地址
+			-->
+			<!-- <form class="layui-form">
+				<input class="layui-input" type="text" name="uname">
+				<input class="layui-input" type="text" name="age">
+				<div class="layui-btn" lay-submit lay-filter="test">提交</div>
+			</form> -->
+			
+			
+		
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var $ = layui.$;
+			window.onclick = function () {
+				$(document.body).append(`
+				<div class="layui-form layui-form-pane" lay-filter="formEle">
+						<div class="layui-form-item">
+						    <label class="layui-form-label">姓名</label>
+							<div class="layui-input-block">
+								<input class="layui-input" type="text" name="uname">
+							</div>
+						</div>
+						<div class="layui-form-item">
+						    <label class="layui-form-label">年龄</label>
+							<div class="layui-input-block">
+								<input class="layui-input" type="text" name="age">
+							</div>
+						</div>
+						
+						
+						<input type="checkbox" name="fruit1" title="橘子" checked>
+						<input type="checkbox" name="fruit2" title="苹果"> 
+						<input type="checkbox" name="fruit3" title="香蕉"> 
+						
+						<input type="radio" name="sex" value="0" title="男">
+						<input type="radio" name="sex" value="1" title="女" checked>
+							
+						<div class="layui-btn" lay-submit lay-filter="test">提交</div>
+					</div>
+				</div>
+				`);
+				// 动态插入表单元素的时候需要使用表单渲染才能使用 checkbox、radio、select
+				// layui.form.render(); // 重新渲染页面上所有表单的 三项
+				layui.form.render(null, "formEle"); // 重新渲染lay-filter="formEle" 的表单元素内的 三项
+			}
+			
+			// var form = layui.form;
+			
+			// // form 表单的提交事件   form.on("submit(提交元素上的lay-filter的值)")
+			// form.on("submit(test)", function (obj) {
+			// 	console.log(obj);
+			// 	// obj.field 是可以获取的表单元素的内容，{ input标识name: 对应的value }
+			// 	// return false;
+			// })
+			
+			
+			
+		</script>
+	</body>
+</html>

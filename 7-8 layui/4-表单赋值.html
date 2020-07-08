@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>表单赋值</title>
+		<link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css"/>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container">
+			<form action="" class="layui-form" lay-filter="formEle">
+				<input type="text" class="layui-input" name="uname">
+				<input type="text" class="layui-input" name="age">
+				<input type="checkbox" name="fruit[0]" title="苹果" checked>
+				<input type="checkbox" name="fruit[1]" title="香蕉">
+				<input type="radio" name="sex" value="0" title="男" checked>
+				<input type="radio" name="sex" value="1" title="女">
+				
+				<button class="layui-btn" lay-submit="" lay-filter="test">提交</button>
+			</form>
+			
+		</div>
+		
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var form = layui.form;
+			
+			// form.val(layui-form元素上面的lay-filter的值, [可选: 赋值])
+			// console.log(form.val("formEle"));
+			form.val("formEle", {
+				uname: "李白",
+				age: "23",
+				// "fruit[0]": true,
+				// "fruit[1]": true,
+				// sex: "1"
+			})
+		</script>
+	</body>
+</html>

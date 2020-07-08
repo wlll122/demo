@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>表单验证</title>
+		<link rel="stylesheet" href="../lib/layui/css/layui.css">
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-form">
+			<!-- lay-verfy 按照书写的规则顺序进行校验 -->
+			<input type="text" class="layui-input" lay-verify="required|username" lay-verType="msg">
+			<input type="text" name="age" onblur="verify()" id="ipt">
+			<button class="layui-btn" lay-submit lay-filter="sub">提交</button>
+		</div>
+
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function verify() {
+				var str = event.target.value;
+				// 必须是数字，并且不能为空
+				if (/\D/.test(str)) {
+					layer.msg("必须是数字", {
+						icon: 2,
+						time: 2000
+					});
+				} else if (!/\d+/.test(str)) {
+					layer.msg("这是必填项", {
+						icon: 2,
+						time: 2000
+					});
+				}
+			}
+
+			layui.form.verify({
+				username: function(value, item) { //value：表单的值、item：表单的DOM对象
+					if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+						return '用户名不能有特殊字符';
+					}
+					if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+						return '用户名首尾不能出现下划线\'_\'';
+					}
+					if (/^\d+\d+\d$/.test(value)) {
+						return '用户名不能全为数字';
+					}
+				}
+
+				//我们既支持上述函数式的方式，也支持下述数组的形式
+				//数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+				,
+				pass: [
+					/^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'
+				]
+			});
+
+			layui.form.on("submit(sub)", function(obj) {
+				console.log(obj.field);
+			})
+		</script>
+	</body>
+</html>

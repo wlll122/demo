@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>layuiform表单</title>
+		<link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css" />
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container">
+			<div class="layui-form layui-form-pane" lay-filter="formEle">
+
+				<input type="checkbox" name="fruit[0]" title="橘子" checked>
+				<input type="checkbox" name="fruit[1]" title="苹果">
+				<input type="checkbox" name="fruit[2]" title="香蕉">
+
+				<div class="layui-btn" lay-submit lay-filter="test">提交</div>
+			</div>
+		</div>
+
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var form = layui.form;
+
+			form.on("submit(test)", function(obj) {
+				console.log(obj.field);
+			})
+		</script>
+	</body>
+</html>

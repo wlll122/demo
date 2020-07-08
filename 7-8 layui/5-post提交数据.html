@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>post提交数据</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="http://www.bufantec.com/api/test/user/checkUserName/api/test/user/save" method="post">
+			<input type="text" name="username" placeholder="请输入用户名" value="12334" />
+			<br>
+			<input type="password" name="password" placeholder="请输入密码" value="41342134" />
+			<br>
+			<input type="text" name="name" placeholder="请输入昵称" value="2134" />
+			<br>
+			<input type="text" name="age" placeholder="请输入年龄" value="1234" />
+			<br>
+			男 <input type="radio" name="sex" value="0" checked>
+			女 <input type="radio" name="sex" value="1">
+			<br>
+			<input type="text" name="address" placeholder="请输入地址" value="134" />
+			<br>
+			<input type="text" name="school" placeholder="请输入学校" value="1234" />
+			<br>
+			<button type="submit">提交</button>
+		</form>
+		
+		
+		<script type="text/javascript">
+			var formEle = document.querySelector("form");
+			
+			
+			// http://59.110.138.169/api/test/user/save
+			// 请求参数：name 用户昵称 age 、sex、tel、address、school、username 登录名、password 密码
+			// 请求方式: post  请求的数据格式为： form表单数据
+			
+			// post 提交更安全，get请求一般用于查询数据
+			// 因为form默认跳转到提交数据的页面，因此我们使用ajax控制提交数据
+			formEle.onsubmit = function () {
+				var xhr = new XMLHttpRequest();
+				
+				xhr.onreadystatechange = function () {
+					if(xhr.readyState == 4 && xhr.status == 200){
+						// console.log(xhr.responseText);
+						if(JSON.parse(xhr.responseText).code == "success"){
+							alert("提交成功");
+						}
+					}
+				}
+				
+				xhr.open("POST", "http://59.110.138.169/api/test/user/save");
+				// post请求的参数写在send中   form表单数据格式 name=value&...
+				var ipts = document.querySelectorAll("input");
+				var str = "";
+				for(var i = 1; i < ipts.length; i ++){
+					console.log(ipts[i].name , ipts[i].value);
+					str += "&" + ipts[i].name + "=" + ipts[i].value;
+				}
+				// console.log(str.slice(1));
+				// 在open方法之后，send方法之前，设置请求头（提交的数据类型）
+				xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+				xhr.send(str.slice(1));
+				
+				return false;
+			}
+		</script>
+	</body>
+</html>
