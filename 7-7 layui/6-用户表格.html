@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>用户表格</title>
+		<link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css" />
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.text-center{
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-container">
+			<button class="layui-btn add">添加学员</button>
+
+			<table id="tableEle" class="layui-table" lay-filter="tableDemo"></table>
+		</div>
+
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script src="api.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+				1. 通过表格获取用户数据，展示出来
+				2. 通过添加用户的按钮添加用户 （打开弹窗、填写表单、提交请求）
+				3. 通过表格中的行工具条修改用户信息
+				4. 通过表格中的行工具条删除用户
+					1）关于请求的信息  （请求地址，请求参数，请求方式，请求参数的格式，返回数据的格式）
+					2）校验
+					3）集中管理API（总结归纳）
+			*/
+			var table = layui.table,
+				$ = layui.$,
+				form = layui.form,
+				userId = null;
+
+			var tableIns = table.render({
+				elem: "#tableEle",
+				url: api.list,
+				request: {
+				    pageName: 'start' //页码的参数名称，默认：page
+				    // limitName: 'nums' //每页数据量的参数名，默认：limit
+				},
+				parseData: function(res) {
+					console.log(res);
+					// 接收到的数据更改下性别显示
+					for (var i = 0; i < res.data.list.length; i++) {
+						res.data.list[i].sex = res.data.list[i].sex == "1" ? "女" : "男";
+					}
+					return {
+						code: 0,
+						msg: "success",
+						count: res.data.totalRow,
+						data: res.data.list
+					}
+				},
+				cols: [
+					[{
+							title: "序号",
+							type: "numbers"
+						},
+						{
+							title: "昵称",
+							field: "name"
+						},
+						{
+							title: "年龄",
+							field: "age"
+						},
+						{
+							title: "性别",
+							field: "sex"
+						},
+						{
+							title: "地址",
+							field: "address"
+						},
+						{
+							title: "学校",
+							field: "school"
+						},
+						{
+							title: "操作",
+							toolbar: `
+						<div>
+							<button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit">修改</button>
+							<button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del">删除</button>
+						</div>
+						`
+						}
+					]
+				],
+				page: {
+					limit: 5,
+					limits: [5, 10, 15]
+				}
+			})
+
+			// 添加学员 --------
+			$(".add").click(function() {
+				openForm();
+			})
+
+			// 表格的行工具事件  修改、删除
+			table.on("tool(tableDemo)", function(obj) {
+				var data = obj.data; //获得当前行数据
+				var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+				if (layEvent == "edit") {
+					// 修改
+					// 打开弹窗，将数据渲染到表单里面（给表单赋值）
+					// 不能修改登录名和密码
+					openForm(data);
+					// 获取全局的userId
+					userId = data.userId;
+
+				} else if (layEvent == "del") {
+					// 删除  切记！切记！切记！给用户删除提示弹窗
+					layer.confirm("确定要删除吗？真的吗？你考虑好了吗？", {
+						icon: 3
+					}, function(index) {
+						//do something
+						// console.log("点击了确定");
+						layer.close(index);
+						
+						get(api.del + "?id=" + data.userId, function (res) {
+							if(res.code == "success"){
+								layer.msg("删除成功", {time: 1500});
+								// 重新获取数据
+								tableIns.reload();
+							}else{
+								layer.msg("删除失败", {time: 1500});
+							}
+						})
+					})
+				}
+			})
+
+			// 打开form表单
+			function openForm(value) {
+				// 添加用户或者修改用户可以通过 value 参数来判断
+				var str = `<div class="layui-form" lay-filter="formEle">`;
+				// 如果是修改，不添加if语句中的内容
+				if (!value) {
+					str +=
+						`<div class="layui-form-item">
+							<label class="layui-form-label">登录名</label>
+							<div class="layui-input-block">
+								<input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">密码</label>
+							<div class="layui-input-block">
+								<input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input" value="123456">
+							</div>
+						</div>`;
+				}
+				str +=
+					`<div class="layui-form-item">
+							<label class="layui-form-label">昵称</label>
+							<div class="layui-input-block">
+								<input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">年龄</label>
+							<div class="layui-input-block">
+								<input type="text" name="age" placeholder="请输入" autocomplete="off" class="layui-input" value="12">
+							</div>
+						</div>
+						<div class="layui-form-item">
+						    <label class="layui-form-label">性别</label>
+						    <div class="layui-input-block">
+						      <input type="radio" name="sex" value="0" title="男">
+						      <input type="radio" name="sex" value="1" title="女" checked>
+						    </div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">学校</label>
+							<div class="layui-input-block">
+								<input type="text" name="school" placeholder="请输入" autocomplete="off" class="layui-input" value="诗歌培养基地">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">地址</label>
+							<div class="layui-input-block">
+								<input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input" value="敦煌莫高窟">
+							</div>
+						</div>
+						<div class="layui-form-item text-center">
+							<button class="layui-btn" lay-submit lay-filter="sub">提交表单</button>
+						</div>
+					</div>
+					`;
+				// 打开弹窗
+				layer.open({
+					type: 1,
+					content: str,
+					shade: [.8, "#393D49"],
+					shadeClose: true
+				})
+				// 动态添加表单，需要将 select、checkbox、radio重绘
+				form.render("radio", "formEle");
+
+				if (value) {
+					value.sex = value.sex == "男" ? 0 : 1;
+					form.val("formEle", value);
+				}
+			}
+
+			// 表单提交事件
+			form.on("submit(sub)", function(obj) {
+				var data = obj.field; // 表单所有字段名组成的对象
+
+				// console.log(data);
+				// 看是修改还是添加用户  判断是否有登录名或者密码字段
+				if (data.username) {
+					// 校验用户名是否存在
+					ajax(api.check, "username=" + data.username, function(res) {
+						if (res.code == "success") {
+							// 用户名可用
+							ajax(api.add, data, function(res) {
+								if (res.code == "success") {
+									// 添加成功  关闭表单弹窗
+									layer.closeAll();
+									// 刷新数据表格  表格重载
+									tableIns.reload();
+									// 给用户提示
+									layer.msg("添加成功", {
+										icon: 6,
+										time: 1500
+									});
+								}
+							})
+						} else {
+							// 用户名不可用
+							layer.msg("登录名已存在，请重起", {
+								icon: 2,
+								time: 1500
+							});
+						}
+					})
+				} else {
+					// 修改用户信息
+					data.userId = userId;
+					userId = null;
+					ajax(api.edit, data, function(res) {
+						if (res.code == "success") {
+							// 关闭弹窗，提示成功，刷新表格
+							layer.closeAll();
+							// 刷新数据表格  表格重载
+							tableIns.reload();
+							// 给用户提示
+							layer.msg("修改成功", {
+								icon: 6,
+								time: 1500
+							});
+						}
+					})
+				}
+
+			})
+
+			function ajax(url, params, success) {
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState === 4 && xhr.status == 200) {
+						var res = JSON.parse(xhr.responseText);
+						success && success(res);
+					}
+				}
+
+				// 将参数改成form形式  { name:value, ... } => name=value&...
+				var str = "";
+				for (var i in params) {
+					str += "&" + i + "=" + params[i];
+					// qs 序列化参数
+				}
+				// encodeURI 处理参数，将其改成后台可正确解析的内容
+				str = encodeURI(str.slice(1));
+
+				xhr.open("POST", url);
+				xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+				xhr.send(str);
+			}
+			
+			function get (url, success) {
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState === 4 && xhr.status == 200) {
+						var res = JSON.parse(xhr.responseText);
+						success && success(res);
+					}
+				}
+				xhr.open("GET", url);
+				xhr.send(null);
+			}
+		</script>
+	</body>
+</html>
