@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="referrer" content="never"/>
+		<title>jsonp方法</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+		<script type="text/javascript">
+			function fn (res) {
+				console.log("后台返回的参数为：", res);
+			}
+		</script>
+	</head>
+	<body>
+		<img src="http://a0.att.hudong.com/56/12/01300000164151121576126282411.jpg" alt="">
+		
+		<!-- script标签请求了设置的src地址的内容，并把请求回来的数据解析成js内容 -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!-- jsonp 原理：利用script标签的特性，往后台发送一个已经定义好的函数的名字，后台返回一个函数调用（将实参传入）的文本，script会将这段文本解析成js。相当于调用了函数 -->
+		<script src="http://localhost:3000/jsonp?callback=fn" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			// 在html中，img的src属性和script的src属性都是不都同源策略影响的
+			// 同源策略仅限制ajax请求
+			// console.log("进入页面，jquery", jQuery);
+			
+			$.ajax({
+				url: "http://localhost:3000/jsonp",
+				dataType: 'jsonp',  // 请求方式为jsonp
+				jsonpCallback: "fn",    // 自定义回调函数名
+			})
+			
+			$.ajax({
+				url: "http://localhost:3000/jsonp",
+				data: {
+					callback: fn
+				},
+				success(res){
+					console.log(res);
+				}
+			})
+			
+			// 代理 proxy
+			
+			// var sc = document.createElement("script");
+			// sc.src =  "http://localhost:3000/jsonp?callback=fn";
+			// document.body.appendChild(sc);
+			
+			
+			// var xhr = new XMLHttpRequest();
+			// xhr.onload = function () {
+			// 	// console.log(xhr.responseText);
+			// 	var sc = document.createElement("script");
+			// 	sc.innerText = xhr.responseText;
+			// 	document.body.appendChild(sc);
+				
+			// 	console.log("jquery", jQuery);
+			// 	console.log($("img"));
+			// }
+			// xhr.open("GET", "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js");
+			// xhr.send(null);
+		</script>
+	</body>
+</html>

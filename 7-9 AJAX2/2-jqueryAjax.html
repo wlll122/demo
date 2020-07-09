@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>jqueryAjax</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			/* $.ajax({ params })*/
+			$.ajax({
+				url: "http://bufantec.com/api/douban/movie/in_theaters",
+				data: {
+					limit: 20
+				},
+				success(res){
+					console.log(res);
+					var str = "";
+					for(var i in res.data.list){
+						str += `<p>${ res.data.list[i].title }</p>`;
+					}
+					document.body.insertAdjacentHTML("afterBegin", str);
+				}
+			})
+			
+			// $.get(url, 参数可选, 回调(data, status))
+			// $.get("http://bufantec.com/api/douban/movie/in_theaters", {start: 2}, function (data, textStatus) {
+			// 	console.log(data, textStatus);
+			// })
+			
+			$.ajax({
+				url: "http://www.bufantec.com/api/test/user/checkUserName",
+				type: "POST",
+				// 设置请求头
+				header: {
+					"content-type": "application/x-www-form-urlencoded"
+				},
+				data: {
+					username: "李白1"
+				},
+				success(res){
+					
+					console.log(res, 11111);
+				}
+			})
+			
+			// $.post(url, 参数可选, 回调(data, status))
+			$.post("http://www.bufantec.com/api/test/user/checkUserName", { username: "张三" }, function (data, textStatus) {
+				console.log(data, textStatus, "$.post");
+			})
+			
+		</script>
+	</body>
+</html>

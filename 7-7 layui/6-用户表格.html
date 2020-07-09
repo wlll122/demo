@@ -208,10 +208,10 @@
 				// 动态添加表单，需要将 select、checkbox、radio重绘
 				form.render("radio", "formEle");
 
-				// if (value) {
-				// 	value.sex = value.sex == "男" ? 0 : 1;
-				// 	form.val("formEle", value);
-				// }
+				if (value) {
+					value.sex = value.sex == "男" ? 0 : 1;
+					form.val("formEle", value);
+				}
 			}
 
 			// 表单提交事件
@@ -247,8 +247,9 @@
 						}
 					})
 				} else {
+					
 					// 修改用户信息
-					data.userId = userId;
+					ata.userId = userId;
 					userId = null;
 					ajax(api.edit, data, function(res) {
 						if (res.code == "success") {

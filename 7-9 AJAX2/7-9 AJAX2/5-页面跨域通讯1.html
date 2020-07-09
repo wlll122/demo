@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>页面跨域通讯1</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			// 设置相同的主域
+			document.domain = "127.0.0.1";
+			
+			// 声明一个iframe标签
+			var ifr = document.createElement("iframe");
+			ifr.src = "test.html";
+			ifr.style.display = "none";
+			document.body.appendChild(ifr);
+			ifr.onload = function () {
+				var doc = ifr.contentDocument || ifr.contentWindow.document;
+				//在这里操作doc，也就是b.html
+				
+				ifr.onload = null;
+			}
+		</script>
+	</body>
+</html>

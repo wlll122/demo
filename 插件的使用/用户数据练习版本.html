@@ -46,7 +46,8 @@
 			elem: "#tableEle",
 			url: api.list,
 			request: {
-				pageName: 'start'
+				pageName: 'start',
+				
 			},
 			parseData: function (res) {
 
@@ -103,7 +104,6 @@
 		})
 		//添加学院事件
 		$(".add").click(function () {
-			console.log(1);
 			openFrom();
 
 		})
@@ -189,50 +189,75 @@
 			// 获取值
 			// 校验用户名
 			// 获取用户名:
-			var userNa = data.username;
-			console.log(userNa);
-			$.ajax({
-				url: api.check,
-				method: "post",
+			if(data.username){
 
-				data: 'username=' + userNa,
-				success: function (res) {
-					// 成功后返回的文本,进行用户名校验
-
-					res.code;
-					console.log(res.code);
-					//返回值为fail,此时为表示重复,关闭弹窗,提示以存在
-					if (res.code === 'fail') {
-						console.log(1);
-						layer.msg("用户名已存在", {
-							icon: 2,
-							time: 1500
-						})
-					} else {
-						data.userId = userId;
-						userId = null;
-						$.ajax({
-								url: api.add,
-								method: "post",
-								data: data,
-								success: function (res) {
-									console.log(res);
-								},
-
-							}),
-
+				var userNa = data.username;
+				console.log(userNa);
+				$.ajax({
+					url: api.check,
+					method: "post",
+	
+					data: {'username:':data.username},
+					success: function (res) {
+						// 成功后返回的文本,进行用户名校验
+	
+						res.code;
+						console.log(res.code);
+						//返回值为fail,此时为表示重复,关闭弹窗,提示以存在
+						if (res.code === 'success') {
+							console.log(1);
+							layer.msg("用户名已存在", {
+								icon: 2,
+								time: 1500
+							})
+						} else {
+							data.userId = userId;
+							userId = null;
+							$.ajax({
+									url: api.add,
+									method: "post",
+									data: data,
+									success: function (res) {
+										console.log(res);
+									},
+	
+								}),
+	
+								layer.closeAll();
+							// 刷新数据表格  表格重载
+							tableIns.reload();
+							layer.msg("添加完成", {
+								icon: 3,
+								time: 1500
+							})
+						}
+	
+					},
+	
+				})
+			}else{
+				//拿到全局变量的id
+				data.userId = userId;
+				userId = null;
+				$.ajax({
+					url:api.edit,
+					method: "post",
+					data:data,
+					success: function (res) {
+						if (res.code == "success") {
+							// 关闭弹窗，提示成功，刷新表格
 							layer.closeAll();
-						// 刷新数据表格  表格重载
-						tableIns.reload();
-						layer.msg("添加完成", {
-							icon: 3,
-							time: 1500
-						})
-					}
-
-				},
-
-			})
+							// 刷新数据表格  表格重载
+							tableIns.reload();
+							// 给用户提示
+							layer.msg("修改成功", {
+								icon: 6,
+								time: 1500
+							});
+						}
+									},
+				})
+			}
 
 		});
 		//修改按钮

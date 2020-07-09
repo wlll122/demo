@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>加载过程</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			var xhr = new XMLHttpRequest();
+			
+			// 加载进度
+			xhr.onprogress = function () {
+				console.log(event);
+				if(event.lengthComputable){
+					document.body.insertAdjacentHTML("beforeEnd", `<p>当前加载的字节数：${event.loaded}，总字节数：${event.total}</p>`);
+				}
+			}
+			
+			// xhr.open("GET", "../lib/image/person.jpg");
+			xhr.open("GET", "user.json");
+			xhr.send(null);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>timeout超时</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<script type="text/javascript">
+			// localhost:3000/timeout
+			ajax({
+				url: "http://192.160.0.100:3000/timeout",
+				success(res){
+					document.body.insertAdjacentHTML("afterBegin", `<p>${ JSON.parse(res).msg }</p>`);
+				}
+			})
+			
+			
+			function ajax (params) {
+				if(!params.url){
+					alert("URL是必填项");
+					return;
+				}
+				
+				// 函数对象默认参，Object.assign(默认参数, 新的参数)
+				params = Object.assign({
+					method: "GET",
+					data: null,
+					success: function (res) {
+						console.log(res);
+					},
+					fail: function (msg) {
+						console.log(msg);
+					},
+					timeout: function () {
+						console.log("超时后 do something");
+					}
+				}, params);
+				
+				var xhr = new XMLHttpRequest();
+				
+				// 请求成功后的事件
+				xhr.onload = function () {
+					params.success(xhr.responseText);
+				}
+				
+				// setTimeout(function () {
+				// 	if(xhr.status !== 200){
+				// 		xhr.abort();
+				// 		alert("加载过慢，请稍后继续");
+				// 	}
+				// }, 5000)
+				
+				// 设定超时时间为 5000，超过时间，请求自动终止
+				xhr.timeout = 5000;
+				// 监听超时
+				xhr.ontimeout = function () {
+					alert("加载过慢，请稍后继续");
+					params.timeout();
+				}
+				
+				xhr.onerror = function () {
+					if(xhr.status == 415){
+						params.fail("媒体类型错误");
+					}else if(xhr.status == 500){
+						params.fail("后台服务内部错误");
+					}else if(xhr.status == 400){
+						params.fail("参数错误，请检查参数");
+					}
+				}
+				// object => [object Object]
+				var str;
+				if(params.data && /Object/.test(Object.prototype.toString.call(params.data))){
+					str = ""
+					for(var i in params.data){
+						str += `&${i}=${params.data[i]}`;
+					}
+				}
+				
+				if(params.method.toUpperCase() == "GET"){
+					// url?name=value
+					if(params.data){
+						xhr.open("GET", params.url + str.replace("&", "?"));
+					}else{
+						xhr.open("GET", params.url);
+					}
+					xhr.send(null);
+				}else{
+					// 0 1open 2send 3Bufenshuju 4wanzhengshuju
+					xhr.open(params.method, params.url);
+					xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+					xhr.send(str.slice(1));
+				}
+				
+			}	
+		</script>
+	</body>
+</html>

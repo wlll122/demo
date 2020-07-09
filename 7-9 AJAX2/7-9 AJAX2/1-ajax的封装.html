@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>ajax的封装</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+				get 请求、post请求
+			*/
+			function get (url, params, success, fail) {
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function () {
+					if(xhr.readyState == 4){
+						if(xhr.status == 200){
+							console.log(res.responseText);
+							var res = JSON.parse(res.responseText);
+							success && success(res);
+						}else if(xhr.status == 415){
+							fail && fail("媒体类型错误");
+						}else if(xhr.status == 500){
+							fail && fail("后台服务内部错误");
+						}else if(xhr.status == 400){
+							fail && fail("参数错误，请检查参数");
+						}
+					}
+				}
+				
+				var str = "";
+				for(var i in params){
+					str += `&${i}=${params[i]}`;
+				}
+				str = str.slice(1);
+				// get url?name=value&name1=value1...
+				xhr.open("GET", url + "?" + str);
+				xhr.send(null);
+			}
+			
+			function post (url, params, success, fail) {
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function () {
+					if(xhr.readyState == 4){
+						if(xhr.status == 200){
+							console.log(res.responseText);
+							var res = JSON.parse(res.responseText);
+							success && success(res);
+						}else if(xhr.status == 415){
+							fail && fail("媒体类型错误");
+						}else if(xhr.status == 500){
+							fail && fail("后台服务内部错误");
+						}else if(xhr.status == 400){
+							fail && fail("参数错误，请检查参数");
+						}
+					}
+				}
+				
+				// 将对象形式转化为form形式  {name:value, name1:value1...} => name=value&name1=value1...
+				var str = "";
+				for(var i in params){
+					str += `&${i}=${params[i]}`;
+				}
+				str = str.slice(1);
+				
+				xhr.open("POST", url);
+				// 与后台约定的参数类型
+				xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+				xhr.send(str);
+			}
+			
+			ajax({
+				url: "http://bufantec.com/api/douban/movie/in_theaters",
+				data: {
+					limit: 20
+				},
+				success(res){
+					var obj = JSON.parse(res);
+					var str = "";
+					for(var i in obj.data.list){
+						str += `<p>${ obj.data.list[i].title }</p>`;
+					}
+					document.body.insertAdjacentHTML("afterBegin", str);
+				}
+			})
+			
+			
+			ajax({
+				url: "http://www.bufantec.com/api/test/user/checkUserName",
+				method: "POST",
+				data: {
+					username: "李白1"
+				},
+				success(res){
+					var obj = JSON.parse(res);
+					console.log(obj, 11111);
+				}
+			})
+			
+			// 函数有多个可选参数的时候，用对象最合适
+			function ajax (params) {
+				if(!params.url){
+					alert("URL是必填项");
+					return;
+				}
+				
+				// 函数对象默认参，Object.assign(默认参数, 新的参数)
+				params = Object.assign({
+					method: "GET",
+					data: null,
+					success: function (res) {
+						console.log(res);
+					},
+					fail: function (msg) {
+						console.log(msg);
+					}
+				}, params);
+				
+				var xhr = new XMLHttpRequest();
+				
+				// 请求成功后的事件
+				xhr.onload = function () {
+					params.success(xhr.responseText);
+				}
+				
+				xhr.onerror = function () {
+					if(xhr.status == 415){
+						params.fail("媒体类型错误");
+					}else if(xhr.status == 500){
+						params.fail("后台服务内部错误");
+					}else if(xhr.status == 400){
+						params.fail("参数错误，请检查参数");
+					}
+				}
+				// object => [object Object]
+				var str;
+				if(params.data && /Object/.test(Object.prototype.toString.call(params.data))){
+					str = ""
+					for(var i in params.data){
+						str += `&${i}=${params.data[i]}`;
+					}
+				}
+				
+				if(params.method.toUpperCase() == "GET"){
+					// url?name=value
+					if(params.data){
+						xhr.open("GET", params.url + str.replace("&", "?"));
+					}else{
+						xhr.open("GET", params.url);
+					}
+					xhr.send(null);
+				}else{
+					// 0 1open 2send 3Bufenshuju 4wanzhengshuju
+					xhr.open(params.method, params.url);
+					xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+					xhr.send(str.slice(1));
+				}
+				
+			}
+		</script>
+	</body>
+</html>
