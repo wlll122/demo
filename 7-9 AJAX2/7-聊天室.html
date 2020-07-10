@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>聊天室</title>
+		<link rel="stylesheet" type="text/css" href="../lib/layui/css/layui.css" />
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.text-center{
+				text-align: center;
+			}
+			.box{
+				display: flex;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="layui-container">
+			
+			<button class="layui-btn join">加入聊天室</button>
+			<button class="layui-btn leave">离开聊天室</button>
+			<button class="layui-btn logout">退出登录</button>
+			
+			<div class="box">
+				<input type="text" class="layui-input msg" placeholder="请输入要发送的消息">
+				<button class="layui-btn sendmsg">发送消息</button>
+			</div>
+			
+			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+				<ul class="layui-tab-title">
+					<li class="layui-this">聊天室</li>
+					<li class="usermsg">个人信息</li>
+				</ul>
+				<div class="layui-tab-content" style="height: 100px;">
+					<div class="layui-tab-item layui-show chat">
+					</div>
+					<div class="layui-tab-item userInfo">
+						<h2>个人信息</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+				0. 注册按钮
+				1. 登录后进入聊天室     保留登录userId
+				2. 聊天的内容、用户个人信息
+				3. 退出登录
+				4. 退出聊天室
+			*/
+			var host = "http://bufantec.com/api/test/user/";
+			var api = {
+				login: host + "doLogin",
+				regist: host + "",
+				// 获取个人详情
+				detail: host + "detail",
+				// websocket地址
+				ws: "ws://bufantec.com/websocket.ws/"
+			}
+
+			var form = layui.form,
+				$ = layui.$,
+				ws = null;
+
+			// 进入页面判断是否有用户id，借此来判断是否需要登录
+			var uid = localStorage.getItem("uid");
+			var index;
+
+			// 本地没有用户id，需要登录，打开弹窗
+			if (!uid) {
+				index = layer.open({
+					type: 1,
+					title: "登录",
+					content: `
+					<div class="layui-form" lay-filter="formEle">
+						<div class="layui-form-item">
+							<label class="layui-form-label">登录名</label>
+							<div class="layui-input-block">
+								<input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">密码</label>
+							<div class="layui-input-block">
+								<input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input" value="123456">
+							</div>
+						</div>
+						<div class="layui-form-item text-center">
+							<button class="layui-btn" lay-submit lay-filter="sub">登录</button>
+							<button class="layui-btn"><a href="./regist.html">注册</a></button>
+						</div>
+					</div>
+					`,
+					shade: [.8, "#393D49"]
+				})
+			}
+
+			form.on("submit(sub)", function(obj) {
+				var data = obj.field;
+				console.log(data);
+				$.ajax({
+					url: api.login,
+					header: {
+						"content-type": "application/x-www-form-urlencoded"
+					},
+					data: {
+						username: data.username,
+						password: data.password
+					},
+					success(res) {
+						if (res.code == "success") {
+							// 登录成功
+							layer.close(index);
+							// 给页面上的uid赋值
+							uid = res.userId;
+							// 用户id存到本地
+							localStorage.setItem("uid", res.userId);
+							// 提示小弹窗
+							layer.msg("登录成功", {
+								icon: 6,
+								time: 1500
+							});
+						} else {
+							layer.msg("登录失败，请检查用户名或密码是否正确", {
+								icon: 2,
+								time: 1500
+							});
+						}
+					}
+				})
+			})
+			
+			
+			// 点击获取个人详情
+			$(".usermsg").click(function () {
+				$.ajax({
+					url: api.detail + "?id=" + uid,
+					success(res){
+						$(".userInfo").html(`
+						<p>昵称：${ res.data.name }</p>
+						<p>年龄：${ res.data.age }</p>
+						<p>性别：${ res.data.sex }</p>
+						<p>学校：${ res.data.school }</p>
+						<p>地址：${ res.data.address }</p>
+						`)
+					}
+				})
+			})
+			
+			// 加入聊天室
+			$(".join").click(function () {
+				ws = new WebSocket(api.ws + uid);
+				
+				// 建立连接
+				ws.onopen = function () {
+					$(".chat").append("<p>加入聊天室</p>");
+				}
+				
+				// 断开连接
+				ws.onclose = function () {
+					$(".chat").append("<p>离开聊天室</p>");
+				}
+				
+				// 收到消息
+				ws.onmessage = function (msg) {
+					console.log(msg.data);
+					var obj = JSON.parse(msg.data);
+					$(".chat").append(`
+					<p>${ obj.from.nickname } says: ${ obj.msg }</p>
+					`)
+					
+				}
+			})
+			
+			// 发送消息
+			$(".sendmsg").click(function () {
+				// 需要接收json字符串，需要uid，以及内容
+				ws.send(JSON.stringify({ userId: uid, msg: $(".msg").val() }))
+				$(".msg").val("");
+			})
+			
+			window.onbeforeunload = function () {
+				if(ws.readyState == 1){
+					ws.close();
+				}
+			}
+			
+			// 离开聊天室
+			$(".leave").click(function () {
+				ws.close();
+			})
+			
+			// 退出登录
+			$(".logout").click(function () {
+				localStorage.removeItem("uid");
+				history.go(0);
+			})
+		</script>
+	</body>
+</html>

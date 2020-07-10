@@ -27,12 +27,12 @@
 				console.log(this.name + " say: ", word);
 			}
 			
-			// sayName();
-			// sayName.call(user);
+			sayName();
+			sayName.call(user);
 			var sayZs = sayName.bind(user);
 			
-			// sayZs("hello");
-			// window.sayZs("hello");
+			sayZs("hello");
+			window.sayZs("hello");
 			
 			// var bound = func.bind(thisObj, arg1, arg2, ...);
 			// 在原有函数的基础上创建出一个新函数，同时将部分参数换成固定值。

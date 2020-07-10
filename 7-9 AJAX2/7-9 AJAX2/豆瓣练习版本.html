@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>regist</title>
+		<link rel="stylesheet" href="../lib/layui/css/layui.css">
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+
+		<script src="../lib/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../7-8%20layui/api.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			var form = layui.form;
+			// 添加用户或者修改用户可以通过 value 参数来判断
+			var str =
+				`<div class="layui-form" lay-filter="formEle">
+					<div class="layui-form-item">
+						<label class="layui-form-label">登录名</label>
+						<div class="layui-input-block">
+							<input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">密码</label>
+						<div class="layui-input-block">
+							<input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input" value="123456">
+						</div>
+					</div>
+				<div class="layui-form-item">
+						<label class="layui-form-label">昵称</label>
+						<div class="layui-input-block">
+							<input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">年龄</label>
+						<div class="layui-input-block">
+							<input type="text" name="age" placeholder="请输入" autocomplete="off" class="layui-input" value="12">
+						</div>
+					</div>
+					<div class="layui-form-item">
+					    <label class="layui-form-label">性别</label>
+					    <div class="layui-input-block">
+					      <input type="radio" name="sex" value="0" title="男">
+					      <input type="radio" name="sex" value="1" title="女" checked>
+					    </div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">学校</label>
+						<div class="layui-input-block">
+							<input type="text" name="school" placeholder="请输入" autocomplete="off" class="layui-input" value="诗歌培养基地">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">地址</label>
+						<div class="layui-input-block">
+							<input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input" value="敦煌莫高窟">
+						</div>
+					</div>
+					<div class="layui-form-item text-center">
+						<button class="layui-btn" lay-submit lay-filter="sub">提交表单</button>
+					</div>
+				</div>
+				`;
+			// 打开弹窗
+			layer.open({
+				type: 1,
+				content: str,
+				shade: [.8, "#393D49"],
+				shadeClose: true
+			})
+			// 动态添加表单，需要将 select、checkbox、radio重绘
+			form.render("radio", "formEle");
+
+			// 表单提交事件
+			form.on("submit(sub)", function(obj) {
+				var data = obj.field; // 表单所有字段名组成的对象
+
+				// console.log(data);
+				// 看是修改还是添加用户  判断是否有登录名或者密码字段
+
+				// 校验用户名是否存在
+				ajax(api.check, {
+					username: data.username
+				}, function(res) {
+					if (res.code == "success") {
+						// 用户名可用
+						ajax(api.add, data, function(res) {
+							if (res.code == "success") {
+								// 添加成功 返回上一个页面
+								history.go(-1);
+							}
+						})
+					} else {
+						// 用户名不可用
+						layer.msg("登录名已存在，请重起", {
+							icon: 2,
+							time: 1500
+						});
+					}
+				})
+
+
+			})
+
+			function ajax(url, params, success) {
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState === 4 && xhr.status == 200) {
+						var res = JSON.parse(xhr.responseText);
+						success && success(res);
+					}
+				}
+
+				// 将参数改成form形式  { name:value, ... } => name=value&...
+				var str = "";
+				for (var i in params) {
+					str += "&" + i + "=" + params[i];
+					// qs 序列化参数
+				}
+				// encodeURI 处理参数，将其改成后台可正确解析的内容
+				str = encodeURI(str.slice(1));
+
+				xhr.open("POST", url);
+				xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+				xhr.send(str);
+			}
+		</script>
+	</body>
+</html>

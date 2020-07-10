@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="layui-v2.5.6/layui/css/layui.css">
+	<style>
+		.text-center{
+				text-align: center;
+			}
+	</style>
+</head>
+<body>
+	
+
+	<script src="layui-v2.5.6/layui/layui.all.js"></script>
+	<script src="api.js"></script>
+	<!-- 用户注册界面 -->
+
+	<script>
+		var table = layui.table,
+		form = layui.form,
+				userId = null;
+				var $ = layui.$;
+		console.log(table);
+		layer.open({
+			type:1,
+			content:`<div class="layui-form" lay-filter="formEle"><div class="layui-form-item">
+							<label class="layui-form-label">登录名</label>
+							<div class="layui-input-block">
+								<input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">密码</label>
+							<div class="layui-input-block">
+								<input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input" value="123456">
+							</div>
+						</div><div class="layui-form-item">
+							<label class="layui-form-label">昵称</label>
+							<div class="layui-input-block">
+								<input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">年龄</label>
+							<div class="layui-input-block">
+								<input type="text" name="age" placeholder="请输入" autocomplete="off" class="layui-input" value="12">
+							</div>
+						</div>
+						
+						<div class="layui-form-item">
+							<label class="layui-form-label">学校</label>
+							<div class="layui-input-block">
+								<input type="text" name="school" placeholder="请输入" autocomplete="off" class="layui-input" value="诗歌培养基地">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">地址</label>
+							<div class="layui-input-block">
+								<input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input" value="敦煌莫高窟">
+							</div>
+						</div>
+						<div class="layui-form-item text-center .text-center{
+				text-align: center;
+			}">
+							<button class="layui-btn" lay-submit lay-filter="sub" >注册</button>
+						</div>
+					</div>`,
+
+					shade: [.8, "#393D49"],
+					shadeClose: true
+		});
+				form.render(null, "formEle");
+
+			
+		// 表单提交事件
+		form.on('submit(sub)', function(obj){
+			
+			var vl= obj.field;
+			$.ajax({
+				url:api.add,
+				data:vl,
+				function (res) {
+					console.log(res.code);
+					if (res.code == "success") {
+						
+						layer.closeAll();
+						layer.msg("添加成功", {
+										icon: 6,
+										time: 1500
+									});
+						// 添加成功 返回上一个页面
+						history.go(-1);
+					}else{
+
+
+
+						layer.msg("登录名已存在，请重起", {
+								icon: 2,
+								time: 1500
+							});
+					}
+				}
+			})
+
+});	
+
+	</script>
+</body>
+</html>

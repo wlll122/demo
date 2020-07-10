@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="layui-v2.5.6/layui/css/layui.css" />
+		<style type="text/css">
+			.text-center {
+				text-align: center;
+			}
+
+			.box {
+				display: flex;
+			}
+		</style>
+	</head>
+	<body>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+		<div class="layui-container">
+
+			<button class="layui-btn join">加入聊天室</button>
+			<button class="layui-btn leave">离开聊天室</button>
+			<button class="layui-btn logout">退出登录</button>
+
+			<div class="box">
+				<input type="text" class="layui-input msg" placeholder="请输入要发送的消息">
+				<button class="layui-btn sendmsg">发送消息</button>
+			</div>
+
+			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+				<ul class="layui-tab-title">
+					<li class="layui-this">聊天室</li>
+					<li class="usermsg">个人信息</li>
+				</ul>
+				<div class="layui-tab-content" style="height: 100px;">
+					<div class="layui-tab-item layui-show chat">
+					</div>
+					<div class="layui-tab-item userInfo">
+						<h2>个人信息</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./layui-v2.5.6/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//设定地址
+			var host = "http://bufantec.com/api/test/user/";
+			var api = {
+				login: host + "doLogin",
+				regist: host + "",
+				// 获取个人详情
+				detail: host + "detail",
+				// websocket地址
+				ws: "ws://bufantec.com/websocket.ws/"
+			}
+			var form = layui.form,
+				$ = layui.$,
+				ws = "ws://bufantec.com/websocket.ws/";
+
+			var form = layui.form,
+				$ = layui.$,
+				ws = null;
+			var index;
+			//打开表单
+			//判断本地是否已经保存\
+			var uid = localStorage.getItem("uid")
+			
+			if(!uid){
+				
+			index = layer.open({
+				type: 1,
+				title: "登录",
+				content: `
+					<div class="layui-form" lay-filter="formEle">
+						<div class="layui-form-item">
+							<label class="layui-form-label">登录名</label>
+							<div class="layui-input-block">
+								<input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input" value="李白">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">密码</label>
+							<div class="layui-input-block">
+								<input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input" value="123456">
+							</div>
+						</div>
+						<div class="layui-form-item text-center">
+							<button class="layui-btn" lay-submit lay-filter="sub">登录</button>
+							<button class="layui-btn" lay-submit lay-filter=""sub><a href="regist.html">注册</a></button>
+						</div>
+					</div>
+					`,
+				shade: [.8, "#393D49"]
+			})
+			} 
+
+			//点击from
+
+			form.on('submit(sub)', function(obj) {
+				//获取数据
+				var data = obj.field;
+				console.log(data)
+				$.ajax({
+					url: api.login,
+					header: {
+						"content-type": "application/x-www-form-urlencoded"
+					},
+					data: {
+						username: data.username,
+						password: data.password
+					},
+					success(res) {
+						// 判断正确
+						if (res.code == 'success') {
+							layer.close(index);
+							uid = res.userId;
+							console.log(uid)
+							localStorage.setItem("uid", uid)
+							layer.msg("登陆成功", {
+								icon: 6,
+								time: 1500
+							});
+						}
+
+					}
+
+				})
+			})
+			//显示登录成功后的界面
+			$('.join').click(function() {
+				ws = new WebSocket(api.ws + uid);
+				ws.onopen = function() {
+					$(".chat").append("<p>加入聊天室</p>");
+				}
+				ws.onclose = function() {
+					$(".chat").append("<p>离开聊天室</p>")
+				}
+				ws.onmessage = function(msg) {
+					var obj = JSON.parse(msg.data);
+					$(".chat").append(`
+										<p>${ obj.from.nickname } says: ${ obj.msg }</p>
+										`)
+				}
+			})
+			//发送消息
+			$(".sendmsg").click(function() {
+				ws.send(JSON.stringify({
+					userId: uid,
+					msg: $(".msg").val()
+				}))
+				//清空当前的文本
+				$(".msg").val("");
+			})
+			window.onbeforeunload = function() {
+				if (ws.readyState == 1) {
+					ws.close();
+				}
+			}
+			//离开,推出登录
+			$(".leave").click(function(){
+				ws.close();
+			})
+			$(".logout").click(function(){
+				localStorage.removeItem("uid");
+				history.go(0);
+			})
+		</script>
+	</body>
+</html>
