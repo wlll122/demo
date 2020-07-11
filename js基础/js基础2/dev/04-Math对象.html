@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 提供了一些 内置对象  比如 Math  Date  Object  Array 
+
+        // Math 对象为我们 提供了 很多 数学方法 ,比如求最大值最小值
+
+        console.log(Math.abs(-10)); // 10
+
+        // 向下取整  (往小取)
+        console.log(Math.floor(2.4)); // 2
+        console.log(Math.floor(2.6)); // 2
+        console.log(Math.floor(-2.6)); // -3
+
+        // 向上取整 (往大取)
+        console.log(Math.ceil(2.4));  // 3
+        console.log(Math.ceil(2.6));  // 3
+        console.log(Math.ceil(-2.6)); // -2
+
+
+        // 求最大最小值
+        // 任意个数
+        console.log(Math.max(1,4,9)); // 9
+        console.log(Math.min(1,4,9));  /// 1
+
+        // Math.pow(x,y)  求x的 y次方
+
+        console.log(Math.pow(3,12));
+
+        // Math.sqrt() 开方运算
+        console.log(Math.sqrt(4)); //2
+        console.log(Math.sqrt(2)); // 1.4142135623730951
+
+
+        // Math.round()  四舍五入 到整数
+        console.log(Math.round(2.4)); // 2
+        console.log(Math.round(2.5)); //3
+        // 精度问题
+        console.log(Math.round(2.4999999999999999999999999999999999)); // 3
+        console.log(2.4999999999999999999999999999999999===2.5); // true
+
+        // 负数 五舍 六入
+        console.log(Math.round(-2.5)); // -2
+        console.log(Math.round(-2.4));  // -2
+        console.log(Math.round(-2.6));  // -3
+
+
+        // Math.random()   随机数 [0,1)
+        console.log(Math.random());
+
+        // [0,5]  整数
+        console.log( Math.floor(Math.random()*6));
+        // [5,10] 整数 [0,5]+5
+        console.log(Math.floor(Math.random()*6)+5);
+
+        // 总结规律,任意范围的随机整数  [min,max]
+        // Math.floor(Math.random()*个数)+min;
+
+
+
+
+
+
+    </script>
+</body>
+</html>

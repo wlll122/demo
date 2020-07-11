@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // json  是一种数据传输格式,目前比较流行
+        //这是一个对象
+
+        var obj = {
+            a: "Hello",
+            b: "World"
+        };
+        //这是一个 JSON 字符串，本质是一个字符串
+        var json = '{"a": "Hello", "b": "World"}';
+
+        // 普通对象 是不能进行传输的,需要转换成 json 字符串
+
+
+        var movie = {
+            title: "我不是药神",
+            casts: [{
+                    name: "徐峥",
+                    avatar: "http://xxxx.jpg",
+                    age: 45,
+                },
+                {
+                    name: "黄渤",
+                    avatar: "http://xxxx2.jpg",
+                    age: 42,
+                },
+            ],
+            pubDate: "2017-10-1",
+            rate: 5,
+        };
+
+        console.log(movie.casts[1].name);
+
+
+        // 传给后台,对象不能传输, 需要转换成json
+        // JSON.stringify()
+        var movieStr = JSON.stringify(movie);
+        console.log(movieStr);
+
+
+        // 从后台获取到的数据(或者说后台拿到你穿的数据).这些都是json格式
+        // 需要转换回 对象  进行操作
+        // json字符串 转变成 对象
+        var newMovie = JSON.parse(movieStr);
+        console.log(newMovie);
+        console.log(newMovie.title);
+
+        // 注意
+        var str = '{a: "Hello", b: "World"}';
+        // 这样直接在对象 两边 加上引号  变成的 字符串 没有办法 转换成对象
+        // console.log(JSON.parse(str)); // 报错
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Date 对象 构造函数对象  ,构造函数可以用来创建对象
+
+        // 包含时间信息的 一个 对象
+
+        // new Date() 可以创建出 当前时间(这句代码执行时)下的 时间对象(保存的是当前的时间信息)
+
+        var myDate = new Date();
+        console.log(myDate);
+        // console.dir(myDate)
+
+        // 假如 想获取 18年10月20日的 9:00的那个时间点的时间信息
+        // 日期字符串
+        // var oldTime = new Date('2018/10/20 9:00');
+        var oldTime = new Date('2018-10-20 9:00');
+
+        console.log(oldTime);
+
+        // 格式化时间信息
+        // '2018年10月20日 9时01分59秒'
+
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth() + 1; // [0,11]
+        var day = myDate.getDate();
+
+        var hour = myDate.getHours();
+        var min = myDate.getMinutes();
+        var s = myDate.getSeconds();
+        // 1秒===1000ms
+        var millS = myDate.getMilliseconds();
+        console.log(year, month, day, hour, min, s);
+
+
+        // 拼接字符串的技巧
+        // var str = year + '年' + month + '月' + day + '日 ' + hour + '时' + min + '分' + s + '秒';
+        var str = '' + year + '年' + month + '月' + day + '日 ' + hour + '时' + min + '分' + s + '秒';
+        console.log(str);
+
+
+        // 星期
+        var weekDay = myDate.getDay();
+        console.log(weekDay);
+
+        // 时间戳 
+        // var stamp = myDate.getTime();  mydate 这个时间点  距离 1970年1月1日 0:0:0  的毫秒数
+        console.log(stamp);
+
+
+        // 时间戳 可以 获取代码的所花费的执行时间
+    </script>
+</body>
+
+</html>

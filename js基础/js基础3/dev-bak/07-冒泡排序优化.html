@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [23, 45, 12, 9, 47, 11];
+
+        // for (var i = 0; i < arr.length - 1; i++) {
+        //     if (arr[i] > arr[i + 1]) {
+        //         // 顺序错误
+        //         // 交换位置
+        //         // 先把之前arr[i]的值保存下来
+        //         var temp = arr[i];
+        //         arr[i] = arr[i + 1]; // arr[i]已经发生了改变
+        //         arr[i + 1] = temp;
+        //     }
+        // }
+
+        // 这段代码  要执行  arr.length-1次
+
+        for (var j = 1; j < arr.length; j++) {
+            // 外层 for 循环 控制 轮次
+            for (var i = 0; i < arr.length - j; i++) {
+                // 内层 for 循环  负责 找出本轮最大值
+                if (arr[i] > arr[i + 1]) {
+                    // 顺序错误
+                    // 交换位置
+                    // 先把之前arr[i]的值保存下来
+                    var temp = arr[i];
+                    arr[i] = arr[i + 1]; // arr[i]已经发生了改变
+                    arr[i + 1] = temp;
+                }
+                // console.log(arr);
+            }
+            // console.log(arr);
+        }
+        console.log(arr);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var a = 100;
+        // a + 10;
+        // a = a + 10; // 110 
+        // 简写:  
+        a+=10; // a =a +10;
+        console.log(a); // 110
+
+
+        // a+=1;
+        // 还可以简写
+        // a++; // a+=1  自增1
+        ++a; // a+=1  自增1 
+        console.log(a); // 111
+
+
+        // 不管是  a++还是  ++a 这种形式,都实现了  a 的 自增1 
+
+        var b = 10;
+        var n = b++; // 先把b  赋值给 n,,在执行  b自增1
+        console.log('n===>',n); // 10
+        console.log('b===>',b); //11
+
+        var c = 10;
+        var m = ++c; // 先 执行 自增1 ,,然后再赋值
+        console.log('m===>',m); // 11
+        console.log('c===>',c); // 11
+
+    </script>
+</body>
+
+</html>

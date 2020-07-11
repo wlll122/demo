@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        console.log('hello world'); // 'hello world' 字面量 
+        console.log(100); // 100 也是字面量
+
+
+        // 假如说一个字面量(有点复杂的字面量),你需要频繁使用,你会怎么做?  
+        // 变量的概念 (可以变化可以修改) ,使用一个变量 来 表示某个字面量  (相当于就是一个储存数据的容器)
+        // 我们可以决定容器 保存哪个值
+
+
+        // 如何定义(创建)(声明)变量
+        // var js当中声明变量的 短语
+        var a; // 相当于声明了一个变量(容器)
+        a = 200; // 把200 赋给 变量a 
+
+        // 简写(推荐)
+        var b = 100; // 声明变量b,并赋值为100
+
+
+        // 如何使用变量
+        console.log(a+b); // 打印 变量a  和 变量b  的 和  300
+
+        // 变量必须先声明,后使用
+        // console.log(c); // 没有c 这个变量  会报错 c is not defined
+
+
+        // 如何修改变量的值 
+        a = 'hello world';  // 把  hello world 这个值赋给  变量a (起到了修改的作用)
+        console.log(a); // 'hello world'
+    </script>
+</body>
+</html>

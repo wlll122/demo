@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- indexOf() 和 lastIndexOf()：获取数据的索引 -->
+
+    <script>
+        var arr = ["a", "b", "c", "d", "e", "d", "c"];
+
+
+        // 获取 'c'这个元素 在数组arr 当中的索引
+        // 从前到后 查找,找到就停止,然后返回对应的索引
+        console.log(arr.indexOf('c')); // 2
+
+
+        // 获取 'c'这个元素 在数组arr 当中的索引
+        // 从后到前 查找,找到就停止,然后返回对应的索引
+        console.log(arr.lastIndexOf('c')); // 6
+
+
+
+        // 找不到匹配的 就是 -1 , 证明数组当中没有这个元素
+        console.log(arr.indexOf('m')); // -1
+
+
+
+        // 常用来 判断  数组当中 存不存在某个元素
+        // if(数组.indexOf('元素')===-1){
+        //     // 元素不再数组当中
+        // }
+
+
+
+    </script>
+</body>
+
+</html>

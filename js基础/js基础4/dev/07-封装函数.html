@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 先把基本逻辑(功能代码) 写出来
+        // 创建函数
+        // 思考参数
+        // 功能代码 占到 函数里边(修改 一些变量)
+        // 考虑返回值问题
+
+        // 对任意数组 求平均值
+        function getAverage(array) {
+            var sum = 0;
+            for (var i = 0; i < array.length; i++) {
+                sum += array[i];
+            }
+            var arg = sum / array.length;
+            return arg
+        }
+        console.log(getAverage([1,3,5,7,10]));
+    </script>
+</body>
+
+</html>

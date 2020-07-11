@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- js 内置对象 -->
+    <!-- Date对象(时间对象)  是一个 构造函数  需要 new 出来一个实例对象  才能使用 -->
+    <script>
+        // nowDate 拿到了 当前的时间对象(这句代码执行时)
+        var nowDate = new Date();
+        console.log(nowDate); // nowDate 是一个 实例对象
+        // 传参数 获取某个时间下  的  时间对象
+        var myDate = new Date('2018-8-6 9:00');
+        console.log(myDate);
+
+        var day = nowDate.getDate(); // 获取  日
+        console.log(day);
+        var year = nowDate.getFullYear(); //获取年份
+        console.log(year);
+        var month = nowDate.getMonth() + 1; //获取月份 0--11
+        console.log(month);
+        var hour = nowDate.getHours(); // 获取 时
+        var min = nowDate.getMinutes(); // 获取分
+        var second = nowDate.getSeconds(); // 获取秒
+        var mSecond = nowDate.getMilliseconds(); // 获取毫秒 1s===1000ms
+        console.log(hour, min, second, mSecond);
+
+        // 打印字符串 2019年8月6日9时39分
+        // 拼接字符串 + 
+        // 必须掌握
+        var str = '' + year + '年' + month + '月' + day + '日' + hour + '时' + min + '分';
+        console.log(str);
+        var str1 = year + '年' + month + '月' + day + '日' + hour + '时' + min + '分';
+        console.log(str1);
+
+        // 时间戳：指的是从格林威治标准时间的1970年1月1日，0时0分0秒到当前日期所花费的毫秒数（1 秒 = 1000 毫秒）。
+        // 唯一
+        console.log(nowDate.getTime());
+    </script>
+</body>
+
+</html>

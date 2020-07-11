@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 求阶乘 -->
+    <script>
+        // 5! = 5*4*3*2*1 === 5*4!
+        function jc(n) {
+            // 一定要有跳出条件
+            if (n === 1) {
+                return 1;
+            }
+            return n * jc(n - 1);
+        }
+        console.log(jc(5)); // 120
+        // 5*jc(4)
+        // 5*4*jc(3)
+        //5*4*3*jc(2)
+        //5*4*3*2*jc(1)
+        // 5*4*3*2*1
+        // 一直分裂下去,需要给一个停止条件
+
+
+        // 求1!+2!+3!+....+n!
+        // var jch = 0;
+        // var n = 4;
+        // for (var i = 1; i <= n; i++) {
+        //     jch += jc(i);
+        // }
+        // console.log(jch);
+
+        // 5的阶乘和 == 5! + 4的阶乘和;
+        function jch(n) {
+            if (n === 1) {
+                return 1;
+            }
+            return jc(n) + jch(n - 1);
+        }
+        console.log(jch(4));
+
+
+        // 斐波那切数列(不死神兔)
+        // 假设一对刚出生的小兔一个月后就能长成大兔，再过一个月就能生下一对小兔，
+        // 并且此后每个月都生一对小兔，一年内没有发生死亡，问：一对刚出生的兔子，一年内繁殖成多少对兔子?
+
+        // 1  2  3  4  5  6  7    8   9   10  11   12
+        // 1  1  2  3  5  8  13  21  34   55  89   144
+
+        function fb(n) {
+            if (n === 1 || n === 2) {
+                return 1;
+            }
+            return fb(n - 1) + fb(n - 2);
+        }
+        console.log(fb(12));
+        // 思考跳出条件
+        // fb(3)===fb(2)+fb(1);
+
+
+        // 台阶问题 每次走1 或者2   走上第 10 阶  有几种走法
+        function foo(n) {
+            if (n === 1 || n === 0) {
+                return 1;
+            }
+            return foo(n - 1) + foo(n - 2);
+        }
+        console.log(foo(3));
+    </script>
+</body>
+
+</html>

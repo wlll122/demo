@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var foo = function (){
+            alert('foo')
+        }
+        // 方式三
+        // 立即执行函数,,,但函数创建时 就会执行一次
+        // ()() 第二个括号 起到了 调用的作用
+        ;(function (){
+            alert('hello')
+        })();
+    </script>
+</body>
+</html>

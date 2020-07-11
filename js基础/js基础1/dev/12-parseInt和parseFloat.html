@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 专门用来 把  字符串 转换成 数字的 
+        // parseInt   整数
+        // parseFloat  浮点数
+
+
+        // '100px'===>  Number('100px') NaN 
+        console.log(parseInt('100px')); // 100
+
+        // 必须以数字开头 
+
+        // 非字符串===> 先 隐式转换成 字符串
+        console.log(parseInt(5.8)) // 5
+
+        console.log(parseInt(true)); // parseInt('true') ==> NaN
+
+
+        // （4）带两个参数时，第二个参数表示进制转换。
+        // 前边的字符串 以 什么 进制 解析  ,默认 10进制
+        console.log(parseInt('12',16)); // 16+2==>18(十进制)
+    </script>
+</body>
+</html>

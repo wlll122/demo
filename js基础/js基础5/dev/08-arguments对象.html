@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // arguments 函数的 实参对象,(保存了实参信息)只能在函数内部使用
+        // 类数组 (数组的形式.有长度,索引,但是 不具备数组的方法)
+        function add(x, y, z) {
+            console.log(arguments); //  [3, 5, 7, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+            console.log(arguments.callee); // 函数本身
+            return x + y + z;
+        }
+        add(3, 5, 7)
+
+
+
+        // 递归
+        function fb(n) {
+            if(n==1||n==2){
+                return 1;
+            }
+            return arguments.callee(n - 1) + fb(n - 2)
+        }
+    </script>
+</body>
+
+</html>

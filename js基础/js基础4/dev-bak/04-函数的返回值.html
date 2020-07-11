@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function sum(a, b) {
+            // 把 a+b 的结果丢出去 当做 这个函数的返回值(当做这个函数的结果)
+            // return a + b;
+            var h = a + b;
+            return h;
+        }
+        // 把sum函数运行的结果 赋值给 num 变量
+        var num = sum(1, 3);
+        console.log(num); // 4
+
+        // 求出来的和  我要用来干其他的事情(和5相加)
+        // 拿到任意两个数求和的结果
+        // 需要用到返回值 
+        // return 语句之后的代码 不再执行(函数里边 遇到return  函数执行就结束)
+        // 并不是所有函数 都有 返回值 (undefined)
+
+        console.log(sum); // sum函数
+        console.log(sum(2, 4)); // 打印函数执行的  返回值 ,并且 函数里边的代码也会执行一遍
+    </script>
+</body>
+
+</html>

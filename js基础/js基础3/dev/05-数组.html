@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 数组 属于 引用数据额类型
+        // 保存数据   某一类数据的 (有序)集合 
+        // 创建数组的 方式
+        // 方式-  
+        var arr = ['小明','小红','小王'];
+
+        // 方式二  
+        var arr1 = new Array(); // 创建出来一个空数组
+        console.log(arr);
+        console.log(arr1);
+
+        var arr2 = new Array(4);
+        console.log('arr2',arr2);
+        
+        var arr3 = new Array(4,5,6);
+        console.log('arr3',arr3);
+
+
+
+        console.log(typeof arr); // object 
+
+        // 需要判断 这个变量 保存的 是不是数组类型 instanceof
+        console.log(arr instanceof Array);  // true
+
+
+       
+
+        
+    </script>
+</body>
+</html>

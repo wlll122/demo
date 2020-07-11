@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 遍历对象
+        var user = {
+            name: '小明',
+            age: 24,
+            sex: '男',
+            exp: '3年',
+            say: function () {
+                alert('你好');
+            }
+        }
+
+
+        // for in 循环 遍历对象 
+        for (var key in user) {
+            // key  指的是 你遍历到的 每个 属性名
+            console.log(key); // name  age...
+            console.log(user.key); // undefined ,没有key 属性 ,,  . 后边跟的 字符,不会被当做变量解析
+            // 属性名是动态的(或者说想让属性名被当做变量解析,那你需要使用[])
+            console.log(user[key]);
+        }
+    </script>
+</body>
+
+</html>

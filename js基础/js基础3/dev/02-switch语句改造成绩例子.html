@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var score = prompt('请输入成绩');
+        // if (score >= 90) {
+        //     alert('优秀')
+        // } else if (score >= 80) {
+        //     //    else 暗含之上的条件不符合 
+        //     alert('良好')
+        // } else if (score >= 60) {
+        //     // 已经暗含是 <80 了
+        //     alert('及格')
+        // } else {
+        //     alert('不及格')
+        // }
+
+        switch(true){
+            case score>=90:
+                alert('优秀');
+                break;
+            case score<90&&score>=80:
+                alert('良好');
+                break;
+            case score<80&&score>=60:
+                alert('及格');
+                break;
+            default:
+                alert('不及格');
+                break;
+        }
+
+
+    </script>
+</body>
+
+</html>

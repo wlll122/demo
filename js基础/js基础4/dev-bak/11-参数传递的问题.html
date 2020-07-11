@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function ins(x) {
+            x++;
+        }
+        var num = 10;
+        ins(num);
+        // 调用完之后  num是多少?
+        console.log(num);
+
+        // 基本数据类型作为参数传递时,并不影响原来的数据
+
+        var b = [1, 2, 3];
+
+        function add(arr, n) {
+            arr.push(n);
+        }
+        add(b, 4);
+        console.log(b);
+        // arr=b; (b保存的是 指向  数组的 引用地址)
+        // 引用数据类型作为参数传递时,会影响原数据
+    </script>
+</body>
+
+</html>

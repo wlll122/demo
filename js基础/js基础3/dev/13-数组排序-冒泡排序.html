@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [97, 68, 72, 29, 51, 45,103]
+        // 从小大
+        // for (var i = 0; i < arr.length - 1; i++) {
+        //     // 遍历到的这一位  和  他的下一位比较
+        //     if (arr[i] > arr[i + 1]) {
+        //         // 交换位置  
+        //         var temp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = temp
+        //     }
+        // }
+        // console.log(arr);
+
+        // 以上代码 执行一次冒出一个 最大值 ,,, 所以要重复执行
+
+        // 6个数 需要 执行 5轮 以上for次循环
+
+        for (var j = 0; j < arr.length; j++) {
+            // 控制轮次 (比较几轮)
+            // 优化: 根据轮次的不同 ,  对于已经确定位置的元素,没有必要再同他们比较了
+            // -j 的规律
+            for (var i = 0; i < arr.length - 1; i++) {
+                // 找出本轮最大的数
+                // 遍历到的这一位  和  他的下一位比较
+                if (arr[i] > arr[i + 1]) {
+                    // 交换位置  
+                    var temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp
+                }
+            }
+            console.log(arr);
+        }
+        console.log(arr);
+
+
+        // 优化之后 
+        // for (var j = 1; j < arr.length; j++) {
+           
+        //     for (var i = 0; i < arr.length - j; i++) {
+                
+        //         if (arr[i] > arr[i + 1]) {
+        //             // 交换位置  
+        //             var temp = arr[i];
+        //             arr[i] = arr[i + 1];
+        //             arr[i + 1] = temp
+        //         }
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

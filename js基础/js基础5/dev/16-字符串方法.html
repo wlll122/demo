@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = "how are You? And you?";
+        // ** charAt() ** 获取指定位置的字符
+        // ** charCodeAt() ** 指定位置字符 的 Unicode 编码
+
+        console.log(str.length); // 21
+        console.log(str.charAt(5)); // r
+        console.log(str.charCodeAt(5)); // 114 r
+
+        console.log(str.toLowerCase()); // how are you? and you?
+        console.log(str.toUpperCase()); // HOW ARE YOU? AND YOU?
+
+
+        // **indexOf()** 返回字符在字符串中的位置
+        // **lastIndexOf()**
+        console.log(str.indexOf('o')); // 1
+        console.log(str.lastIndexOf('o')); // 18
+
+
+        // **concat()** 连接字符串
+        console.log(str.concat('and you')); // how are You? And you?and you
+
+
+        // **slice()** 提取字符串的某个部分
+        console.log(str.slice(1,3)); // 'ow'
+
+
+        // **substr()** 截取字符串  
+        // 第一个参数 是开始索引
+        // 第二参数   截取几个字符
+        console.log(str.substr(1,3)); // 'ow '
+
+
+        console.log(str);
+    </script>
+</body>
+
+</html>

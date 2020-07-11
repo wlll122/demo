@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2];
+        console.log(typeof arr); // object
+        // instanceof 
+        console.log(arr instanceof Array); // true
+
+        // 封装一个 求数组平均数
+        function getArg(arr) {
+            // var arr = [1, 22, 3, 47, 5, 16, 7, 331, 9, 10];
+            var sum = 0;
+            for (var i = 0; i < arr.length; i++) {
+                sum += arr[i];
+            }
+            var arg = sum / arr.length;
+            // console.log(arg);
+            return arg;
+        }
+        var arr2 = [1, 2, 3];
+        console.log(getArg(arr2));
+        getArg([12.3, 4.56, 78]);
+        // var arr = [1, 22, 3, 47, 5, 16, 7, 331, 9, 10];
+        // // 求证数组的平均数
+        // // 先对数组元素  求和
+        // var sum = 0;
+        // for (var i = 0; i < arr.length; i++) {
+        //     // sum = sum + arr[i];
+        //     sum += arr[i];
+        // }
+        // // console.log(sum);
+        // var arg = sum / arr.length;
+    </script>
+</body>
+
+</html>

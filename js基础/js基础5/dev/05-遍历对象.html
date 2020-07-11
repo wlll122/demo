@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var user = {
+            name: '张三',
+            age: 24,
+            sex: '男',
+            say: function () {
+                alert('hello')
+            }
+        }
+
+
+        // 遍历对象 保存的信息
+
+        // for in 循环
+        for(var key in user){
+            // 这个 key (变量名)  就是 遍历到的  user里边所用的属性名
+            console.log('属性名===>',key);
+            console.log('属性值==>',user[key]);
+
+
+            // 为什么要用中括号 
+            // 对象.属性名   这个属性名是个字符,写什么就是什么(不会当做变量解析)
+            // user.key  找的就是 'key' 属性(user 并没有key属性,所以拿到的是 undefined) 
+            // 那你想让 这个  key  被解析成变量 ,user[key]
+
+        }
+    </script>
+
+</body>
+
+</html>

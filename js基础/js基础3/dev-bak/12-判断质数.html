@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var num = parseInt(prompt('青输入一个整数'));
+        // 1 . 因数个数 2个
+        // var count = 0;
+        // for (var i = 1; i <= num; i++) {
+        //     if (num % i === 0) {
+        //         count++;
+        //     }
+        // }
+        // if (count === 2) {
+        //     alert(num + '是质数');
+        // } else {
+        //     alert(num + '不是质数');
+        // }
+
+        // true 代表是质数,false  代表不是质数
+        var isZhi = true;
+        for (var i = 2; i < num; i++) {
+            if (num % i === 0) {
+                // 碰到了其他因数,说明不是质数
+                isZhi = false;
+                break;
+            }
+        }
+        isZhi ? alert('是质数') : alert('不是质数');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+
+	<body>
+		<script>
+			// 1.条件判断语句
+			// 条件成立才执行。如果条件不成立，那就什么都不做。
+			var a = 20;
+			var b = 10;
+			// 如果a>b  那么计算 a-b
+			// if(条件表达式){
+			//     // 符合条件时 执行的代码
+			// }
+			// 强调: if后边的括号(),具有隐式转换的作用,会将里边的结果都转换为布尔值
+			if (a > b) {
+				console.log(a - b);
+			}
+
+			// 2. 条件分支语句
+			// if(条件表达式){
+			//     符合条件时 执行
+			// }else{
+			//     否则
+			//     不符合条件时,执行
+			// }
+
+			// 多选一,只能选择其中一条路走
+			var age = 25;
+			if (age > 18 && age < 60) {
+				alert("你可以考驾照");
+			} else {
+				alert("不能考驾照");
+			}
+			// 多分支语句
+			// 90-100 优秀
+			// 80-89 良好
+			// 60-79  及格
+			// 60以下  不及格
+			var score = 78;
+			if (score >= 90) {
+				alert("优秀");
+			} else if (score >= 80) {
+				// 暗含之上 的条件不符合 这里 已经暗含了 <90
+				alert("良好");
+			} else if (score >= 60) {
+				// 暗含了 <80
+				alert("及格");
+			} else {
+				// 暗含 <60
+				alert("不及格");
+			}
+
+			// 跳楼现象
+		</script>
+	</body>
+</html>

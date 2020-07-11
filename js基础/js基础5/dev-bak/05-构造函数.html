@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 自定义构造函数 取 创建一个对象
+        function Student(name, sex) {
+            this.level = '七年级'；
+            this.say = function () {
+                // 在new 的时候 这里边 的 this  不会被解析
+                alert(this.name);
+            }
+        }
+
+        var user1 = new Student('小明', '男');
+        var user2 = new Student('小红', '女');
+        console.log(user1);
+        console.log(user2);
+
+        // this  指的是什么 (指针)   存在只想问题
+        // 函数不调用时,this  指向不明确 ,函数执行时,this 指向才会确定 ,通常指向调用者
+        console.log(user1.say);
+        user1.say(); // this指向user1   就是  . 前边的那个对象
+
+
+        var a = 10;
+
+        function foo() {
+            alert(this.a);
+        }
+        foo(); // foo 的调用者是window,this 指向window  ,10
+
+
+
+        // new  到底做了什么?
+        var user3 = new Student('小张', '男');
+        // 1. 在函数中 创建了一个空对象 {}
+        // 2. 将 函数中  this  指向 创建出来的 {}
+        // 3.  执行里边的代码 (追加属性)
+        // 4.  将追加好属性的  对象  return 出去
+        console.log(user3);
+
+        // 构造函数当中 this  指向  new 出来的实例对象
+
+
+        // 总结 this 指向: 1. 指向调用者,通常是 . 前边的对象
+        // 2.  对于构造函数而言 ,指向new出来的实例对象 
+
+        // 补充 :  this 的指向 我们是可以强行修改(call,apply...)
+    </script>
+</body>
+
+</html>

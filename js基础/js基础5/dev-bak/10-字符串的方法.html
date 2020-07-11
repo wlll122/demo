@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // charAt() 获取相应位置的字符
+        // charCodeAt() 指定位置字符 的 Unicode 编码
+        // indexOf() 返回字符在字符串中的位置
+        // lastIndexOf()
+        // concat() 连接字符串
+        // slice() 提取字符串的某个部分
+        // substr() 截取字符串
+        // toUpperCase()
+        // toLowerCase()
+
+        var str = "how are you? And you?";
+
+        console.log(str.length); // 21
+        console.log(str.charAt(4)); // 从0开始  a
+        console.log(str.charCodeAt(4)); // 返回 a  对应的unicode 编码
+        console.log(str.indexOf('a')); // 4
+        console.log(str.lastIndexOf('a')); // 13
+        var str1 = '你好';
+        console.log(str.concat(str1)); // how are you? and you?你好
+        console.log(str.slice(1, 5)); //ow a
+        console.log(str.substr(1, 5)); // ow ar
+        // substr(起始位置,[取的个数])  截取字符串 返回截取的字符串
+        console.log(str.toLowerCase());
+        console.log(str.toUpperCase());
+    </script>
+</body>
+
+</html>

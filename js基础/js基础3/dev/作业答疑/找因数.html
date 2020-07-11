@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 统计因数个数
+        var count = 0;
+        var num = prompt('请输入数字');
+
+        for (var i = 1; i <= num; i++) {
+            if(num%i===0){
+                console.log(i);
+                count++;
+            }
+        }
+        console.log(count);
+    </script>
+</body>
+
+</html>

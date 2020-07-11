@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [24, 34, 21, 9, 8];
+
+        for (var i = 0; i < arr.length; i++) {
+            var temp = arr[i];
+            // for (var j = i - 1; j >= -1; j--) {
+            //     if (temp < arr[j]) {
+            //         arr[j + 1] = arr[j];
+            //     } else {
+            //         arr[j + 1] = temp;
+            //         break;
+            //     }
+            // }
+            var j = i - 1;
+            while (temp < arr[j] && j >= 0) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = temp;
+        }
+        console.log(arr);
+    </script>
+</body>
+
+</html>

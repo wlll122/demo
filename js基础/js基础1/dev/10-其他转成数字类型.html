@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str = 'hello';
+        var str1 = '100';
+        var str2 = 'hi100'
+        var str3 = '';
+        var str4 = '   ';
+        var flag = true;
+        var a;
+        var obj = null;
+
+        // 方法:  Number()
+        console.log('true===>',Number(true)); // 1
+        console.log('false===>',Number(false)); // 0
+        console.log('undefined===>',Number(a)); // NaN
+        console.log('null===>',Number(obj)); // 0
+
+
+        // 字符串有非数字字符 转成 NaN 
+        // 纯数字字符,可以转成数字(去掉引号)
+        // 空字符串 和  全是空格的字符串  转成  0
+        console.log(Number(str)); // NaN 
+        console.log(Number(str1)); //100  纯数字字符 
+        console.log(Number(str2)); // NaN
+        console.log(Number(str3)); // 0 空字符串
+        console.log(Number(str4)); // 0 空格字符串
+
+
+        // 隐式转换 用的 使用的 是  Number() 
+
+
+
+    </script>
+</body>
+</html>

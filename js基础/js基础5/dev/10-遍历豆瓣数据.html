@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="douban.js"></script>
+    <script>
+        console.log(movies);
+        // 打印出  每部电影的 名字
+
+        //  打印每部电影的 '电影名字:风语咒,导演:闫飞/彭大魔'
+
+        // 数组 采用  for  循环 进行遍历
+        var subjectArr = movies.subjects;
+        for (var i = 0; i < subjectArr.length; i++) {
+            // console.log(subjectArr[i].title); // 电影名字
+            var str = '电影名字:'+subjectArr[i].title +',导演:';
+            // 导演信息
+            var directorArr = subjectArr[i].directors;
+            for(var j =0;j<directorArr.length;j++){
+                // console.log(directorArr[j].name);
+                if(j==directorArr.length-1){
+                    str+=directorArr[j].name;
+                }else{
+                    str+=directorArr[j].name+'/';
+                }     
+            }
+            console.log(str);
+        }
+    </script>
+</body>
+
+</html>

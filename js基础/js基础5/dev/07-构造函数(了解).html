@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // new 到底做了什么
+
+        // new Array()   new Date()   new Object()
+
+
+        // 首字母大写 的函数通常是 构造函数 (作用:专门用来造对象的)
+
+
+        // 一个简单的构造函数
+
+
+        function Student(user,age){
+            // 名字
+            // 年龄  独有
+            // 教室  公共属性
+            this.name = user;
+            this.age = age;
+            this.room = '02';
+            this.address = '郑州';
+        }
+
+        var s1 = new Student('张三',24);
+        console.log(s1);
+        // var s2 = new Student('李四',12);
+        // console.log(s2);
+
+
+
+        // new 的步骤
+        // 1.  调用 student 这个函数 ,并且创建一个空对象{},  同时 让 this 指向了 这个空对象{}
+
+        // 2.  执行 student 里边的 代码  this.name=user;===>{}.name = '张三' ;{}.age = 24;  {}.room = '02';{}.address='郑州'
+        // 3.  代码执行完,这个空对象已经被添加了很多属性,,此时 把这个对象 return 出去
+        // 4.  s1 收到了 这  返回值(return 出去的那个对象)
+
+
+        // new 出来的对象(s1),叫做构造函数的 实例对象 
+        // 构造函数当中的 this 就指向  new 出来的实例对象
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 2018年9月3日;
+        var date = new Date('2018-09-03');
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        var day = date.getDate();
+        var monthArr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        // console.log(year, month, day);
+        var totalDay = 0;
+        for (var i = 0; i < month; i++) {
+            totalDay += monthArr[i];
+        }
+        totalDay += day;
+        if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) {
+            // 是闰年 并且 超过2月
+            if (month > 1) {
+                totalDay++;
+            }
+        }
+        console.log(totalDay);
+    </script>
+</body>
+
+</html>

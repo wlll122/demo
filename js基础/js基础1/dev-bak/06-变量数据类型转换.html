@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 类型转换的规则 (基本数据类型)-->
+
+    <!-- js有时候 会偷偷的 对数据类型进行转换(隐士转化) -->
+
+    <!-- 其他数据类型 ==> 字符串 -->
+
+    <!-- 
+    其他数据类型 ===> number类型 -->
+
+
+    <!-- 其它数据类型==> boolean 类型 -->
+
+    <script>
+        // 其他===> 字符串
+        var a = 123;
+        var b = true;
+        var c;
+        var d = null;
+        var e = '你好';
+        // 方式一
+        // + 在这个地方是拼接字符串
+        console.log(a + ''); // 123  
+        console.log(a + 'def'); // 123def
+        console.log(c + ''); // undefined
+        console.log(d + '');
+
+        // 方式二
+        console.log(a.toString()); // 123
+        console.log(b.toString()); // true
+        // console.log(c.toString()); 报错
+        // console.log(d.toString()); 报错
+
+
+        // js当中的隐式转换(转成字符串)
+        // 方式三 string()函数
+        console.log(String(a)); // '123'
+        console.log(String(b)); // 'true'
+        console.log(String(c)); // 'undefined'
+        console.log(String(d)); // 'null'
+
+
+        // 其他===> 布尔值
+        // Boolean()函数 隐式转换(转换成布尔值) 采用的就是这个规则
+        // 哪些情况会变成 false 
+        // null undefined 0  NAN ''
+        console.log(Boolean(a)); // true
+        console.log(Boolean(0)); // false
+        console.log(Boolean(NaN)); // false
+        console.log(Boolean(1.3)); // true
+        console.log(Boolean(-1)); // true
+        console.log(Boolean(Infinity)); // true
+
+        console.log(Boolean(c)); // false
+        console.log(Boolean(d)); // false
+
+        console.log(Boolean(e)); // true
+        console.log(Boolean('')); // false
+        console.log(Boolean(' ')); // true
+
+
+        // 其他数据类型==>number类型
+        // Number()函数 隐式转换(转成数字) 用的是这个规则
+        console.log(Number(true)); // 1
+        console.log(Number(false)); // 0
+        console.log(Number(c)); // NaN
+        console.log(Number(d)); // 0
+
+        // 字符串 转换成数字
+        // 1. 如果字符串中是纯数字， 则直接将其转换为数字。
+
+        // 2. 如果字符串中有非数字的内容， 则转换为 NaN。（ 此处可以看到 Number() 函数的局限性）
+
+        // 3. 如果字符串是一个空串或者是一个全是空格的字符串， 则转换为 0。
+        console.log(Number('')); // 0
+        console.log(Number('   ')); // 0
+        console.log(Number(e)); // NaN
+        console.log(Number('345')); // 345 数字
+        console.log(Number(' 345')); // 345 数字
+        console.log(Number('3 45')); // NaN
+
+
+
+
+        // 补充 parseInt 和 parseFloat  这两个方法 专门用来 把字符串 变成数字
+    </script>
+
+</body>
+
+</html>

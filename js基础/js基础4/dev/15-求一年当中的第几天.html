@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 求任意一天   当当年的第几天(日期字符串)
+
+
+        function getTotalDay(str) {
+            var myDate = new Date(str);
+
+            var total = 0;
+
+
+            var month = myDate.getMonth(); // [0,11]
+            var monthArr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            // 不能取到 month 
+            for (var i = 0; i < month; i++) {
+                total += monthArr[i];
+            }
+            var day = myDate.getDate();
+            total = total + day;
+
+            var year = myDate.getFullYear();
+            // 如果是闰年年怎么办? 
+            // 四年一闰百年不闰  或者 四百年在润
+            if(isRun(year)){
+                if(month>=2){
+                    total++;
+                }
+            }
+            return total;
+        }
+        console.log(getTotalDay('2020-02-03'));
+        
+
+
+        // true 就是闰年   false 就是平年 
+        function isRun(year){
+            return (year%4===0&&year%100!==0) || (year%400===0)
+
+            // if((year%4===0&&year%100!==0) || (year%400===0)){
+            //     return true
+            // }else{
+            //     return false
+            // }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr5 = ["a", "b", "c", "d", "e", "f"];
+        arr5.splice(2, 0, 5, 6);
+        console.log(arr5);//["a", "b",5，6，"c",，"d", "e", "f"];
+
+        // forEach 可以遍历数组
+        // 回调函数内  第一个参数 表示遍历到的元素 ,第二个参数表示其对应的下标
+        arr5.forEach(function (item, index) {
+            console.log(index, item);
+        });
+    </script>
+</body>
+
+</html>

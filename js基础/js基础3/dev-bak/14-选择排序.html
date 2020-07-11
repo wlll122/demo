@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [11, 9, 3, 6, 2, 0];
+
+        // 选择排序 
+        // 第一次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置，然后再从剩余的未排序元素中寻找到最小（大）元素，然后放到已排序的序列的末尾。
+        // 以此类推，直到全部待排序的数据元素的个数为零。选择排序是不稳定的排序方法。
+
+        // 第一轮[0, 9, 3, 6, 2, 11]
+        // var minIndex = 0;
+        // for (var i = 1; i < arr.length; i++) {
+        //     if (arr[minIndex] > arr[i]) {
+        //         minIndex = i;
+        //     }
+        // }
+        // // 经过这样一轮比较  咱们就找到了 最小值 对应的 下标
+        // // 交换位置
+        // var temp = arr[0];
+        // arr[0] = arr[minIndex];
+        // arr[minIndex] = temp;
+        // console.log(arr);
+
+        // 第二轮 [0,2,3,6,9,11]
+        // var minIndex = 1;
+        // for (var i = 2; i < arr.length; i++) {
+        //     if (arr[minIndex] > arr[i]) {
+        //         minIndex = i;
+        //     }
+        // }
+        // var temp = arr[1];
+        // arr[1] = arr[minIndex];
+        // arr[minIndex] = temp;
+        // console.log(arr);
+        // 第三轮[0, 2, 3, 6, 9, 11]
+
+        // 第四轮 [0, 2, 3, 6, 9, 11]
+
+        // 第五轮[0, 2, 3, 6, 9, 11]
+
+
+
+        // 优化
+        // for (var j = 0; j < arr.length - 1; j++) {
+        //     // 外层循环控制轮次
+
+        //     // 本轮待排序元素的 开头位置
+        //     var minIndex = j;
+        //     for (var i = j + 1; i < arr.length; i++) {
+        //         if (arr[minIndex] > arr[i]) {
+        //             minIndex = i;
+        //             // 交换下标
+        //         }
+        //     }
+        //     // 经过这样一轮比较  咱们就找到了 最小值 对应的 下标
+        //     // 交换位置
+        //     var temp = arr[j];
+        //     arr[j] = arr[minIndex];
+        //     arr[minIndex] = temp;
+        //     console.log(arr);
+
+        // }
+
+
+
+        for (var j = 0; j < arr.length-1; j++) {
+            // 外层循环控制轮次
+
+            // 本轮待排序元素的 开头位置
+            var minIndex = j;
+            for (var i = j+1 ; i < arr.length; i++) {
+                if (arr[minIndex] > arr[i]) {
+                    minIndex = i;
+                    // 交换下标
+                }
+            }
+            // 经过这样一轮比较  咱们就找到了 最小值 对应的 下标
+            // 交换位置
+            var temp = arr[j];
+            arr[j] = arr[minIndex];
+            arr[minIndex] = temp;
+            console.log(arr);
+
+        }
+    </script>
+</body>
+
+</html>

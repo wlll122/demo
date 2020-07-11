@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var arr = [97, 68, 72, 29, 51, 45];
+
+        // 选择排序  小道 大 
+
+        for (var j = 1; j < arr.length; j++) {
+
+            var minIndex = j - 1;  // 最小下标(这个minindex 保存的是 本轮 最小值所在的索引)
+
+            for (var i = j; i < arr.length; i++) {
+                if (arr[minIndex] > arr[i]) {
+                    minIndex = i;
+                }
+            }
+            // 循环结束,minIndex  就拿到了 真正的 最小值索引
+            // 交换位置 
+            var temp = arr[j - 1];
+            arr[j - 1] = arr[minIndex];
+            arr[minIndex] = temp;
+            console.log(arr);
+        }
+
+
+
+        // // 0代表第一轮
+        // for (var j = 0; j < arr.length; j++) {
+
+        //     var minIndex = j;  // 最小下标(这个minindex 保存的是 本轮 最小值所在的索引)
+
+        //     for (var i = j+1; i < arr.length; i++) {
+        //         if (arr[minIndex] > arr[i]) {
+        //             minIndex = i;
+        //         }
+        //     }
+        //     // 循环结束,minIndex  就拿到了 真正的 最小值索引
+        //     // 交换位置 
+        //     var temp = arr[j];
+        //     arr[j] = arr[minIndex];
+        //     arr[minIndex] = temp;
+        //     console.log(arr);
+        // }
+
+
+    </script>
+</body>
+
+</html>

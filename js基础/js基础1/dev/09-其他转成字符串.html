@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 其他数据类型转成字符串  类型  就是 数据带上了 引号
+        var num = 10;
+        var flag = true;
+        var a;
+        var obj = null;
+
+        // 方法一 : 利用 + 运算符 (拼接字符串的作用)
+        console.log('hello'+'world');  // helloworld
+        console.log(num+''); // '10'
+        console.log(flag+'');
+        console.log(a+'');
+        console.log(obj+'');
+
+
+        // 方法二: toString()  undefined 和 null 无法使用
+        console.log(num.toString()); // '10'
+        console.log(flag.toString()); // 'true'
+        // console.log(a.toString());  // Cannot read property 'toString' of undefined
+        // console.log(obj.toString());
+
+
+        // 方法三:  String()  将括号里边的内容 显示转换成 字符串
+        console.log(String(num)); // '10'
+        console.log(String(flag));
+        console.log(String(a));
+        console.log(String(obj));
+
+        // num = String(num)
+
+
+        // 记忆 方法三的  规则  (隐式转换采用)
+
+
+
+    </script>
+</body>
+</html>

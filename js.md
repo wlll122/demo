@@ -207,6 +207,35 @@
 
 	- 刷新页面
 
+### 请求方式
+
+- GET/参数在url框不安全
+- POST
+- 设置请求头参数
+
+### JQuary-ajax
+
+- $.axjx()
+
+### 声明实例
+
+- 监听过程,判定是否成功
+
+	- 设定返回函数
+
+		- open
+
+			- send
+
+### 跨域
+
+- jsonp方法(利用src的属性)
+
+	- 原生写法:使用src
+	- JQ:设置请求方式为jsonp
+
+- cors方法解决
+
 ## 数组字符串方法
 
 ### 字符串
@@ -333,4 +362,185 @@
 		-           for(var name in json){
 		-             arr2.push(Number(name));//类型发生变化了
 		-           }
+
+## websocket
+
+### 实例对象
+
+### readystat
+
+- 判定连接状态
+
+	- connecting(连接中)0
+	- open(连接成功)1
+	- closing(正在关闭)2
+	- closed(已关闭)3
+
+### 回调
+
+- onopen(成功回调)
+- onclose(关闭后回调)
+- onerror(错误后回调)
+
+### 发送消息
+
+- sendmsge
+
+## BOM
+
+### offset
+
+### 子主题 2
+
+### 子主题 3
+
+### 子主题 4
+
+### 事件对象(桌面事件)
+
+- 鼠标在当前元素的位置
+
+	- e.clientX,clientY
+	- PageX,pageY
+
+### 对象
+
+- e.target(具体触发事件元素)
+- 绑定事件元素
+
+### offset获取实际的宽高
+
+- style获取的只能是行内的样式
+
+### 阻止浏览器默认事件
+
+- e.preventDefault
+
+### 阻止事件的冒泡
+
+子元素事件内添加:
+e.stopPropagation();
+
+### 缓动动画
+
+步骤:
+target - start
+
+封装步骤:1.清除前一个定时器
+2.设定步长
+3,改变位置
+4.关闭定时器
+
+### 事件委托
+
+element.addeventlistener('click',function(){
+event.target.style.(事件)});
+
+将事件委托在父元素上,提升性能
+
+## DOM
+
+### 事件
+
+1.获取事件源
+2.绑定事件
+3.事件处理程序
+
+### 绑定事件
+
+1.标签名
+2.类名
+进行绑定
+
+### 特殊dom对象
+
+- body:document.body
+- html:document.documnetElentment
+
+### 样式操作
+
+- element.style.(样式名)
+
+### onload事件
+
+- window.onload
+
+### 元素关系操作
+
+- 父元素:parentNode
+- 子元素
+
+	- element.firstElementChild
+
+### 插入元素
+
+父元素节点.appenchuild(新的子元素节点
+)
+
+### 删除节点
+
+父元素.removeChild(子节点)
+复制节点:clone
+
+### 属性操作
+
+setAttribute("属性名","属性值"),设定属性
+get 获取属性值
+remove 删除属性
+
+### 元素内容操作
+
+box.innterText();设定文本值
+box.innerHtml();设定html对象
+
+### 循环绑定事件注意事项
+
+在循环绑定事件时i 要慎用,先获取i值
+  // 解决方式:  lis[i].index = i;
+或直接let声明
+
+## H5
+
+### 事件监听器
+
+- addeventlistener
+
+## CSS3新增
+
+### 矢量字体
+
+### 文本阴影
+
+text-shadow: 参数1(水平偏移),参数2(垂直偏移)参数三(模糊半径)参数四(颜色)
+
+### 盒子阴影
+
+box-shadow: h-shadow(x) v-shadow(y)
+ blur(模糊半径) spread(扩展范围) 
+color(颜色)
+
+### c3盒子模型
+
+box-sizeing:border-box,
+width即为盒子的实际宽度,border等不改变其宽度
+
+### 过渡
+
+- transition
+- transform
+
+  scale(x,y):垂直或水平缩放
+  translate(x,y),改变水平或垂直位置
+  rotate(deg);旋转元素
+  倾斜:skew
+
+## 轮播图
+
+### 无缝轮播原理
+
+在最后一张添加第一张图片,当滑到了最后一张再让其跳转到第二张
+
+### 程序例子
+
+function move(){  if(count==list.children.length-1){  count=0;  list.style.left=0;  }  count++;  //list.style.left=-w*count+"px";  slowlyMove(list,-w*count);  // 0 1 2 3 4  currentDots(count%4)   }   //自动lunbo  function autoplay(){  autoplay.timer=setInterval(function(){  move();  //console.log(1)  },2000)  }   autoplay();  //鼠标放上去停止轮播  banner.onmouseenter=function(){  clearInterval(autoplay.timer);  }  //鼠标离开开启轮播  banner.onmouseleave=function(){  autoplay();  }   //点击右侧按钮  arrowR.onclick=function(){  move();  }   //点击左侧按钮  arrowL.onclick=function(){  if(count===0){  count=list.children.length-1;  list.style.left=-count*w+"px";  }  count--;  slowlyMove(list,-w*count);  // 0 1 2 3 4  currentDots(count%4)  }   //点击下面小按纽轮播  for(var i=0;i<olis.length;i++){  olis[i].index=i;  olis[i].onclick=function(){  var i=this.index;  slowlyMove(list,-w*i);  currentDots(i);  count=i;  }  }   //封装简单缓动动画  function slowlyMove(ele,target){  if(ele.offsetLeft===target){  return  }   if(ele.timer){  clearInterval(ele.timer);  }   ele.timer=setInterval(function(){  //当前的位置  var start=ele.offsetLeft;  //步长  var step=(target-start)/10;  step=step>0?Math.ceil(step):Math.floor(step)  // if(Math.abs(step)<1){ //(-1,1)   // }    list.style.left=start+step+"px";   if(start+step===target){  clearInterval(ele.timer);  ele.timer=null;  }    },1000/60)   }  //排他思想，  function currentDots(i){  document.querySelector('.dots .current').classList.remove('current');  dots.children[i].classList.add('current');  }
 

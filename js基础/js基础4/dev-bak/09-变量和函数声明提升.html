@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 这里存在 函数声明提升 (必须是function关键字声明的具名函数)
+        // 把function 声明的 函数  提升到顶部
+        function say() {
+            alert('你好');
+            write();
+        }
+        // function 声明的函数 可以先使用后声明
+
+        // 变量声明提升
+        console.log(a); // undefined 说明变量存在
+        var a = 10;
+        // 真正的执行顺序
+        // 把声明 过程提升到了顶部 ,赋值操作 并未提升
+        // var a;
+        // console.log(a);
+        // a = 10;
+
+        bar(); // bar is not a function
+        var bar = function () {
+            alert('bar函数');
+        }
+        //
+        // var bar;
+        // bar();
+        // bar = function(){}
+
+
+
+
+        // 在函数作用域也有声明提前的特性：
+
+        function foo() {
+            console.log(c); // undefined
+            var c = 10;
+        }
+        foo();
+    </script>
+</body>
+
+</html>

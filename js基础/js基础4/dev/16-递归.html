@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 封装一个 pow(x,n)  x的n次方
+
+
+        // 累乘
+        // function pow(x, n) {
+        //     var temp = 1;
+        //     for (var i = 1; i <= n; i++) {
+        //         temp = temp * x;
+        //     }
+        //     return temp
+        // }
+
+
+        function pow(x,n){
+            // 递归一定要有跳出条件 
+            if(n==1){
+                return x;
+                // 给一个准确值,就无法递归下去了(停止了)
+            }
+            return pow(x,n-1)*x;
+            // x的n次方 =  x的n-1次方 * x
+        } 
+        console.log(pow(5,4));
+
+        // 第一步:  return pow(5,3)*5
+        // 第二步:  return pow(5,2)*5 *5
+        // 第三步:  return pow(5,1)*5 *5 *5
+        // 第四步:  return 5 *5 *5 *5
+
+    </script>
+</body>
+
+</html>

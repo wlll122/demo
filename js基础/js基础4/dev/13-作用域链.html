@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 作用域的上下级关系(包含关系)
+
+
+        // 变量的查找规则
+
+        // 先在自身作用域查找,如果找不到就到 上一级作用域查找(一层层向上查找,找到为止),如果找到全局作用域也没找到,就 报错(没有这个变量)
+
+
+
+        // var a = x + 1; // 报错
+        function foo() {
+            var x = 1;
+            var z = y + 1;  // 保存  y is not defined
+            function bar() {
+                var y = x + 1;  // x 是1
+                var z = 100;
+            }
+            function ins() {
+                x++;  // 修改 foo里边的 x  
+                y++;  // 报错
+                var z = 1000;
+            }
+            bar();
+            ins();
+        }
+
+        foo();
+    </script>
+</body>
+
+</html>

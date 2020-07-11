@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 与(并且)&&  或(或者) ||   非(取反) !
+        // 用户输入一个年龄,判断能不能考驾照 (18岁到 60岁之间)
+        var age = Number(prompt('请输入您的年龄')); // prompt 录入的信息 是  字符串类型
+        console.log(age); //24
+
+        // js中 不要连比
+        // 大于等于18 并且 小于等于60 
+        // console.log(18<=age<=60);  //不能写连比  错误  18<24<60  18<12<60
+
+
+        console.log(age>=18&&age<=60);  // 两个条件都满足 ,才算得上满足条件 (有一个不满足 那就是 不满足条件)
+
+
+        // 或运算(或者)  只要有一个满足条件,就算得上满足条件   (两个都不满足,才是不满足条件)
+
+        // 非运算  取反
+
+
+
+        
+    </script>
+</body>
+</html>

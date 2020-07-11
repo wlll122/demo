@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 100;
+        var b = 6;
+        var c = 10;
+
+        var sum = a + b; // 106
+        var cha = a - b; // 94
+        var ji = a * b; // 600
+        var shang = a / b; // 16.666666666666668
+        console.log(shang)
+        // 取余  求余数
+        var yu = a % b;
+        console.log(yu); // 4
+        console.log(a * (b + c));
+
+        // 运算顺序   先算乘除 再算加减   有括号先算括号里边的
+
+
+        // 注意 
+        // （1）当对非 Number 类型的值进行运算（包括+、-、*、/）时，会将这些值转换为 Number 然后再运算。
+
+        console.log(true + 1); // 2
+        console.log(1 + null); // 1
+        console.log(100 - '1'); // 99
+        // 这里 +  是拼接操作 下边讲解
+        console.log(100 + 'abc'); // 100abc
+
+        console.log(1 + undefined); // 1+NaN = NaN
+        console.log(100 - 'abc'); // NaN
+        // 规律  :  NaN参与的的运算 结果都是NaN
+
+        // （3）任何的值和字符串做加法运算，都会先转换为字符串，然后再做拼串操作。
+        console.log('abc' + 100); // abc100
+        console.log('100' + 100); // 100100
+
+        // （4）任何值做-、*、/运算时都会自动转换为 Number。
+        console.log('100' - 100); // 0
+    </script>
+</body>
+
+</html>

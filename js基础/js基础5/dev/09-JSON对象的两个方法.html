@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // JSON 网络间进行传输的一种数据格式 ,本质是一个字符串 
+
+        // 网络间 对象无法进行传输,需要转换成JSON格式的 字符串,在进行传输
+
+
+        // JSON格式
+
+        var json = '{"name":"张三","age":24,"sex":"男"}';
+
+        // '{name:"张三"}'  这种并不是 json 格式
+
+
+        // 把用户信息对象  发给服务器
+        // 把对象变成 json  JSON.stringify()
+        var user = {
+            name:'张三',
+            age:24
+        }
+
+        var userJson = JSON.stringify(user);
+        console.log(userJson);
+
+
+        // 服务器 或者 前端 接收到的 数据 是 json格式(字符串)
+        // 把json字符串 变回对象  JSON.parse();
+
+        var newUser = JSON.parse(userJson);
+        console.log(newUser);
+        console.log(newUser.name);
+
+
+        // 注意 :  只有 json 格式的 字符串  才能 通过 parse  方法 便会对象
+    </script>
+</body>
+</html>

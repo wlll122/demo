@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 符合条件时,代码才能执行 
+
+        // 1. 条件判断语句
+        // if(条件){
+        //     // 这里边的代码执行与否,要看if 后边的 条件  真假
+        //     console.log(你好); // 这句代码的执行有前提条件
+        // }
+        var age = prompt('请输入年龄')
+
+        // 注意 if 后边的括号 ,会把里边的值 隐式转换成  布尔值 
+        if(age>=18&&age<=60){
+            alert('你可以考驾照')
+        }
+        
+
+        // 2.  条件分支语句
+
+        // if(){
+        //     // 符合条件时,执行这部分代码
+        // }else{
+        //     // 否则(不符合条件),执行这部分代码
+        // }
+
+        if(age>=18&&age<=60){
+            console.log('你可以考驾照');
+        }else{
+            console.log('你不可以考驾照');
+        }
+
+
+        // if(age>=18&&age<=60){
+        //     console.log('可以考');
+        // }
+        // if(age<18||age>60){
+        //     console.log('你不可以考');
+        // }
+
+
+    </script>
+</body>
+</html>

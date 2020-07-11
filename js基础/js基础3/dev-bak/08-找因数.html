@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var num = parseInt(prompt('请输入一个整数'));
+        var count = 0;
+        // 计数器,用来记录因数的个数
+        for (var i = 1; i <= num; i++) {
+            if (num % i === 0) {
+                console.log(i);
+                count++;
+            }
+        }
+        console.log(count);
+    </script>
+</body>
+
+</html>

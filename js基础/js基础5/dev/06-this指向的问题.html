@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var age = 30;
+        var user = {
+            username:'张三',
+            age:24,
+            say:function(){
+                // 调用 say  时 ,弹出 自己的年龄
+                // this 是一个 指针 (这个)
+                // 调用时 this 的 指向 才会确定
+                alert(this.age)
+            }
+        }
+        user.age = 25;
+        user.say(); // alert(this.age)====> this指的是谁(指向user)===>  user.age ====>25
+        // 因为 user  调用了  say 方法 所以此时this 指向user
+
+
+        var obj = user.say; // 把say属性 的 值 赋给了 obj 这个变量
+        obj(); // alert(this.age)====> this指的是谁?  此时 this 指向 window , 弹出 windwo.age;   弹出 30
+        // window.obj()  ====  obj() 
+
+
+
+        // 总结: this  永远指向调用者 , (调用者就是 . 前边的对象)
+        // 构造函数当中的 this 就指向  new 出来的实例对象
+    </script>
+</body>
+</html>

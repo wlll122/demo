@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var array = [1, 7, 2, 3, 9];
+
+
+        function reverse(arr) {
+            var newArr = [];
+            for (var i = 0; i < arr.length; i++) {
+                newArr.unshift(arr[i]);
+            }
+            // console.log(newArr);
+            return newArr
+        }
+
+        var result = reverse(array);
+        console.log(result);
+    </script>
+</body>
+
+</html>

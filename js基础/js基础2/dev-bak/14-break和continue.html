@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 用来遍历数据
+        for (var i = 1; i <= 100; i++) {
+            // 1到100以内
+            // 找到一个 能被三整除的数
+            // 找到一个之后 ,就应该退出循环
+            if (i % 3 === 0) {
+                console.log(i);
+                break; // 退出for循环
+            }
+            console.log('...');
+        }
+
+        //找出 1-100 以内 所有 能被3整除  或者 能被5 整除的数
+        for (var i = 1; i <= 100; i++) {
+            if (i % 3 === 0) {
+                console.log(i);
+                continue; // 结束当次循环
+            }
+            if (i % 5 === 0) {
+                console.log(i);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 数组
+        // 中括号,每一个元素 用逗号隔开,里边的每一个元素可以是其他任意的数据类型
+        // var arr = [10, '你好', true, null, undefined, [1, 2], {}];
+        // 通常咱们用数组 表示同一类数据的集合
+        // 表示一组数据
+        var arr1 = [1, 2, 3, 4, 5];
+        // 统计咱们班的名字
+        var str = ["小明", "小红"];
+
+        // 对象 我们把 任何东西 抽象成 对象 的 思想(意识)
+        // 大括号
+        // 这个对象 在 描述一个人
+        // 对象的作用  描述事物
+        // key:value
+        // 属性:属性值
+        // 属性之间  用逗号隔开
+        var user = {
+            name: "小明",
+            age: 24,
+            sex: "男",
+            height: 172,
+            weight: 56,
+            children: {
+                name: "小红",
+                age: 2,
+            },
+            cj: [90, 92, 100],
+            say: function () {},
+        };
+
+        // 函数
+        // function 关键字 声明函数(定义) 函数名(函数的参数) {执行的代码}
+        function say() {
+            // 这个函数调用时,执行的代码
+            alert("你好");
+        }
+        // 函数 不调用  是 不会执行的
+        // say(); // 调用
+
+        console.log(typeof arr1); // 对象 object
+        console.log(typeof user); // object
+        console.log(typeof say); // function
+    </script>
+</body>
+
+</html>

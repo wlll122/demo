@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var type = prompt('请输入汽油编号');
+        var num = prompt('请输入加油升数,单位L');
+        var price;
+        var total;
+        // 嵌套层数 不要太多  
+
+        // 弹出 '你加了20升92号汽油,总价118元'
+        if(type === '92'){
+            if(num>=20){
+                // alert(5.9*num)
+                price = 5.9;
+            }else{
+                // alert(6*num)
+                price = 6;
+            }
+        }
+        if(type === '97'){
+            if(num>=30){
+                // alert(6.95*num);
+                price = 6.95;
+            }else{
+                // alert(7*num)
+                price = 7;
+            }
+        }
+        total = num*price;
+        alert('你加了'+num+'升'+type+'号汽油,总价'+total+'元')
+    </script>
+</body>
+</html>

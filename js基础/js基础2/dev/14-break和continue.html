@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 循环能不能在中间打断
+        // break 和  continue  用于打断结束循环
+
+
+        // break的作用
+        for (var i = 0; i < 5; i++) {
+            if (i == 2) {
+                break;  // 退出循环语句 包括break语句下边的代码
+            }
+            console.log("i的值:" + i);
+        }
+
+        // continue的作用
+
+        for (var j = 0; j < 5; j++) {
+            if (j == 2) {
+                continue;  // 结束当次循环  continue下边语句不执行,,但是  后边的 循环依然执行
+            }
+            console.log("j的值:" + j);
+        }
+    </script>
+</body>
+
+</html>

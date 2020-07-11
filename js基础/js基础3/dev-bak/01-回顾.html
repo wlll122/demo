@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // js 内置对象   Date   Math 
+        // Date  需要 new 出来一个实例对象  获取  年月日 时分秒  毫秒  星期几   时间戳 
+
+        // Math  数学常用方法的 工具库
+        // 向上取整  向下取整  取最大值   最小值  取绝对值  幂运算  开方运算   随机 [0,1)  四舍五入
+
+        // 逻辑运算符  与(且)&&   或||  非 !
+        // 短路运算 
+
+
+        // 顺序结构
+        // 选择结构
+
+        //     if语句
+        //     1. 条件判断语句
+        //     if(){}
+        //     2. 条件分支语句 (跳楼现象,每一个else if 暗含了之上的条件都不符合)
+        //     成绩 优良及格 不及格
+        //     3. if语句嵌套 加油站加油的例子
+
+        //     switch 语句  匹配表达式的结果  选择匹配到的  case 语句体
+        //     每一个 case 里边  必须有 break(退出switch语句)
+
+
+        // 循环结构
+        //     // 循环执行某段代码
+        //     for循环
+        // for (var i = 0; i < 10; i++) {
+        //     console.log(i);
+        // }
+
+        // while 循环  和  do while 循环
+
+
+        // break(退出整个for循环) 和 continue(退出本次循环,后边的循环继续)
+        // 只作用在离自己最近的 for循环
+
+
+        // for 循环嵌套
+
+        for (var i = 0; i < 10; i++) {
+            console.log(i)
+            for (var j = 0; j < 5; j++) {
+                if (j == 3) {
+                    break;
+                }
+                console.log(j)
+            }
+        }
+    </script>
+</body>
+
+</html>

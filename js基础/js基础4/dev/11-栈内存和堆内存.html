@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 基本数据类型 保存在 栈内存当中
+        // 引用数据类型  数据本身保存在 堆内存当中,,,,在栈内存中 保存的是 指向数据的 指针(地址)
+        var a = 10;
+        var arr = [1,3,5,7];  // arr 变量名 保存的是 0xxx01 (地址) 
+
+        var b = a; 
+        b++;
+        console.log(a); // 10
+
+
+        var newArr = arr; // 把arr这个变量名保存的 地址 赋给了  newArr
+        newArr.push(9);
+        console.log(arr); //[1,3,5,7,9]
+
+    </script>
+</body>
+</html>

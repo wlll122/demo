@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 短路运算: 
+
+
+        // 且运算 : 第一个条件满足(无法下定论),所以要看后边的条件(后边的代码执行)
+        // true && alert("看我出不出来！！");
+        // 且运算: 第一个条件 false (就可以下定论(false)),所以没有必要往下看了(后边的条件不再执行)
+        // false && alert("看我出不出来！！");
+
+
+
+
+
+        // 或运算: 第一个条件为真(可以下定论 (整体就是 true)),没有必要看后边的条件了
+        // true || alert("看我出不出来！！");
+        // 或运算:  第一个条件为 false  (不能下定论),所有后边条件 需要执行
+        // false || alert("看我出不出来！！");
+
+        // 非运算 ! (显示把变量转成 布尔类型)
+        var a = 10;
+        a = !a; // !true===> false
+        console.log(a); // false
+
+        // 总结: 
+        // 且运算: 遇到false 就返回
+        // 或运算:  遇到 true  就返回
+
+
+
+        // 非布尔值进行逻辑运算
+
+        // 且运算
+        var result = 5 && 6; // true&&true  (整体结果由第二个条件决定,所以就返回第二个条件)
+        console.log(result); // 6
+
+
+        var age = 24;
+        var flag = age>=18 && age<=60; // 24>=18 && 24<=60 (结构由 第二个条件决定,就返回第二个条件 24<=60)
+        console.log(flag);
+
+
+        // 或运算
+        var result2 = 5 || 6; // true || true (第一个为真,整体就是真,相当于整体结果是由第一个条件决定的,返回第一个条件)
+
+        console.log(result2);
+
+
+        // 总结: 
+        // 与运算: 
+        //     -  如果第一个值为 true，则必然返回第二个值（所以说，如果所有的值都为 true，则返回的是最后一个值）
+
+        //     -  如果第一个值为 false，则直接返回第一个值
+            
+        // 或运算 
+
+        //     -   如果第一个值为 true，则直接返回第一个值
+
+        //     -   如果第一个值为 false，则返回第二个值
+    </script>
+</body>
+
+</html>

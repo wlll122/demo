@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 传递的参数 如果是基本数据类型,,函数执行,并不会影响 传进来的数据本身
+        var num = 2;
+        function ins(x) {
+            x++;
+        }
+        ins(num);
+        console.log(num); // 2
+
+
+        // 传递的参数 是 引用数据类型,,, 函数执行 ,对传进来的数据进行的修改 ,,会影响 外部 数据变量
+        var arr = [2, 3];
+        function add(array, n) {
+            array.push(n);
+        }
+        
+        add(arr,4);
+        console.log(arr);  // [2, 3, 4]
+
+
+
+        // 产生以上问题的  原因
+        // 两种数据 在 计算机当中  保存方式不同
+
+        // 栈内存(保存基本数据类型)  和  堆内存 (复杂数据)
+
+
+        // var a  =10;
+        // var obj = {
+        //     name:'张三'
+        // }
+    </script>
+</body>
+
+</html>

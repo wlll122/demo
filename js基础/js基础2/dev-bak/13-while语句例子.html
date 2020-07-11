@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 假如投资的年利率为 5%，试求从 1000 块增长到 5000 块，需要花费多少年？
+        var money = 1000;
+        var count = 0; // 计数器 用来记录 年
+        while (money < 5000) {
+            money = money * 1.05;
+            count++;
+        }
+        console.log(count);
+    </script>
+</body>
+
+</html>

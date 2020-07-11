@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // '你好'  我们称它为字面量 数字或者 加引号的文字(字符串)
+        console.log('你好');
+        console.log(100);
+
+
+        // 用字母表示数
+        // 变量也是这样一种思想
+        console.log(100 + 200);
+
+        // 用变量来表示一些 后面频繁用到的字面量,简化操作
+
+        // 声明变量  来 表示(接收)某个字面量
+        // 需要用到 var 这个关键词 ,后边要有一个空格
+        // 声明变量的过程 
+        var a = '你好';
+        console.log(a); // 你好
+
+
+        // 注意
+        // 变量必须先定义(声明),在使用
+
+        // 此时 b 不加引号,会被当做变量来解析,加上引号'b'被当做字符串解析
+        console.log(b); //  b is not defined 变量 没有定义
+
+        // 也可以这样声明变量
+        var c; // 声明变量
+        c = '不凡学院'; // 赋值 
+        // 这样写 繁琐,通常我们 我们 合并为一句代码,声明的同时给他赋值
+
+
+        // 变量名 有命名规则
+        // 1. 只能使用 字母,数字,下划线_ $
+        // 2 严格区分大小写  变量a 和 变量A 不一样
+        // 3.不能以数字开头 2a 错误
+        // 4 不能使用js当中的 关键字和保留字 (具有特殊功能的短语)
+        // 5 驼峰命名 firstName navItem
+        // 6 .语义化  见名知意
+
+        var firstName;
+        // var 1a; 错误
+        var num;
+        var str;
+        var arr;
+        var obj;
+        var arr_1;
+        // var arr-2; 错误
+    </script>
+</body>
+
+</html>

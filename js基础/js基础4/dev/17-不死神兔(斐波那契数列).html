@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 有一对兔子，从出生后第三个月起每个月都生一对兔子，
+    小兔子长到第三个月后每个月又生一对兔子，假如兔子都不死，问第二十个月的兔子对数为多少？ -->
+
+    <script>
+        // 1    2    3    4    5    6     7    8    9      10    11    12  ....
+        // 1    1    2    3    5    8     13   21   34     55     89    144....
+
+        // 这个月兔子有几对?  ===  上个月的兔子对数 + 新增的兔子对数(上上一个月的兔子对数)
+
+
+        function fb(n) {
+            // 跳出条件
+            if (n === 2) {
+                return 1;
+            }
+            if (n === 1) {
+                return 1;
+            }
+            return fb(n - 1) + fb(n - 2);
+        }
+
+        console.log(fb(20));
+
+
+        // 走台阶的问题 10个台阶  ,每次可以走 2阶或者 1阶 ,,,,,走上去 有几种走法?  
+
+        // 走上10阶,要么你从第9阶走了一步上来的  要么 你是从 8阶走了 2阶上来的
+
+        function foo(n) {
+            if (n == 1) {
+                return 1
+            }
+            if (n == 2) {
+                return 2
+            }
+            return foo(n - 1) + foo(n - 2);
+        }
+
+        console.log(foo(5));
+        // 1   2   3   4   5 
+        // 1   2   3   5   
+
+        // 递归性能 很差 
+
+        function bar(n) {
+            var arr = new Array(n);
+            arr[0] = 1;
+            arr[1] = 1;
+            for (var i = 2; i < n; i++) {
+                arr[i] = arr[i - 1] + arr[i - 2];
+            }
+            console.log(arr);
+            return arr[n - 1]
+        }
+
+        console.log(bar(20));
+
+    </script>
+</body>
+
+</html>

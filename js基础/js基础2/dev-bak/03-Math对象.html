@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Math 和其他的对象不同，它不是一个构造函数，不需要创建对象。
+
+        Math 属于一个工具类，里面封装了数学运算相关的属性和方法。 -->
+
+    <script>
+        // 求绝对值 Math.abs()
+        console.log(Math.abs(-100));
+        // 四舍五入
+        console.log(Math.round(2.5)); // 3
+        console.log(Math.round(-2.5)); // -2
+        console.log(Math.round(2.4)); // 2
+        // 存在误差
+        console.log(Math.round(2.499999999999999999999999999999999)); // 3
+        console.log(2.499999999999999999999999999999999 === 2.5); // true
+
+        // 求最大值
+        console.log(Math.max(3, 5, 8));
+        // 求最小值
+        console.log(Math.min(3, 5, 8));
+
+        // 幂运算
+        console.log(8 * 8 * 8);
+        console.log(Math.pow(8, 3)); // 8的3次方 512
+
+        // 开方运算
+        console.log(Math.sqrt(4)); // 2
+        // 向上取整 Math.ceil()  天花板函数
+        console.log(Math.ceil(2.4)); // 3
+        console.log(Math.ceil(-2.4)); // -2
+
+        // 向下取整 Math.floor()  地板函数
+        console.log(Math.floor(2.9)); // 2
+        console.log(Math.floor(-2.9)); // -3
+
+        // Math.random()	生成 0-1 之间的随机数 [0,1) 前闭后开
+        console.log(Math.random());
+
+        // 随机 5-10 之间的 整数(5,6,7,8,9,10) 
+        // 0,1,2,3,4,5 + 5
+        console.log(Math.floor(Math.random() * 6) + 5);
+
+        // /  求任意范围的随机整数
+        // Math.floor(Math.random()*个数)+最小值
+    </script>
+</body>
+
+</html>

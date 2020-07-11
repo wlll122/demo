@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 字符串类型  (引号 单双引号都可以)
+        var str = 'hello';  // 字符串类型
+        var str1 = '100'; // 字符串类型
+        // 注意一点 不能嵌套 
+
+        // var str2 = 'hello 'wo'rld';
+        // 但是单双引号可以互相嵌套 
+        var str2 = 'hello "wo"rld';
+        console.log(str2);
+
+        console.log('小明说:\'今天天气很好\'.')
+
+
+        // 数字类型
+        // 整数小数负数 infinty  
+        // 特殊NaN 是一个特殊的数字，表示 Not a Number，非数值 (计算不出来结果时 就返回NaN)
+        var num = 100;
+        var num1 = 100.56;
+        var num2 = -1; 
+        console.log(100*'hello'); // NaN
+
+
+        // isNaN()  用于判断括号里边的 内容是不是 NaN, 如果是结果就是true  ,不是结果就是false 
+        console.log(isNaN(num)); // false 不是NaN
+
+        console.log(0.1+0.2);  // 0.30000000000000004
+
+
+
+        // 布尔类型:  只有两个值 true  和  false 
+        var flag = true;
+        console.log(flag); // true
+
+
+        // undefined 未定义
+        var a;
+        // 变量创建了,但是没有 赋值,,那么他的值 就是 undefined 
+        console.log(a);  // undefined
+
+
+        // null  表示空对象
+        var obj = null;
+        console.log(obj); // null
+    </script>
+</body>
+</html>

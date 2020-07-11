@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 求任意三个数的 和 
+
+        // 假如没有参数  ,你就没办法 实现 任意
+
+        // 形参是给 实参 占位用的 
+
+        // 通常  形参个数 与  实参 保持一致 
+
+        // 形参比 实参多? 
+
+        function add(x, y, z) {
+            // 这里需要变量接收 你传进来的 值(参与代码执行的数据)
+            // 这些变量 咱们称之为函数的参数
+            // 隐式声明了 
+            // var x;
+            // var y;
+            // var z;
+
+            // x  y  z  叫做 形参
+            var sum = x + y + z;
+            console.log(sum);
+        }
+
+        // 你传的 3,5,7  就叫实参 
+        add(3, 5, 7);
+        add(8, 9, 10);
+        add(2,5); // 形参比实参要多 ,多余的形参无法赋值,就是undefined
+        add(2,5,7,10);// 形参 比实参少 ,,多余的实参 无法参与运算
+
+    </script>
+</body>
+
+</html>

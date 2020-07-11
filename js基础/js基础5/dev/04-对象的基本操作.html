@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var user = {
+            name:'张三'
+        }
+
+        // 给对象 添加属性 
+        // 对象.属性名 = 属性值; 
+        user.age = 24;
+        user.sex = '男';
+        console.log(user);
+
+
+
+        // 获取对象的属性 
+        // 对象.属性名;
+        console.log(user.name);
+        var n = user.age;
+        // 获取的是一个 不存在的属性名
+        console.log(user.child); // undefined
+
+        // 判断对象当中 存不存在  age 属性
+        // if(对象.age!==undefined){
+        //     存在这个(age)属性
+        // }
+
+
+
+        // 修改对象的属性 
+        user.age = 30;
+        user.name = '李四';
+
+
+        // 删除对象的属性
+        // delete 对象.属性名;
+        delete user.sex;
+        console.log(user);
+
+
+
+        // 给对象追加方法
+        user.say = function(){
+            alert('hello');
+        }
+
+        // 调用对象的方法
+        // 对象.属性名(方法名)();
+        user.say();
+
+    </script>
+</body>
+</html>

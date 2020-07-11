@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 统计因数个数
+        var count = 0;
+        var num = prompt('请输入数字');
+
+        // for (var i = 1; i <= num; i++) {
+        //     if (num % i === 0) {
+        //         console.log(i);
+        //         count++;
+        //     }
+        // }
+        // if (count == 2) {
+        //     alert('质数')
+        // } else {
+        //     alert('不是质数')
+        // }
+        var flag = true; // 假设这个数是质数(true)
+        for (var i = 2; i < num; i++) {
+            if (num % i === 0) {
+                // alert('不是质数');
+                flag = false;
+                break;
+            }
+        }
+
+        // if (flag === true) {
+        //     alert('质数')
+        // } else {
+        //     alert('不是质数')
+        // }
+
+        if(flag){
+            alert('质数')
+        }else{
+            alert('不是质数')
+        }
+    </script>
+</body>
+
+</html>

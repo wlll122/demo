@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 预解析的过程 
+        // 把所有 用 var 声明的 变量提升到 作用域的 最顶部
+        // 而且 仅仅提升的是 声明,,赋值并不会提升
+
+        // 函数声明(用function 关键字声明的具名函数)也会提升(整个函数)
+
+        console.log(a);  // undefined
+        var a = 10;
+
+        // 真正的执行顺序
+        // var a; // 提升
+        // console.log(a);
+        // a = 10;
+
+
+
+        add(3, 5);
+        function add(x, y) {
+            console.log(x + y);
+        }
+
+
+        foo();   // foo is not a function  undefined()
+        var foo = function () {
+            console.log('hello');
+        }
+        // var foo;提升了 ,但是  function 赋值却没有提升
+
+
+
+
+        // 同理 函数作用域  也存在提升
+        // 会提升到函数作用域的最顶部
+    </script>
+</body>
+
+</html>

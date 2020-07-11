@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 与(并且) &&   大于18并且小于60   都为真   才为真
+        // 或(或者) ||  大于60或者等于60   有一个为真  即为真
+        // 非(取反) !
+
+        // var age = prompt('请用户输入年龄:');
+        // 不能写成连比
+        // console.log(age > 18 && age < 60);
+
+        // 1.能参与逻辑运算的，都是布尔值。
+        // 短路 的 与  遇到false 就停止
+        // true && alert("看我出不出来！！");
+        // false && alert("看我出不出来！！");
+
+        // 短路的  或  遇到true 就停止
+        // true || alert("看我出不出来！！");
+        // false || alert("看我出不出来！！");
+
+        // 如果对非布尔值进行逻辑运算，则会先将其转换为布尔值
+        var a = 10;
+        console.log(!a); // !true   false
+
+        // 重要
+        // 非布尔值进行与或运算时，会先将其转换为布尔值，然后再运算，但返回结果是原值(决定了整个表达式真假的 那个值)。比如说：
+        console.log(5 && 6); //6
+
+        console.log(18 < 60 && 18 > 20); // false
+    </script>
+</body>
+
+</html>

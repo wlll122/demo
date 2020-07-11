@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 10;
+        a = a + 5;
+        // a + 5; 这句代码仅仅计算了结果,并没有把结果赋值给a ,所以a  还是 10
+        console.log(a); // 15
+
+        // a = a+5; 简写成 a+=5;
+        var b = 20;
+        b += 5; // b=b+5;
+        console.log(b); // 25
+
+
+        var c = 100;
+        // c += 1; // c=c+1;
+        // c+=1 可以简写成 c++;
+        c++; // 自增1
+        console.log(c);
+        // 同理c--
+
+
+        // 注意  
+        // 比较 num++  和 ++num  区别
+
+        var num = 10;
+        // num++;
+        ++num;
+        console.log(num); // 11
+        // 共同点 :   两个都能实现  num 的 自增1;
+        // 不同点:  返回值不同(表达式计算结果不同) n++ (返回+1之前的值)  ++n(返回+1之后的值)
+
+        // 区别 返回值(计算结果)不同
+        var n = 10;
+        // console.log(n++); // 10
+        var result1 = n++; // 执行n++ ,实现n自增1,同时把n++ 这个算式的结果赋值给 result1
+        console.log(n); // 11
+        console.log(result1); // 10
+
+        var n2 = 10;
+        var result2 = ++n2;
+        console.log(n2); //  11
+        console.log(result2); // 11
+
+
+        // 返回值
+        // var x = 10;
+
+        // function zz() {
+        //     var y = x;
+        //     x = x + 1;
+        //     return y
+        // }
+        // console.log(zz());
+    </script>
+</body>
+
+</html>

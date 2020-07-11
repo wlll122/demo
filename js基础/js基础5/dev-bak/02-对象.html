@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 对象 描述事物,封装信息 -->
+
+    <!-- 对象  有 属性 和  方法(属性值是函数) -->
+    <script>
+        // 如果两个变量保存的是同一个对象引用，当一个通过一个变量修改属性时，另一个也会受到影响。
+        var obj1 = {
+            name: '小明'
+        }
+        console.log(obj1);
+        var obj2 = obj1; // 栈内存变量保存的 内存地址
+        obj2.name = '小红';
+        console.log(obj1);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 作用域  变量可以做用的范围(可以使用的范围) 
+
+        // 作用域分为两种  一种全局作用域(页面的任意地方都可以使用) 
+        // 局部作用域(函数作用域)  (只在函数内部使用)
+
+
+
+        // 全局变量: 在全局作用域下 声明的变量 就是全局变量(全局变量可以再页面任意地方访问得到)
+
+        // 全局变量 会挂载 在 window 对象上,作为window对象的属性来保存
+
+        // 局部变量(函数作用域下声明的)  (只能在函数内部访问得到)
+
+
+        var a = 10;
+        function add(x,y){
+            var sum = x+y;
+            console.log(a);
+        }
+
+        console.log(window);
+        add(3,5);
+
+        // 在函数内部声明的变量 ,是无法 在 函数外部 获取(访问的) 
+        // 全局变量 ,可以再页面任何地方使用
+
+
+
+    </script>
+</body>
+</html>

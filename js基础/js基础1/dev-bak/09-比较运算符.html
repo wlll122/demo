@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // > < = >= <= == != 
+        // 通过比较运算符可以比较两个值之间的大小关系，如果关系成立它会返回 true，如果关系不成立则返回 false。
+        console.log(5 > 3); // true
+        console.log(4 >= 4); // true
+
+        // （1）对于非数值进行比较时，会将其转换为数字然后再比较。
+        console.log(true > 0); // 1>0 true
+        console.log(1 > '100'); // 1>100 false
+
+        // 特殊情况：如果符号两侧的值都是字符串时，不会将其转换为数字进行比较。
+        // 比较两个字符串时，比较的是字符串的Unicode 编码。【非常重要，这里是个大坑】
+        console.log('12' > '2'); // false 49>50
+        // （3）任何值和 NaN 做任何比较都是 false。
+
+        // ==  是否等于
+        console.log('你好' == '你好'); // true
+        // ==这个符号并不严谨，会将不同类型的东西，转为相同类型进行比较（大部分情况下，都是转换为数字）
+        console.log(6 == '6'); // true
+
+        // undefined 衍生自 null，所以这两个值做相等判断时，会返回 true。
+
+        console.log(undefined == null); //打印结果：true。
+
+        // NaN 不和任何值相等，包括他本身。
+        console.log(NaN == NaN); // false
+
+
+        // 注意 严格等于  ===  和  ==  的区别
+        //  会先比较数据类型,在比较数据
+        console.log('6' === 6); // false
+
+        // !=  是 == 的反面
+
+        // !== 是 === 的反面
+    </script>
+</body>
+
+</html>

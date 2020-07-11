@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 数据类型分为 两类  基本数据类型(原始数据类型)  另外一种
+        // 引用数据类型(复杂数据类型)
+
+        // 基本数据类型 包括六种
+        // 1. 字符串 string类型
+        // 2. 数字 number类型
+        // 3. 布尔值 boolean类型
+        // 4. undefined
+        // 5. null
+        // 6. symbol
+
+        // 引用数据类型
+        // 1. 数组 Array类型
+        // 2. 函数
+        // 3. 对象 Object类型(数组 和 函数 都是 对象)
+
+
+        // 1. 字符串类型 用引号引起来  引号不能嵌套(单引号里边不能嵌套单引号)
+        // var str = '你好'不凡'学院';  错误示范
+        var str = '你好"不凡"学院';
+        console.log(str);
+        console.log('今天\n天气很好');
+        console.log('今天\\天气很好');
+
+        // 2.数字类型   number类型
+        var num = 100;
+        var strNum = '100'; // 字符串类型的数字
+        console.log(num);
+        console.log(strNum);
+
+        // Infinity(这个数据表示无穷大)
+        // -Infinity(这个数据表示无穷小)
+
+        // 更特殊的一个值  NaN (not a number)
+        var c = "abc" / 18;
+        console.log(c); ///NaN
+
+        // isNaN() 用来判断括号里边的 变量 是不是 NaN
+        console.log(isNaN(c)); // true  正确(真) 是NaN  如果是false 说明不是NaN
+        console.log(isNaN(num)); // false 假
+
+        // 补充typeof  运算符  用来判断数据的类型
+        console.log(typeof str); //string  字符串类型
+        console.log(typeof num); // number 数字类型
+        console.log(typeof c); // number 数字类型
+
+
+        // 3. 布尔类型 Boolean
+        // 只有 两个值  true  false
+        // 主要用于做 逻辑判断
+        var booA = true;
+        var booB = false;
+        var booStr = 'true'; // 字符串
+        console.log(booA);
+        console.log(booStr);
+        console.log(typeof booA); // boolean  布尔类型
+
+        // 4. undefined 类型  一个值 undefined 
+        // 声明了一个变量，但是没有赋值（例如：var a;），此时它的值就是 undefined。
+        var txt;
+        console.log(txt); // undefined
+        console.log(typeof txt); // undefined 类型
+        // 变量 d 没有声明  报错
+        // console.log(d); 
+
+        // 5. null 表示 空  什么都没有,通常用来表示一个空对象
+        var e = null;
+        console.log(e); //null
+        console.log(typeof e); //object  返回对象类型
+    </script>
+</body>
+
+</html>

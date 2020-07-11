@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>    
+
+
+
+        function add(x, y, z) {
+            var sum = x + y + z;
+            // 想使用 这个结果,就需要把结果 return 出去
+            return sum
+
+            //   return 下边的语句不会执行
+            // 函数只要执行return  就结束了
+            console.log('123....');
+        }
+
+        // return 后边 的数据 咱们称之为这个函数的 返回值
+
+
+        // 求 2,5 ,7 的和 
+        // 我想在 函数的 外部  使用  这个 求出来的结果
+        // 就需要在函数内部 把 求出来的结果 return  出去
+       var temp =  add(2,5,7);
+       console.log(temp); // 14
+        // console.log(sum);
+    </script>
+</body>
+
+</html>

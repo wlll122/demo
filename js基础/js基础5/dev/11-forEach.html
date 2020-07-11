@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // forEach  也可以实现 数组的遍历
+
+        var arr = ['pink','green','black','orange'];
+
+        // 他的参数 是一个函数   (函数作为参数)
+        // 这个函数里边 又有两个参数
+        // 第一个参数代表 遍历的元素
+        // 第二个参数 代表 遍历元素的 索引
+
+        arr.forEach(function(item,index){
+            console.log('item===>',item); // item 就是 数组当中 每一个 元素
+            console.log('index===>',index); // 当前遍历到的这个元素 的 索引
+
+        })
+    </script>
+</body>
+</html>

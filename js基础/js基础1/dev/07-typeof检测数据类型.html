@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // typeof  检测数据类型
+        // 语法  typeof 变量名
+        var str = '100';
+        var num =100;
+        var flag = false;
+        var a;
+        var b = null;
+
+        var arr = [1,2,3];
+        var obj = {
+            name:'张三'
+        }
+        function foo(){
+            console.log('hello')
+        }
+
+
+        console.log(typeof str);  // string
+        console.log(typeof num); //number
+        console.log(typeof flag); //boolean
+        console.log(typeof a); //undefined
+        console.log(typeof b); // object
+        console.log(typeof arr); //object 数组是特殊的对象
+        console.log(typeof obj); //object
+        console.log(typeof foo); // function
+
+    </script>
+</body>
+</html>

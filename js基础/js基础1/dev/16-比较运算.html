@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 比较运算的结果只有 两种  要么 正确 要么错误  true  或者 false
+        // > ,<  ,>=,  <=  , == ,!=
+
+        // 数字才能比较大小 
+        console.log(5>3);// true
+
+        console.log(3>5); //false
+
+        console.log(4>=4); // true
+
+        console.log(4!=4); // false
+
+
+
+
+        // 参与比较的不是 数字 ,会隐士转换成 数字  进行比较
+
+        console.log(true>0); // 1>0 true
+        console.log(undefined>0); // NaN>0  false
+        // NaN 参与的 比较  都是 false 
+        console.log(1 > "0"); //true
+
+
+        // 特殊情况: 如果符号两侧的值都是字符串时
+        console.log('100'>'21'); // false 49>50   错误示范: 100>21  true
+
+        // ==  不严谨 
+        // `==`这个符号并不严谨，会将不同类型的东西，**转为相同类型**进行比较（大部分情况下，都是转换为数字
+
+
+        console.log(100=='100') // true 存在隐士转换
+
+        console.log(undefined == null); //  true
+
+
+        // 当我们进行 相等判断的时候 通常使用 ===   严格等于(全等于)
+
+        // 严格等于 不存在 隐式转换
+
+        // 先比较数据类型,数据类型不一致,直接false 
+        // 数据类型一致 ,再比较
+        console.log("100" === 100); //false
+
+
+
+        // 不等于  等于的 反面 
+        // !=  是   ==  的反面
+
+        // !==  是  === 的反面
+    </script>
+</body>
+</html>

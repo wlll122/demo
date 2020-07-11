@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [97, 68, 72, 29, 51, 45];
+
+        // 选择排序  小道 大 
+
+        var minIndex = 0;  // 最小下标(这个minindex 保存的是 本轮 最小值所在的索引)
+
+        for (var i = 1; i < arr.length; i++) {
+            if(arr[minIndex]>arr[i]){
+                minIndex = i;
+            }
+        }
+        // 循环结束,minIndex  就拿到了 真正的 最小值索引
+        // 交换位置 
+        var temp = arr[0];
+        arr[0] = arr[minIndex];
+        arr[minIndex] = temp;
+        console.log(arr);
+
+        // // 第二轮开始
+
+        var minIndex = 1;
+        for (var i = 2; i < arr.length; i++) {
+            if(arr[minIndex]>arr[i]){
+                minIndex = i;
+            }
+        }
+        console.log(minIndex);
+        // 循环结束,minIndex  就拿到了 真正的 最小值索引
+        // 交换位置 
+        var temp = arr[1];
+        arr[1] = arr[minIndex];
+        arr[minIndex] = temp;
+        console.log(arr);
+
+        // 第三轮
+        var minIndex = 2;
+        for (var i = 3; i < arr.length; i++) {
+            if(arr[minIndex]>arr[i]){
+                minIndex = i;
+            }
+        }
+        console.log(minIndex);
+        // 循环结束,minIndex  就拿到了 真正的 最小值索引
+        // 交换位置 
+        var temp = arr[2];
+        arr[2] = arr[minIndex];
+        arr[minIndex] = temp;
+        console.log(arr);
+    </script>
+</body>
+
+</html>

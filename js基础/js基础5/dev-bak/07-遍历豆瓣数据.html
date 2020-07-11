@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="douban.js"></script>
+    <script>
+        console.log(movies);
+        // 遍历 出来 所有的电影名字 
+
+        var subjects = movies.subjects;
+        // for (var i = 0; i < subjects.length; i++) {
+        //     console.log(subjects[i].title);
+        //     // 遍历出所有电影的 导演名字
+        //     var directorArr = subjects[i].directors;
+        //     for (var j = 0; j < directorArr.length; j++) {
+        //         console.log(directorArr[j].name);
+        //     }
+
+        // }
+        // 遍历出 每部电影的所有信息
+        for (var i = 0; i < subjects.length; i++) {
+            for (var key in subjects[i]) {
+                // console.log(key + '========>' + subjects[i][key]);
+                console.log(subjects[i][key]);
+
+            }
+
+        }
+        // 对象变成字符串
+        console.log(String(movies)); // [object Object]
+    </script>
+</body>
+
+</html>

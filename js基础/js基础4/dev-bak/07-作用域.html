@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+	</head>
+
+	<body>
+		<script>
+			// 作用域 :  全局作用域  和 局部作用域(函数作用域)
+			// 作用域 :  变量的作用范围
+			// 根据作用范围的不同,分为全局变量   和 局部变量
+			// 全局变量  全局作用域中的变量都是全局变量，在页面的任意的部分都可以访问的到。
+			// 局部变量  局部作用域中声明的变量
+			// script标签下  全局作用域
+			function foo() {
+				// 局部作用域
+			}
+			// 生命的foo函数 也作为 window 对象的 属性(方法)保存
+			var a = 10; // 全局变量  做位window 对象的 属性保存
+
+			// 函数作用域
+			function say() {
+				var b = 20; // 局部变量
+				// 只能在这个函数内部使用
+				console.log(b); // 20
+			}
+			say();
+			console.log(b); // 报错 b is not defined 没有找到这个变量
+			console.log(window);
+		</script>
+	</body>
+</html>

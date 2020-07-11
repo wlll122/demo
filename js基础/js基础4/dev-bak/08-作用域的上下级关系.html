@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function foo() {
+            var x = 1; // 局部变量
+
+            function bar() {
+                var y = x + 1; // 2
+                var z = 100;
+                // 局部变量
+            }
+            bar();
+            var z = y + 1; // 报错 这里拿不到y
+
+            function ins() {
+                x++; // 
+                y++; // 报错
+                var z = 1000;
+            }
+            ins();
+        }
+        // foo();
+
+        // 函数内部声明的变量  ,只能在其内部使用
+        // 变量查找规则  就近原则  先找自身作用域,找不到 就到 富集作用于查找
+
+
+
+        // 在函数中要访问全局变量可以使用 window 对象。
+        // （比如说，全局作用域和函数作用域都定义了变量 a，如果想访问全局变量，可以使用window.a）
+        var a = '全局变量a';
+
+        function say() {
+            var a = '内部变量a';
+            // console.log(a);
+            // 有些情况 你需要使用全局变量a怎么办
+            console.log(window.a);
+
+        }
+        say();
+    </script>
+</body>
+
+</html>

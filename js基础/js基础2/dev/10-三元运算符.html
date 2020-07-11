@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 加油超过20升 单价 5.9元  否则  单价 6元
+        var num = 30;
+        var price;
+        // if (num >= 20) {
+        //     price = 5.9;
+        // } else {
+        //     price = 6;
+        // }
+
+        // 三元运算符 以后用的比较多
+        // ? 前边 是 true,,就走冒号前边的代码   否则 就走冒号后边的代码  if  else 语句的简写
+        // num >= 20 ? price = 5.9 : price = 6; // 还可以简化
+        price = num >= 20 ? 5.9 : 6;
+        console.log(price);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 方法一 : 借助构造函数
+        // 使用 new 关键字调用的函数，是构造函数 constructor。构造函数是专门用来创建对象的函数。
+        var obj = new Object();
+        console.log(obj);
+        // 使用typeof检查一个对象时，会返回object
+
+        // 方式二  字面量
+        var obj2 = {
+            name: '小明',
+            sex: '男',
+            say: function () {
+                alert('你好')
+            }
+        };
+        // 属性名和属性值是一组一组的键值对结构，键和值之间使用:连接，多个值对之间使用,隔开。
+        // 如果一个属性之后没有其他的属性了，就不要写,，因为它是对象的最后一个属性。
+
+
+        // 追加属性
+        obj.username = '张三';
+        obj.psd = '123456';
+
+
+        // 对象的属性值可以是任何的数据类型
+        obj.sayName = function () {
+            alert('张三');
+        }
+        obj.child = {
+            name: '小红',
+            sex: '女'
+        }
+        console.log(obj);
+
+
+        // 注意 ,对象里边   属性 是无序  的
+
+        // 查看属性值 获取
+
+        // 对象.属性名
+        console.log(obj2.name);
+        // 当你打印一个 对象没有的 属性时,结果是 undefined 
+        console.log(obj2.age); // undefined
+        // 修改属性值 
+        obj2.name = '小张';
+        console.log(obj2);
+
+        // 删除对象的 某个属性
+
+        delete obj2.name;
+        console.log(obj2);
+
+
+        // 如果想调用 对象的方法 
+        // 对象.方法名()
+        obj.sayName();
+    </script>
+</body>
+
+</html>

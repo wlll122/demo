@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        // 排序  sort
+
+        var arr = [1, 5, 2, 9, 3, 11];
+        // arr.sort(); 
+        console.log(arr); // [1, 11, 2, 3, 5, 9]
+
+
+        // 使用sort()  时  需要传递参数
+
+        // 不带参数时  **Unicode 编码** 索引进行排序的
+
+
+        // 想实现 真正意义的从小到大(从大到小),,,必须带参数
+        // 参数 是一个 函数
+        // 这个函数里边有两个参数  a  ,b
+        // 根据返回值 确定排序的规则(大到小 还是 小到大)
+        arr.sort(function (a, b) {
+            // return a - b; // 从小到大的排序
+            return b - a; // 从大到小  排列
+        })
+        console.log(arr);
+
+
+        var users = [
+            {
+                name: '张三',
+                age: 24,
+                h: 178
+            },
+            {
+                name: '王五',
+                age: 25,
+                h: 174
+            },
+            {
+                name: '李四',
+                age: 24,
+                h: 177
+            },
+            {
+                name: '赵六',
+                age: 22,
+                h: 174
+            }
+        ]
+
+
+        // 对users  排序 ,年龄从小到大排
+        // 年龄相同 ,按照身高,从低往高
+        users.sort(function (a, b) {
+            // a 和 b 就代表这个数组当中的任意两个元素
+            if (a.age === b.age) {
+                return a.h - b.h
+            }
+            return a.age - b.age
+        })
+        console.log(users);
+    </script>
+</body>
+
+</html>

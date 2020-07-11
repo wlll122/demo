@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 专门用来 把 字符串   变成数字
+        //    parseInt()的作用是将字符串中的有效的整数内容转为数字。
+        console.log(parseInt("2019在公众号上写了6篇文章")); //打印结果：2019
+        console.log(parseInt("2019.01在公众号上写了6篇文章")); //打印结果仍是：2019   （说明只会取整数）
+        console.log(parseInt("aaa2019.01在公众号上写了6篇文章")); //打印结果：NaN
+        console.log(parseInt("20aa2019.01在公众号上写了6篇文章")); //打印结果：20
+        // 转换规则: 从第一个非空白字符（空格、换行、tab）开始转换，直到遇到一个非数字字符为止。
+
+        // 如果对非 String使用 parseInt()或 parseFloat()，它会先将其转换为 String然后再操作
+        console.log(parseInt(true)); // NaN
+
+        // 自动带有截断小数的功能：取整，不四舍五入
+        console.log(parseInt('5.8')); // 5
+        console.log(parseInt(5.6)); // 5
+
+        // 两个参数
+        console.log(parseInt('ab', 16)); // 10*16+11=171
+
+
+        // parseFloat()的作用是：将字符串转换为浮点数。
+        // 遇到 第二个小数点 也会停止
+        var a = "123.456.789px";
+
+        console.log(parseFloat(a)); // 打印结果：123.456
+        console.log(Number('100px')); // NaN
+    </script>
+</body>
+
+</html>
