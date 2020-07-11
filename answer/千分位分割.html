@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>千分位分割</title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			// 请写一个函数，将数字的整数位以千分位分隔 例如: fn(1234567) ==> "1,234,567"  fn(12345.67) ==> "12,345.67"
+			/*
+				思路：先将数字反转，从后往前数，每隔三位加一个逗号。如果传入的数字有小数点，先将小数点跟整数分开
+			*/
+			function fn(num){
+				// 将数字变成字符串，然后以小数点分开成数组 12345 => [12345]  123.45 => [123,45]
+				// arr[0] 为数字的整数位  arr[1] 为数字的小数位
+				var arr = num.toString().split(".");
+				// 获取整数位，从后往前数加逗号
+				var n = arr[0];
+				// 创建新字符串，用于接收加过逗号的字符
+				var str = "";
+				for(var i = n.length; i > 0; i --){
+					// 每隔三位添加逗号，最开始的值除外
+					str += (i !== n.length && i % 3 === 0) ? "," + n[n.length - i] : n[n.length - i];
+				}
+				return str + (arr[1] ? "." + arr[1] : "");
+			}
+			
+			fn(1234567);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>p标签变颜色</title>
+		<style>
+			button{
+				margin-left: 100px;
+				padding: 12px 40px;
+				font-size: 16px;
+				letter-spacing: .1rem;
+				background-color: #fff;
+				border-radius: 3px;
+				border: 1px solid #999;
+			}
+		</style>
+	</head>
+	<body>
+		<p>这段文本会变蓝，<span>这段文本会变红。</span>隔了一段又变蓝，<span>哎~，你看我又变红了。</span></p>
+		
+		<button id="btn">点击添加p标签</button>
+		<script>
+			document.body.addEventListener("click", function () {
+				let ele = event.target.closest("p");
+				if(ele){
+					ele.style.color = "blue";
+					let childs = ele.children;
+					for(var i = 0; i < childs.length; i ++){
+						childs[i].style.color = "red";
+					}
+				}
+			})
+			
+			btn.onclick = function () {
+				// 随机出现span标签
+				var ifShow = Math.round(Math.random());
+				this.insertAdjacentHTML("beforeBegin", `<p>新添加的p标签的内容${ ifShow ? "，<span>偶尔出现的span标签</span>" : ""}</p>`);
+			}
+		</script>
+	</body>
+</html>

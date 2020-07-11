@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>驼峰命名</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 封装方法将字符串转化为驼峰命名 例如：`var s1 = "get-element-by-id"  fn(s1) ===> getElementById`
+			
+			function fn (str) {
+				// 匹配到 -单词 然后替换成单词的大写形式
+				return str.replace(/-\w/g, function (mtr) {
+					return mtr[1].toUpperCase();
+				})
+			}
+			
+			var f = fn("get-element-by-id");
+			console.log(f);
+		</script>
+	</body>
+</html>

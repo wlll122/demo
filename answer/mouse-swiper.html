@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>轮播</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				user-select: none;
+			}
+			.box{
+				position: relative;
+				width: 613px;
+				height: 230px;
+				margin: 50px auto;
+				border: 1px solid red;
+				overflow: hidden;
+			}
+			.list{
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 600%;
+				height: 100%;
+				list-style: none;
+			}
+			.list li{
+				float: left;
+				width: calc(100% / 6);
+				height: 100%;
+			}
+			img{
+				width: 100%;
+			}
+			.dots{
+				position: absolute;
+				bottom: 20px;
+				right: 30px;
+				list-style: none;
+			}
+			.dots li{
+				float: left;
+				width: 10px;
+				height: 10px;
+				margin-left: 20px;
+				border-radius: 50%;
+				background-color: blue;
+			}
+			.dots li.act{
+				background-color: orange;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="box">
+			<ul class="list">
+				<li><img src="../../lib/image/banner/m4.jpg" alt="" draggable="false"></li>
+				<li><img src="../../lib/image/banner/m1.jpg" alt="" draggable="false"></li>
+				<li><img src="../../lib/image/banner/m2.jpg" alt="" draggable="false"></li>
+				<li><img src="../../lib/image/banner/m3.jpg" alt="" draggable="false"></li>
+				<li><img src="../../lib/image/banner/m4.jpg" alt="" draggable="false"></li>
+				<li><img src="../../lib/image/banner/m1.jpg" alt="" draggable="false"></li>
+			</ul>
+			<ul class="dots">
+			
+			</ul>
+			
+		</div>
+		<script type="text/javascript">
+			/*
+				思路：
+					1. 鼠标拖拽事件
+					2. 拖动距离超过多少进行轮播。如果是用鼠标抬起时判断 ul 的移动距离来判断，需要注意将 ul 的起始距离清空，不然会造成点击 ul 也发生位移的情况。
+					3. 无缝轮播的写法，因为是拖动事件，不能再第一张或者最后一张往右或者往左拖动时出现空白，所以第一张左边应该加上最后一张，最后一张后面应该加上第一张
+					4. 计数器，初始值因为第一张图片的下标，循环拖动时，如果图片位于第一张就将它换成最后一张往前走，如果位于最后一张就改成第一张往后走。
+					5. 添加小点，注意下标临界值
+			*/
+
+			var list = document.querySelector(".list");
+			var dots = document.querySelector(".dots");
+			var box = document.querySelector(".box");
+			
+			// 获取一张图片的宽度
+			var w = list.children[0].offsetWidth;
+			// 记录显示第几张图片
+			var count = 1;
+			
+			initDots();
+			
+			function initDots () {
+				for (var i = 0; i < list.children.length - 2; i++) {
+					var liEle = document.createElement("li");
+					liEle.index = i;
+					liEle.onclick = function (){
+						var i = this.index + 1;
+						// 跟页面计数器同频
+						count = i;
+						
+						doThings();
+					}
+					dots.appendChild(liEle);
+				}
+				dots.children[0].classList.add("act");
+			}
+			
+			list.addEventListener("mousedown", function () {
+				clearInterval(this.timer);
+				
+				// 获取鼠标按下时与页面的左边距，以及ul的起点左边距
+				this.startX = this.offsetLeft;
+				this.mouseX = event.pageX;
+				list.addEventListener("mousemove", drag);
+			})
+
+			
+			
+			window.addEventListener("mouseup", function () {
+				if(list.startX == undefined){
+					return;
+				}
+				
+				// 判断鼠标抬起的时候拖动距离是否向左或者向右拖动了图片宽的1/4，如果超过了，则判定为轮播
+				if(list.offsetLeft > list.startX + w/4){
+					// 往右
+					// 如果是第1张，定位到最后一张，如果最后一张，定位到第一张
+					if(count === 1){
+						count = 5;
+						list.style.left = -count * w + list.moveX + "px";
+					}
+					count --;
+				}else if(list.offsetLeft < list.startX - w/4){
+					// 往左
+					if(count === 4){
+						count = 0;
+						list.style.left = list.moveX + "px";
+					}
+					count ++;
+				}
+				
+				
+				// 重置list的起始值
+				list.startX = null;
+				
+				// 滑动，改变小点样式
+				doThings();
+				
+				// 清空move事件
+				list.removeEventListener("mousemove", drag)
+			});
+			
+			// list 绑定的拖动事件
+			function drag () {
+				// 获取鼠标移动距离
+				var moveX = event.pageX - this.mouseX;
+				
+				// 如果拖动距离大于图片宽度的1/3，不让继续拖动
+				if(Math.abs(moveX) > w/3){
+					moveX = moveX > 0 ? w/3 : -w/3;
+				}
+				
+				this.moveX = moveX;
+				var endX = this.startX + moveX;
+				
+				this.style.left = endX + "px";
+			}
+			
+			
+			// 删除list绑定的移动事件
+			function delBindMove () {
+				list.removeEventListener("mousemove", drag);
+			}
+
+			
+			function doThings(){
+				
+				slowlyMove(list, -w*count);
+				document.querySelector(".dots .act").classList.remove("act");
+				var i = count == 0 ? 3 : (count === 5 ? 0 : count - 1);
+				dots.children[i].classList.add("act");
+			}
+			
+			function slowlyMove(ele, target) {
+				if(ele.offsetLeft === target){
+					return;
+				}
+				// 防止定时器冲突
+				if (ele.timer) {
+					clearInterval(ele.timer);
+				}
+				
+				// 设置动画
+				ele.timer = setInterval(function () {
+					// 获取初始位置
+					var start = ele.offsetLeft;
+					// 声明步长
+					var step = (target - start)/10;
+					// 判断步长区间
+					if(Math.abs(step) < 1){  // (-1，1)
+						step = step > 0 ? 1 : Math.floor(step);
+					}
+					// 移动
+					ele.style.left = start + step + "px";
+					// 判断是否到达终点
+					if(start + step === target){
+						clearInterval(ele.timer);
+						ele.timer = null;
+					}
+				}, 1000/60);
+			}
+		</script>
+	</body>
+</html>

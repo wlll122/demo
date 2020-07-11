@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>字符串模板解析</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			let template = '我是{{name}}，年龄{{age}}，性别{{sex}}';
+			let data = {
+			  name: '姓名',
+			  age: 18
+			}
+			
+			render(template, data); // 返回值：我是姓名，年龄18，性别undefined
+			
+			function render (str, obj) {
+				// 解题思路：选出模板语法的内容 {{xxx}},将其替换为对象中对应的属性值
+				// 摆明了就是 字符串替换 + 正则  用正则选出 {{xxx}},将xxx用组区别出来
+				str = str.replace(/\{\{([\w\W]+?)\}\}/g, function (mtr, p1) {
+					// 去除匹配到的{{}}，留下其中的属性名
+					// var key = mtr.replace(/[\{\{\}\}]/g, "");
+					// 返回对象对应的属性
+					return obj[p1]
+				})
+				
+				console.log(str);
+				return str;
+			}
+		</script>
+	</body>
+</html>

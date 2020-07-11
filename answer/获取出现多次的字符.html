@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 实现一个函数，输入某个字符串，输出其中出现最多的字符和个数，例如：`fn("abcabcbbccccc")`，log：字符最多的是 c，出现了 7 次
+			/*
+				下面这种方法的思路为：将字符串中的字符当成对象的key，然后value为它出现的次数，比较它出现的次数，定义一个最大值，每次找到出现次数最多的字符都转成相应的key值
+				var obj = {
+					a: 2,
+					b: 4,
+					c: 7
+				}
+			*/
+			function fn (str) {
+				// 定义一个对象
+				var obj = {};
+				// 假定字符串第一个字符出现次数最多
+				obj[str[0]] = 1;
+				var maxKey = str[0];
+				
+				for(var i = 1; i < str.length; i ++){
+					if(obj[str[i]]){
+						// 如果对象上有这个属性，则将它的次数 +1， 然后与当前出现次数最多的属性比较，如果多于就更换最大的属性
+						obj[str[i]] ++;
+						if(obj[str[i]] > obj[maxKey]){
+							maxKey = str[i];
+						}
+					}else{
+						// 如果对象上不存在这个属性，则添加这个属性，并定义出现次数为 1
+						obj[str[i]] = 1;
+					}
+				}
+				return `字符最多的是 ${ maxKey }，出现了 ${ obj[maxKey] } 次`;
+			}
+			
+			var f = fn("abcabcbbccccc");
+			console.log(f);
+		</script>
+	</body>
+</html>

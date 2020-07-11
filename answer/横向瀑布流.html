@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>横向瀑布流</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				display: flex;
+				width: 1200px;
+				margin: 30px auto;
+				list-style: none;
+				border: 1px solid red;
+				flex-wrap: wrap;
+			}
+			img{
+				width: 100%;
+				margin: 5px;
+				vertical-align: bottom;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="box" id="box"></ul>
+		
+		<script src="./imgData.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			// 假设固定高度为 150
+			
+			create();
+			
+			window.onscroll = (function () {
+				var timer = null;
+				return function () {
+					if(!timer){
+						timer = setTimeout(function () {
+							// 当页面开始滚动的时候判断距离添加内容
+							if(document.body.offsetHeight < document.documentElement.clientHeight + window.pageYOffset + 100){
+								create();
+							}
+							timer = null;
+						}, 50);						
+					}
+				}
+			}())
+			
+			function create () {
+				var arr = [], ww = 0;
+				for(var i = 0; i < 5; i ++){
+					var liEle = document.createElement("li");
+					var imgEle = new Image();
+					// 随机图片来源
+					imgEle.src = imgLs[rd(0,99)];
+					// 将图片添加到li中
+					liEle.appendChild(imgEle);
+					// 将li添加到box中
+					box.appendChild(liEle);
+					
+					imgEle.onload = function () {
+						// 计算当高度变成150的时候的缩放比例
+						var bite = this.height / 140;
+						// 计算当高度变为 150 的时候图片的宽度
+						this.style.width = this.width / bite + "px";
+						// 计算所有图片总宽
+						ww += this.offsetWidth;
+						// 将图片添加到数组中
+						arr.push(this);
+						// 因为图片加载速度不一，所以不能直接判断 i==5 的时候为图片加载完毕。加载一张图片添加一次数组，这样数组的长度就是加载完成的图片的个数
+						if(arr.length == 5){
+							// 获取当高度为 150 的时候所有图片的总宽与容器1200的比值，因为每一个图片左右margin：5，总宽度-50
+							bite = ww / 1150;
+							
+							// 当最后一个图片加载完，获取比例，给每一张图片重新赋值
+							for(var i = 0; i < arr.length; i ++){
+								arr[i].style.width = arr[i].offsetWidth / bite + "px";
+								arr[i].style.height = 140 / bite + "px";
+							}
+							
+							// 页面初始化的时候循环执行直到出现滚动条
+							if(document.body.offsetHeight < document.documentElement.clientHeight + 100){
+								create();
+							}
+						}
+						// console.log(this.naturalWidth,this.naturalHeight);
+					}
+				}
+				
+			}
+			
+			function rd (n,m) {
+				return Math.floor(Math.random() * (m-n+1)) + n;
+			}
+		</script>
+	</body>
+</html>
