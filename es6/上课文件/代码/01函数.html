@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	
+	<script>
+		
+	//javascript : BOM DOM ECMAscript  	
+		
+		
+		//1.函数定义
+	//(1)函数定义 (2)字面量 (3)构造函数
+	/**
+	function fun(a,b){
+		//console.log(a+b);
+		return a+b;
+	}
+	console.log((1,2));	
+	
+	var fun2=function(a,b){
+		console.log(a+b);
+	}	
+	fun2(1,3);
+ 		
+	var fun=new Function('a','b','console.log(a*b)');
+		fun(3,4);
+		**/
+	//var arr=[],
+	//三种定义方法的区别:(1)作用域	(2)执行效率 (3)执行顺序
+	
+	//run1() 
+	//run2() //字面量的这种方式不能放在定义函数的前面
+	
+
+	// var name="全局es6";
+	
+	// function run1(){
+	// 	var name="我是run1的name";
+	// 	console.log(name);
+	// }
+	// var run2=function(){
+	// 	var name="我是run2的name";
+	// 	return name;
+	// 	console.log(name)
+	// }
+		
+	// function run3(){
+	// 	var name="我是run3的name";
+	// 	return  new Function('console.log(name)')
+	// }	
+	
+	
+	
+    // run3()()
+	
+	// function fn(a,b){
+	// 	return a+b;
+	// }
+	// var old=new Date().getTime();
+	// for(var i=0;i<1000;i++){
+	// 	fn(i,i+1);
+	// }
+   // var now=new Date().getTime();
+	
+	// console.log((now-old)/1000); //0.001
+	
+	
+    var old=new Date().getTime();
+	for(var i=0;i<1000;i++){
+		var c=new Function('a','b','return(a+b)');
+		c(i,i+1);
+	}
+	 var now=new Date().getTime();
+	  console.log((now-old)/1000); //0.068
+
+	
+	
+	//2.传参 形参和实参
+	
+	//  function book(num,price){
+	// 	 console.log(num*price);
+	// 	 console.log(arguments[0],arguments[1],arguments[2]);
+	// 	 console.log(arguments.length); //实参的个数
+	// 	 console.log(book.length);	//形参 
+	//  }
+	
+	//  book(2,5,6);
+	
+	//3.作用域     
+	
+	function book(bookName){
+		this.bookName=bookName;
+	}
+	var bookName="锋利的js";
+	
+	var obj=new book('es6书籍');
+	console.log(bookName);   //锋利的
+	console.log(obj.bookName); //es6 
+	bookName="新的锋利的js";
+	console.log(bookName); //新的锋
+    console.log(obj.bookName); //es6书籍
+	
+	
+	 function tab(){
+	 	//var num; 
+	 	console.log(num); //undefiend
+	 	num=10;
+	 	var num=10;
+	 	//var num=20;
+		
+	 }
+	
+	 tab();
+	
+	
+	
+	
+	
+	
+		
+	</script>	
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	<script>
+	//1.trim
+    var s1='  我是一只 小蜜蜂  '
+	console.log(s1.length);
+		
+    var s=s1.trim(); //去掉字符前后空格
+	console.log(s,s.length);
+	
+	//2.魔板字符串   变量${}
+	var name="张三",age=18;
+	
+	console.log('我的名字是：'+name+',我的年龄是：'+age);
+	
+	var str=`我的名字是 ${name},我的年龄是 ${age}`;
+		console.log(str);
+		
+	var s2='我是一只 小蜜蜂'
+     console.log(s2.startsWith('星'))  //字符串开头是否包含字符 返回的是一个布尔值
+	 console.log(s2.endsWith('蜜蜂'))   //字符串结尾是否包含字符
+	
+	
+		
+	</script>	
+	</body>
+</html>

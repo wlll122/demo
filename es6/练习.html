@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let arr = [1, 56, 6598, 565, 4];
+    let item = arr.find(function (al) {
+        return al > 50;
+    })
+    console.log(item)
+    let obj = {}
+    let arr1 = [
+        {
+            name: `张三`,
+            age: 12,
+            class: 1
+        },
+        {
+            name: `李四`,
+            age: 14,
+            class: 3
+        },
+        {
+            name: `王五`,
+            age: 17,
+            class: 2
+        }
+    ];
+    // let item1 = arr1.find(function (el,index) {
+    // return el.age ==14;                 //当使用赋值符号时返回第一个对象,并覆盖对象的属性值
+    // })
+    let item1 = arr1.find((el, index) => el.age == 14)
+    console.log(item1)
+    // let index3 = arr1.findIndex(function (el,index) {    //返回所选值的下标
+    // return el.age == 17;
+    // })
+    let index3 = arr1.findIndex((el, index) => el.age == 17);
+    console.log(index3);
+    // 化简
+    let str = `   sdsfdg`;
+    str = str.trim();
+    console.log(str.startsWith("s"));
+    console.log(str.endsWith("d"));
+    let arr2=[1,6,5]
+    let [a,f,g]=arr;
+    console.log(a,f,g)
+    let cla=12;
+    let obj1 = {
+        name:`赵立`,
+        age:12,
+        cla
+    }
+    let {age,name}=obj1;
+    console.log(age,name,cla);   //对象的解构赋值
+</script>
+</body>
+</html>
