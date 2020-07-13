@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	<script>
+   //    function fun(a,b){
+		 //  console.log(a+b);
+	  // }
+	  
+	  //function =>
+	  fun=(a,b)=>{
+		  console.log(a+b);
+	  }
+     fun(1,2)			  
+	//当参数只有一个的情况下，小括号可以省略，其他情况不能省略
+	//当函数体只有一句执行语句的时候（不包含return）可以省略花括号
+	fn=a=>console.log(a)	
+	fn(2)
+		
+	fn1=()=>{
+		return 5
+	} 
+	
+console.log( fn1());		
+
+//箭头函数没有自己的this,指向的是外层的this
+var obj={
+	name:'alpha',
+	age:18,
+	say:function(){
+		console.log(this)
+		//console.log('汪汪汪')
+		setTimeout(()=>{
+			console.log('hahaha')
+			console.log(this); //obj
+		},1000)
+		// setTimeout(function(){
+		// 	console.log(this)
+		// },1000)
+	}
+}
+
+   obj.say()
+		
+	setTimeout(function(){
+		//console.log(this)
+	},1000)	
+	
+	
+	// 1.箭头函数没有arguments
+	// 2.箭头函数没有自己的this
+	// 3.箭头函数不能作为构造函数
+	
+	</script>	
+	</body>
+</html>

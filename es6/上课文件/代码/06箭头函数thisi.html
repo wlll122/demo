@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/**
+		  var obj={
+			  a:function(){
+				  console.log(this);
+			  }
+		  }
+	      obj.a(); //obj
+			**/
+		/**		
+			var obj = {
+				a: ()=>{
+					console.log(this);
+				}
+			}
+			obj.a(); //window 
+			**/
+		/**
+		var obj={
+			a:function(){
+				console.log(this);
+				setTimeout(()=>{
+					console.log(this);
+				},1000)
+			}
+		}	
+			
+		obj.a(); //obj obj
+		**/
+		
+		/**
+		var obj={
+			a:function(){
+				console.log(this); //obj
+			},
+			b:{
+				c:function(){
+					console.log(this);//b
+				}
+			}
+		}
+		obj.b.c();
+		**/
+		var obj={
+			a:function(){
+				console.log(this); //obj
+			},
+			b:{
+				c:()=>{
+					console.log(this);//window
+				}
+			}
+		}
+		obj.b.c();
+		
+		//当对象多层嵌套的时候，箭头函数的this指向最外层的对象
+		
+		</script>
+	</body>
+</html>

@@ -21,12 +21,17 @@
 	var str=`我的名字是 ${name},我的年龄是 ${age}`;
 		console.log(str);
 		
-	var s2='我是一只 小蜜蜂'
-     console.log(s2.startsWith('星'))  //字符串开头是否包含字符 返回的是一个布尔值
+	var s2='我是一只小蜜蜂'
+     console.log(s2.startsWith('星'))  //字符串开头是否包含子字符串 返回的是一个布尔值
 	 console.log(s2.endsWith('蜜蜂'))   //字符串结尾是否包含字符
-	
-	
-		
+	 console.log(s2.includes('只'))  //字符串中是否包含子字符串
+     
+	 console.log('$18.'.padEnd(6,0)) //在后面补位
+	 console.log('4'.padStart(2,'0')) //在前面补位
+	 
+	 
+	console.log(s2.repeat(10)) //重复n遍
+	 
 	</script>	
 	</body>
 </html>

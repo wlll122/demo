@@ -44,17 +44,137 @@
     str = str.trim();
     console.log(str.startsWith("s"));
     console.log(str.endsWith("d"));
-    let arr2=[1,6,5]
-    let [a,f,g]=arr;
-    console.log(a,f,g)
-    let cla=12;
+    let arr2 = [1, 6, 5]
+    let [a, f, g] = arr;
+    console.log(a, f, g)
+    let cla = 12;
     let obj1 = {
-        name:`赵立`,
-        age:12,
+        name: `赵立`,
+        age: 12,
         cla
     }
-    let {age,name}=obj1;
-    console.log(age,name,cla);   //对象的解构赋值
+    let {age, name} = obj1;
+    console.log(age, name, cla);   //对象的解构赋值
+    let s2 = `我是一致小鸟`;
+    console.log(s2.repeat(10));
+
+    // 数组的扩展方法
+    let arrs = [10, 20, 20, 30, 40, `cs`, `ht`];
+    for (let i = 0; i < arrs.length; i++) {
+        console.log(arrs[i]);
+    }
+    for (let attr in arrs) {
+        console.log(arrs[attr]);
+    }
+    arrs.forEach((el, index) => {
+        console.log(`el=>`, el);//值
+        console.log(`index=>`, index);//下标
+    })
+    let newArr = arrs.map(item => item * 2);   //返回值乘以2
+    console.log(newArr)
+    console.log(Array.isArray(arrs))
+    let obj2 = {
+        0: `html`,
+        1: `css`,
+        2: `js`,
+        length: 3
+    }
+    console.log(Array.from(obj2));
+    // 箭头函数
+    fun = (a, b) => {
+        console.log(a + b);
+    }
+    fun2 = (a, b) => console.log(a + b);
+
+    fun2(2, 5);
+    // 箭头函数的this指向
+    // 箭头没有自己的this
+    let obj4 = {
+        name: `alpha`,
+        age: 18,
+
+        say: () => {
+            console.log(this)
+            setTimeout(() => {
+                console.log(this)
+            }, 1000)
+            // setTimeout(function () {
+            // console.log(this)
+            // },1000)//此时指向window
+        }
+    }
+    obj4.say();
+
+    let obj6 = {
+        a: () => {
+            console.log(this)
+        } //箭头函数指向最上层,就是window
+        //     a:function () {
+        // console.log(this)
+        //     }
+        //此时的this指向调用者
+    }
+    obj6.a();
+    let objs = {
+        a: function () {
+            console.log(this);//此处this指向objs
+            setTimeout(() => {
+                console.log(this)//此处this向上查找,找到了a这个对象
+            }, 1000)
+        }
+    }
+    objs.a();
+
+    let objs1 = {
+        a: function () {
+            console.log(this)//this指上层几个都有的    b,a
+        },
+        b: {
+            c: function () {
+                console.log(this)//指的C方法本身;   c
+            }
+        }
+    }
+    objs1.a();
+    objs1.b.c();
+    let objs3 = {
+        a: () => {
+            console.log(this)
+        },
+        b: {
+            c: () => {
+                console.log(this)
+            }
+        }
+    }
+    objs3.a();
+    objs3.b.c();
+    class student {
+        constructor(name,age) {
+            this.name=`张三`;
+            this.age=12;
+        }
+        showName(){
+            console.log(this.name);
+        }
+        showAge(){
+            console.log(this.age);
+        }
+    }
+    class  newStu extends student{
+        constructor(level,...args) {   //参数收集器必须写在最后一个位置
+            super(...args);
+            this.level=level;
+        }
+        showLevel(){
+            console.log(this.level);
+        }
+    }
+    let u1 = new newStu(`王五`,12,3);
+    u1.showName();
+    u1.showAge();
+    u1.showLevel();
+
 </script>
 </body>
 </html>

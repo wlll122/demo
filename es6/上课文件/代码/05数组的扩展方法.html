@@ -53,13 +53,58 @@ var goods=[
 		return el.id==200
 	}) 
  	console.log(item);
-	//返回符合元素的下标
+	//返回符合元素的下标，如果查找不到返回-1
     var index=goods.findIndex(function(el,index){
 		return el.id==300
 	})
 	console.log(index);
 	//goods.splice(index,1);
 	//console.log(goods);
-    </script>	
+	
+	
+	// function fun(a,b,c){
+	// 	console.log(Array.isArray(arguments))
+	// }
+	//Array.isArray 判断是不是数组
+	
+	//fun(1,2,3);
+	
+	//Array.from :将类数组转化为数组
+	var obj={
+	     0:'html',
+		 1:'css',
+		 2:'js',
+		length:3
+	}
+	
+	console.log(Array.from(obj))
+	
+	function fun(a,b,c){
+		console.log(Array.from(arguments))
+	}
+	
+	fun(1,2,3)
+	
+	//var arr=[]; 
+	
+	//var arr1=new Array()
+	
+	// var arr1=new Array(3);
+	// var arr2=new Array('3');
+	// var arr3=new Array(2,5);
+	
+	
+	var arr1=Array.of(3);
+	var arr2=Array.of('3');
+	var arr3=Array.of(2,5);
+	console.log(arr1);
+	console.log(arr2);
+	console.log(arr3);
+	
+	
+	
+	
+    </script>
+	<div style="height: 1000px;"></div>	
 	</body>
 </html>
