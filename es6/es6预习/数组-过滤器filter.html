@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+</head>
+<body>
+<script>
+    let arr = [12, 34, 656, 76, 34, 465, 34, 66];
+    let result = arr.filter(item => {
+        if (item % 3 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    })
+    console.log(result);
+    // 化简版本
+    let result2=arr.filter(item=>item%3==0);
+    console.log(result2);
+    let arr2=[{
+        title:`男士衬衫`,price:75
+    },{
+        title:`女士衬衫`,price:233
+    },{
+        title:`男士包`,price:754
+    },{
+        title:`女士衬衫`,price:75000
+    }];
+    let result3=arr2.filter(json=>json.price>=10000);
+    console.log(result3);
+</script>
+</body>
+</html>

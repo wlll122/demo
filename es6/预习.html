@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>预习</title>
+</head>
+<body>
+<script>
+    function rand() {
+    let  i = Math.random()*10;
+    if (i<5){
+        throw error("发生了错误")
+    }else {
+        return i;
+    }
+    }
+    try {
+        //首先执行此处的函数,发生错误执行catch内的函数
+        console.log(rand())
+    }catch (error) {
+        console.log(error)
+    }
+    console.log(22);
+</script>
+</body>
+</html>

@@ -208,12 +208,12 @@ url 为响应WebSocket请求的地址，根据后台开启的服务来写。
 
 
 
-#### 举个完整的例子
+#### 举个完整的例子1111 
 
-<font color="blue">前台</font>
+<font color="blue">前1台</font>
 
 ```js
-// 实例化WebSocket对象
+=// 实例化WebSocket对象
 var ws = new WebSocket(ws/wss地址--后台指定);
 let ws = new WebSocket("ws://localhost:8080");
 ws.onopen = function() {

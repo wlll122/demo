@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    Promise.all([
+        $.ajax({url:`data/arr.txt`,dataType:`json`}),
+        $.ajax({url:`data/json.txt`,dataType:`json`}),
+        ]
+    ).then(function (arr) {
+        let [arr1,json]=arr;
+        console.log(arr1);
+        console.log(json);
+    },function () {
+        console.log(`失败!`);
+    })
+
+
+</script>
+</body>
+</html>

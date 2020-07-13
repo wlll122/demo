@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指向问题</title>
+</head>
+<body>
+<div class="div"></div>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+    console.log(this === window)//此处this指向window
+    let sum = (a,b)=>{
+        return a+b;
+        console.log(this)
+    }
+    sum(3,4);
+    // 普通函数的this指向
+    let x = 11;
+    console.log(this)
+    let obj = {
+        x:22,
+        say:function () {
+        console.log(this);//this指向obj
+
+        }
+    }
+    obj.say();
+    let  obj1 = function (p) {
+this.p=p;
+    }
+    let o=new obj1("hello world");
+    o.p;
+
+    let neObj ={
+        foo:function () {
+        console.log(this);
+        }
+    };
+    neObj.foo();//this指向foo,指向调用的对象
+    
+
+</script>
+</body>
+</html>

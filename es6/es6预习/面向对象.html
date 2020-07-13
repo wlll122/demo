@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象</title>
+</head>
+<body>
+<script>
+    // class
+    class User{
+        constructor(name,pass) {
+            this.name= name;
+            this.pass = pass;
+        }
+        showName(){
+            console.log(this.name);
+            //this指向User
+        }
+        showPss(){
+            console.log(this.pass);
+        }
+    }
+    let u1 = new User(`blue`,`124345`);
+    u1.showName();
+    u1.showPss();
+
+    // 继承,从原有基础继承,extend扩展
+    //super,超类 == 父类;
+    class ViperUser extends User{
+        constructor(name,pass,level) {   //name,pass 可以使用...args
+            super(name,pass);
+            this.level=level;//添加属性
+        }
+        showLevel(){//添加方法
+            console.log(this.level)
+        }
+    }
+    let u2=new ViperUser(`blue`,`133`,3);
+    u2.showName();
+    u2.showPss();
+    u2.showLevel();
+</script>
+</body>
+</html>

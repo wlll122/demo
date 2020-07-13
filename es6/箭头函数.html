@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数</title>
+</head>
+<body>
+<!--    简写的函数表达-->
+<script>
+    let  f= v=>v;
+    let  f = function (v) {
+    return v;
+    }
+    //带一个参数的方法
+    let  f = a =>a;
+    //多个参数的写法
+    let f = (a,b)=>a+b;
+    let  f = (a,b)=>{
+        if (a>b){
+            return a-b;
+        }else {
+           return  b-a;
+        }
+    }
+    //函数返回值使用大括号包裹
+
+    // 函数指向问题
+    console.log(this === window)
+</script>
+</body>
+</html>

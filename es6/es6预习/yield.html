@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>yield</title>
+</head>
+<body>
+<script>
+    function* show() {
+    console.log(`a`);
+   let a=yield;
+    console.log(`b`);
+    };
+    let gen = show();
+    gen.next(12);//执行的函数是yield之前的函数,不包含参数a,按原来的方式传参数
+    gen.next(5);//执行参数a及之后的函数,要操第二个传参数
+
+    //上面每一步都有一个过程值
+    // yield返回值,中间结果;
+    //最后一步使用return 返回
+    function* show1() {
+        console.log(`a`);
+        yield 12;
+        console.log(`b`);
+    };
+    let gen = show1();
+    let res1 = gen.next();
+    console.log(res1);
+    let res2 = gen.next();
+    console.log(res2);
+
+// 异步操作1.回调,promise.generator
+//     runner
+// 逻辑读取数据
+//     当读取不同类型的数据在回调中做不同的操作时要用到genterator
+    Promise.all([
+
+    ])
+    function *genTer() {
+        let userData= yield $.ajax({
+            url:`getUserData`,dataType:'json'
+        });
+        if (userData.type == `Vip`){
+            let items =yield $.ajax({
+                url:`getVipData`,
+                dataType: `json`,
+            })
+        }else {
+            let items = yield $.ajax({
+                url:`getUser`,
+                dataType:`json`
+            })
+        }
+        //生成列表等
+    }
+// promise:一次读一堆
+//generator:读一些有逻辑性的数据
+</script>
+</body>
+</html>

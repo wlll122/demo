@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结构赋值</title>
+</head>
+<body>
+<script>
+    // 左右结构一致
+    //右边必须是个都关系
+    //声明与赋值在一起
+    let {a,c,d}={a:12,c:5,d:12};
+    console.log(a,c,d)
+    //可以直接拆开
+    // let [{b},[n1,n2,n3],number,str]=[{b:34},[12,34,6],3,`ssd`];
+    // console.log(b,n1,n2,n3,number,str);
+    let [json,arr,number,str]=[{b:34},[12,34,6],3,`ssd`];
+    console.log(json,arr,number,str);
+    console.log(json)
+    //左右两边数据类型一致,右边必须有意义
+    //结构赋值必须连在一起
+
+
+</script>
+</body>
+</html>

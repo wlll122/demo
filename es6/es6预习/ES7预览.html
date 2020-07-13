@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    let arr =[12,34,65,3];
+    console.log(arr.includes(33));
+    //includes  数组是否包含某个东西
+    for (let arrKey in arr) {
+        console.log(arrKey)
+    }
+    // for in 循环的是数组下标,json循环的是key
+    // 数组  keys  values  entries
+    // for of 为循环的值,不能用于json
+    for (let number of arr) {
+        console.log(number)
+    }
+   //  keys        values              entries
+   // 所有的key      所有的值             所有的key - value
+    for (let keys of arr.keys()) {
+        console.log(keys);//出现下标
+    }
+    for (let val of arr.values()) {
+        console.log(val);//结果
+    }
+    for (let enter of arr.entries()) {
+        console.log(enter);
+    }
+    //求幂次方
+    console.log(2**4);
+
+
+    //字符串
+    console.log(`abfv`.padStart(10,`c`));//从前面开始补充字符,或者空格
+    console.log(`ads`.padEnd(10,`s`));//在后面补充
+    //async    await   优点:不依赖外部函数,可以用箭头函数,
+    let data1 = await $.ajax({
+    
+    async function readData() {
+        url:`data/arr.txt`,
+        dataType:"json"
+    })
+        let data2 = await $.ajax({
+        url:`data/json.txt`,
+        dataType:"json"
+    })
+    console.log(data1,data2)
+    }
+    readData();
+    // 箭头形式
+</script>
+
+</body>
+</html>

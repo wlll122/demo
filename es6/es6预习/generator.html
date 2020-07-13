@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>generator</title>
+</head>
+<body>
+<script>
+    //generator           生成器
+
+    // generator可以暂停运行
+    //yield 放弃
+    function *show() {
+        console.log(`a`);
+        yield;
+        console.log(`b`);
+    }
+    let genObj=show();
+    genObj.next();
+    genObj.next();
+    //一步一步执行
+    //请求数据的场景
+
+
+    // yield  传参,返回
+
+
+
+
+
+
+</script>
+</body>
+</html>

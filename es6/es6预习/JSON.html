@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON</title>
+</head>
+<body>
+<script>
+    // json对象
+    // json简写
+    //stringify   json变成字符串    parse
+    let json={a:12,b:12};
+    console.log(JSON.stringify(json))
+    let str =`http://baidu.com`+encodeURIComponent(JSON.stringify(json));
+    console.log(str)
+    //json标准:1.只能用双引号,所有的名字用双引号包裹
+    let str2 = `{"a":13,"b":"sds"}`;
+    let json3=JSON.parse(str2);
+    console.log(json3);
+    //json的简写
+    let a=23;
+    let b=23;
+    let json4={a,b,c:23};    //名字与值相同时可以写一个,对象属性唯一性
+    console.log(json4);
+
+
+    let json5={
+        a:13,
+        show(){//json中的方法
+          return  this.a
+        }
+    };
+    console.log(json5.show())
+</script>
+</body>
+</html>

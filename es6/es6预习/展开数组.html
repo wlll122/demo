@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>展开数组</title>
+</head>
+<body>
+<script>
+    let arr = [12,3,5,76];
+    console.log(...arr)
+    let show=(a,b,c)=>{
+        console.log(a);
+        console.log(b);
+        console.log(c);
+    }
+    show(...arr);
+    let arr2=[2,4,6,843];
+    // 展开后两个数组直接连接
+    let arr3=[...arr,...arr2]
+    console.log(arr3)
+
+
+    // 默认参数
+
+</script>
+</body>
+</html>
