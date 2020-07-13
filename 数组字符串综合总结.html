@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习</title>
+</head>
+<body>
+<script>
+    // 字符串方法
+    let str1 = `zhangsanshigeren`;
+    let str2 = `wob`;
+    let arr1 = [1, 456, 4, 65, 4, 4, 5, 15, 1, 5];
+    let arr2 = [4, 54, 45, 55, 2, 1, 25, 36, 1, 5];
+
+    console.log(str1.substring(0, 1));    //substring   字符串方法,无负值
+    console.log(str2.slice(-2));        //可以有负值
+    console.log(str2.substr(1, 4));      //参数1起始位置,截取长度
+    console.log(str2.indexOf("o"));     //获取字符的位置
+    console.log(str2.lastIndexOf("o"));  //从后查找第一次出现的目标,并返回正确的索引值
+    console.log(arr1.lastIndexOf(4, 2))      //从参数2开始参数1出现的位置
+    console.log(str1.split(""));            //字符串转化为数组
+    console.log(str2.replace(/wo/, "ha"))    //参数1:需要替换的值,参数2替换的实际值
+    // console.log(str2.length());               //获取字符串实际值
+    console.log(str2.trim());                   //去除字符串空格
+    console.log(str1.startsWith("h"));             //以某字符开头
+    console.log(str1.endsWith("e"));                //以某字符结尾
+    console.log(str1.repeat(4));                    //将字符串重复复制几次
+    console.log(str2.padStart(10,"#"))              //字符串补全,参数一:总的位数,参数2:补全字符,从前开始补全
+    console.log(str2.padEnd(10,"$"))                //从后补全,参数一致
+
+
+    // 数组方法
+    // Array.from可以将伪数组转为数组
+    console.log(arr1.pop())                 //删除最后一个,并返回删除项
+    console.log(arr1.shift())               //删除第一个并返回
+    console.log(arr1.push(2,3,5))           //插入项至数组后面,返回新数组的长度
+    console.log(arr1.unshift(12,2,2))       //从前面将值插入数组,返回新长度
+    console.log(arr2.join("-"));            //数组转换为字符串,参数为连接符号
+    console.log(arr1.concat(arr2));         //直接连接两个数组
+    console.log(arr1.indexOf(1))            //返回参数第一次出现的下标
+    console.log(arr2.lastIndexOf(2))        //无这个值返回  -1 ,主要用来判定是否存在
+    console.log(arr1.slice(2,5))            //参数1:起始下标,必填;参数二结束下标,但是不包含参数二位置元素(选填)
+    console.log(arr1.splice(3,2,12))        //重要:参数1起始位置,参数二删除的个数,删除后要添加的元素///返回值为删除的元素
+    console.log(Array.isArray(arr1));       //判断是否是数组
+
+
+    // ES6新增:
+    let item =(a,b,...ags)=>{
+        console.log(ags)
+        return a+b;
+
+    }
+    item(5,4,5,45,6);
+    //...ags   参数收集器(可能的名字)
+    //... 可以展开数组
+    // 例子:
+    let arr3 = [1,4,2,54];
+    let ex = (a,b,c)=>{
+        console.log(a,b,c);
+    }
+    ex(...arr3);
+    let arr4=[54,4,4,];
+    // 直接连接两个数组
+    let arr5 = [...arr3,...arr4];
+    console.log(arr5);//直接连接两个数组
+
+
+    // MAP方法:实现映射,一对一
+    console.log(arr4.map(item=>item>=10?`上等`:`下等`))
+
+    //reduce方法:获得数组和
+    let result = arr4.reduce((temp,item)=>{
+        return temp+item;
+    })
+    console.log(result)
+
+    //filter方法:过滤器属性
+    let result1 =arr4.filter(item=>{
+        if (item%3==0){
+            return true;
+        }else {
+            return false;
+        }
+    })
+    console.log(result1)//进行简单的选择筛选
+
+
+</script>
+</body>
+</html>
