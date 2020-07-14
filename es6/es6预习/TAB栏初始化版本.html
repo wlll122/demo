@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 600px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid red;
+        }
+        ul{
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+
+        }
+        li{
+            width: 25%;
+            height: 30px;
+            background-color: #00F7DE;
+            box-sizing: border-box;
+            border: 1px solid #b2b2b2;
+            text-align: center;
+            line-height: 30px;
+        }
+        .txtcolor{
+            color: #01AAED;
+        }
+        .tx{
+            display: flex;
+
+        }
+      .tx div{
+            display: none;
+            left: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li>张三</li>
+        <li>李四</li>
+        <li>王五</li>
+        <li>赵六</li>
+    </ul>
+    <div class="tx">
+        <div >张三的家</div>
+        <div>李四的家</div>
+        <div>王五的家</div>
+        <div>赵六的家</div>
+    </div>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    class Txt{
+        color(){
+            return ` #01AAED`;
+        }
+        show(){
+            return `block`;
+        }
+    }
+    let changColor = new Txt();
+    console.log(changColor.color())
+    $("li").click(function () {
+        let colo = changColor.color();
+        let shows =changColor.show();
+        let ind = $(this).index();
+        $(this).siblings().css(`color`,``);
+        $(this).css(`color`,colo)
+        let le = 50;
+        $(".tx div").eq(ind).siblings().css(`display`,`none`);
+        $(".tx div").eq(ind).siblings().css(`marginLeft`,``);
+        $(".tx div").eq(ind).css(`display`,`block`);
+        $(".tx div").eq(ind).css(`marginLeft`,`${le}px`);
+    })
+</script>
+</body>
+</html>

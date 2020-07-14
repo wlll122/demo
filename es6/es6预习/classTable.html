@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 600px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid red;
+        }
+        .top{
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            line-height: 60px;
+        }
+        .top div{
+            height: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid #b2b2b2;
+        }
+        .bot {
+            display: flex;
+
+        }
+        .bot div{
+            left: 0px;
+            display: none;
+           color: #ac2925;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="top">
+
+        </div>
+        <div class="bot"></div>
+
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    class Tab{
+        constructor(arrs) {
+            this.arrs = arrs;
+            this.init();
+        }
+        init(){
+            this.initTop();
+            this.initBot();
+            this.togle(arrs);
+        }
+        initTop(){
+            let str = ``;
+            for (let i =0;i<arrs.length;i++){
+                console.log(i)
+                console.log(arrs[i].tabname)
+                str += `<div style="width: ${100/arrs.length}%">${arrs[i].tabname}</div>`;
+            }
+            $('.top').html(str);
+        }
+        initBot(){
+            let strBot=``;
+            for(let j=0;j<arrs.length;j++){
+                strBot += `<div>${arrs[j].info}</div>`;
+            }
+            $('.bot').html(strBot);
+        }
+        togle(arrs){
+            $('.top div').click(function () {
+                //点击改变颜色
+                $(this).css({
+                    'color':arrs[$(this).index()].color,
+                    })
+                $(this).siblings().css(`color`,``)
+                //更换显示
+                console.log($(this).index())
+                $('.bot div').eq($(this).index()).siblings().css(`display`,`none`);
+                $('.bot div').eq($(this).index()).css(`display`,`block`);
+
+            })
+        }
+    }
+    let arrs = [
+        {
+            color:`#01AAED`,
+            tabname:"张三",
+            info:"张三位于郑州"
+        },
+        {
+            color:`#00FF00`,
+            tabname:"李四",
+            info:"李四位于上海"
+        },
+        {
+            color:`#4cae4c`,
+            tabname:"王五",
+            info:"王五位于北京"
+        },
+        {
+            color:`#ac2925`,
+            tabname:"王五",
+            info:"王五位于郑州"
+        },
+        {
+            color:`#01AAED`,
+            tabname:"赵六",
+            info:"赵六位于郑州"
+        },
+    ]
+    let arr = new Tab(arrs)
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script>
+ /*		
+	1)同步回调:
+		理解:立即执行,完全执行完了才结束,不会放入回调队列中,
+		例子:数组遍历相关的回调函数 /
+    2)异步回调
+		理解:不会立即执行,会放入回调队列中将来执行,
+		例子:定时器回调/ajax回调 /promise的成功|失败的回调,
+	*/
+   //1.同步回调
+ /**
+    const arr=[1,3,5]
+	arr.forEach(item=>{
+		console.log(item)
+	})
+	console.log('foreach（）之后');
+			
+	//2.异步回调
+	setTimeout(()=>{
+		console.log('我是settimeout');
+	},0)		
+	console.log('settimeout之后');	
+	getUser=()=>{
+		$.ajax({
+			url:`http://bufantec.com/api/test/user/list`,
+			method:`GET`,
+			success(data){
+				console.log(data.data.list[0].userId)
+			}
+		})
+	}
+	getUser();
+	getUserInfo=(val)=>{
+		$.ajax({
+			url:`http://bufantec.com/api/test/user/detail?id=${val}`,
+			method: `GET`,
+			success(msg){
+				console.log(msg);
+			}
+		})
+	};
+	getUserInfo('1511b606316346859f0b632464a643c5');
+	**/
+	let val=``;
+	// getUser=(resolver,reject)=>{
+	// 	$.ajax({
+	// 		url:`http://bufantec.com/api/test/user/list`,
+	// 		method:`GET`,
+	// 		// success(res){
+	// 		// 	resolver(res.data.list[0].userId)
+	// 		// },
+	// 		success:function(res){
+	// 			resolver(res.data.list[0].userId)
+	// 		},
+	// 		error(){
+	// 			reject(`请求数据失败`);
+	// 		}
+	//
+	// 	})
+	// }
+ // function getUser(resolve,reject) {
+	// $.ajax({
+	// 	url:`http://bufantec.com/api/test/user/list`,
+	// 	method:`GET`,
+	// 	success:function (res) {
+	// 		resolve(res.data.list[0].userId)
+	// 		console.log(resolve)
+	// 	},
+	// 	error:function () {
+	// 		reject(`数据请求失败`)
+	// 	}
+	// })
+ // }
+ function getUser(resolve,reject){
+	 $.ajax({
+		 url:`http://bufantec.com/api/test/user/list`,
+		 method:'GET',
+		 success:function(res){
+			 resolve(res.data.list[0].userId)
+			 console.log(resolve)
+		 },
+		 error:function(){
+			 reject('数据请求失败')
+		 }
+	 })
+ }
+ function getUserInfo(resolve,reject) {
+	$.ajax({
+		url:`http://bufantec.com/api/test/user/detail?id=${val}`,
+		method: `GET`,
+		success:function (res) {
+			resolve(res)
+		},
+		error:function () {
+		reject(`数据请求失败`)
+		}
+	})
+ }
+ let pro=new Promise(getUser)
+ pro.then((res)=>{
+ 	val = res;
+ 	return new Promise(getUserInfo)
+ }).then(res=>{
+ 	console.log(res)
+ }).catch(err=>{
+ 	console.log(err)
+ })
+	getUser();
+	</script>
+	</body>
+</html>

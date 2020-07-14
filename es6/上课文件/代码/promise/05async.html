@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	<script>
+	// async 写函数前面
+	// async 关键字把一个函数变成一个异步函数
+	// 在async声明的函数当中 return 返回的结果将会作为异步函数成了成功的结果	
+	
+	async  function main(){
+		  return 1
+	  }
+	
+	//console.log(main())
+	main().then(res=>{
+		console.log(res);
+	})
+		
+	
+	
+	//    await 关键字出现于2017 用于获取异步操作的结果
+	// await 关键字并不能单独进行使用 需要与async关键字配合使用
+	// 需要在异步函数当中使用await关键字
+	// await 用于获取promise处理的结果 
+		var promise=new Promise((resolve,reject)=>{
+			
+			setTimeout(()=>{
+				resolve(222)
+			},3000)
+		})
+		
+  async	function fun(){
+		var result= await promise;
+		var      rr= await  main();
+		console.log(result) 
+		console.log(rr);
+	}	
+		
+	fun()	
+		
+		
+		// await 关键字 会阻塞下面代码的执行 await 相当于添加了一个settimeout
+		// await 下面代码的执行 
+		// 利用await关键字的特点 实现以同步的方式书写异步的代码
+		// 利用await关键字 控制ajax的一个执行顺序
+		
+		
+		
+	</script>	
+	</body>
+</html>

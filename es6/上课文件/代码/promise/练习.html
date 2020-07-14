@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习</title>
+</head>
+<body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    function getUser(resolve,reject){
+        $.ajax({
+            url:`http://bufantec.com/api/test/user/list`,
+            method:'GET',
+            success:function(res){
+                resolve(res.data.list[0].userId)
+                console.log(resolve)
+            },
+            error:function(){
+                reject('数据请求失败')
+            }
+        })
+    }
+    function getUserInfo(resolve,reject) {
+        $.ajax({
+            url:`http://bufantec.com/api/test/user/detail?id=${val}`,
+            method: `GET`,
+            success:function (res) {
+                resolve(res)
+            },
+            error:function () {
+                reject(`数据请求失败`)
+            }
+        })
+    }
+    let pro=new Promise(getUser)
+    pro.then((res)=>{
+        val = res;
+        return new Promise(getUserInfo)
+    }).then(res=>{
+        console.log(res)
+    }).catch(err=>{
+        console.log(err)
+    })
+</script>
+</body>
+</html>

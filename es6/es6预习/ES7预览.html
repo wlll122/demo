@@ -38,19 +38,19 @@
     console.log(`abfv`.padStart(10,`c`));//从前面开始补充字符,或者空格
     console.log(`ads`.padEnd(10,`s`));//在后面补充
     //async    await   优点:不依赖外部函数,可以用箭头函数,
-    let data1 = await $.ajax({
-    
     async function readData() {
-        url:`data/arr.txt`,
-        dataType:"json"
-    })
-        let data2 = await $.ajax({
-        url:`data/json.txt`,
-        dataType:"json"
-    })
+    let data1 = await $.ajax({
+        url:`data/arr.txt`,dataType:`json`
+    });
+    let data2 = await $.ajax({
+        url: `data/json.txt`,dataType: `json`
+    });
     console.log(data1,data2)
     }
     readData();
+
+
+
     // 箭头形式
 </script>
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.js"></script>
+</head>
+<body>
+    <script>
+        $(function(){
+		
+	async function getResult(){
+			var result= await getUser();
+			var info= await   getUserInfo(result.data.list[0].userId);
+			
+			console.log(info);
+		}
+		
+	getResult()	
+			
+        
+		 
+		function getUser(){
+			var result=$.ajax({
+				url:`http://bufantec.com/api/test/user/list`,
+				method:'GET'
+			})
+			
+			return result
+		}
+		 
+		 function getUserInfo(val){
+			 return $.ajax({
+				 url:`http://bufantec.com/api/test/user/detail?id=${val}`,
+				 method:'GET'
+			 })			      
+		 }
+		 
+		 
+		 
+		   
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.js"></script>	
+	</head>
+	<body>
+		
+	<script>
+		/**
+		function getUser(){
+			$.ajax({
+				url:`http://bufantec.com/api/test/user/list`,
+				method:'GET',
+				success:function(data){
+					console.log(data.data.list[0].userId)
+					getUserInfo(data.data.list[0].userId)
+				}
+			})
+		}
+		
+		getUser();
+		
+	function getUserInfo(val){
+		$.ajax({
+			url:`http://bufantec.com/api/test/user/detail?id=${val}`,
+			method:'GET',
+			success:function(msg){
+				console.log(msg)
+				
+			}
+			
+		})
+	}
+		
+	//getUserInfo('1511b606316346859f0b632464a643c5')
+		**/
+	var val='';	
+	function getUser(resolve,reject){
+		$.ajax({
+			url:`http://bufantec.com/api/test/user/list`,
+			method:'GET',
+			success:function(res){
+				resolve(res.data.list[0].userId)
+				console.log(resolve)
+			},
+			error:function(){
+				reject('数据请求失败')
+			}
+		})
+	}
+		
+		function getUserInfo(resolve,reject){
+			$.ajax({
+				url:`http://bufantec.com/api/test/user/detail?id=${val}`,
+				method:'GET',
+				success:function(res){
+					resolve(res)
+				},
+				error:function(){
+					reject('数据请求失败')
+				}
+			})
+		}
+		
+	var pro=new Promise(getUser)
+		
+	pro.then((res)=>{
+		val=res;
+		return new Promise(getUserInfo)
+	})
+	.then(res=>{
+			console.log(res)
+		}).catch(err=>{
+			console.log(err)
+		})
+		
+	</script>
+	</body>
+</html>
