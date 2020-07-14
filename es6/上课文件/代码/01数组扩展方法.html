@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	<script>
+		//some every filter reduce 
+		
+	var arr=[1,52,12,36,15]
+	//筛选符合条件的每一项，返回一个新的数组
+	var result=arr.filter(function(el){
+		 return el>20
+	 })	   
+	console.log(result);
+	//查找数组中符合条件的每一项，只要是有一项符合条件的，就返回true，否则
+	//就返回false
+	var arr2=arr.some(function(el){
+		   return el>60
+	})
+
+	console.log(arr2);
+	
+	//查找数组中的每一项，只有全部符合条件才返回true，否则返回false
+	var arr3=arr.every(el=>{
+		return el>0
+	})
+	console.log(arr3);
+	
+  let s=[1,2,3,4,5];
+  
+  //返回数组的前一项和后一项的相加的值
+  //如果传递第二个参数，会作为初始值
+  var sum=s.reduce(function(pre,next){
+	  console.log(pre+"-------"+next)
+	  return pre+next
+  },100)
+	
+	console.log(sum);
+	</script>	
+	</body>
+</html>

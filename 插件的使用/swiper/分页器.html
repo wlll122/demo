@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分页器</title>
+    <link rel="stylesheet" href="swiper.min.css">
+    <style>
+        .box {
+            position: relative;
+            border: 1px solid red;
+            width: 1200px;
+            height: 600px;
+            margin: 0 auto;
+        }
+
+        .swiper-container {
+            width: 1200px;
+            height: 600px;
+        }
+
+        .swiper-pagination {
+            left: 0;
+            top: 0;
+            left: 50%;
+            top: 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <!-- 如果需要分页器 -->
+
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    <div class="swiper-pagination"></div>
+
+</div>
+
+<script src="swiper.min.js"></script>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        loop: true, // 循环模式选项
+
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+            
+        },
+
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // 如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    })
+</script>
+</body>
+</html>

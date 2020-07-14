@@ -39,6 +39,34 @@
     u2.showName();
     u2.showPss();
     u2.showLevel();
+    class Animal{
+        constructor(name,age) {
+            this.name=name;
+            this.age=age;
+        }
+        color(){
+            return `黄色`     //有返回值可以
+        }
+    }
+    let Dog=new Animal(`土狗`,12);
+    console.log(Dog.name);
+    console.log(Dog.age);
+    console.log(Dog.color())
+    class Dogs extends Animal{
+        constructor(name,age,colors) {
+            super(name,age);
+            this.colors=colors;
+        }
+        showColor(){
+            console.log(this.colors)
+        }
+    }
+    let cat = new Dogs(`三花`,12,`黄色`)
+    cat.showColor();
+
+    console.log(cat.name);
+    console.log(cat.age);
+
 </script>
 </body>
 </html>
