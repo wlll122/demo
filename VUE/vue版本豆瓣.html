@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>豆瓣</title>
+    <meta name="referrer" content="never"/>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #main{
+            width:1200px;
+            height: 1000px;
+            border: 1px solid #b2b2b2;
+            margin: 100px auto;
+        }
+        #main .box{
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .box .btn{
+            width: 33%;
+            border: 1px solid red;
+            text-align: center;
+            line-height: 80px;
+            font-size: 30px;
+        }
+        ul{
+            list-style: none;
+        }
+        .center ul{
+            width: 1200px;
+            height: 800px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .center ul::after{
+            content: "";
+            width: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="box">
+            <div class="btn" @click="getMovies">获取正在热映列表</div>
+
+        </div>
+
+        <div class="center">
+                <ul >
+                    <li v-for="item in list">
+                        <img :src="item.small" alt="">
+                        <div class="txt">
+                            <p>{{item.title}}</p>
+                            <p>{{item.longtime}}</p>
+                            <p>{{item.type}}</p>
+                            <p>{{item.rating_average}}</p>
+                            <p v-for="items in item.director">{{items}}</p>
+                            <p  v-for="items in item.scriptwriter">{{items}}</p>
+                        </div>
+                    </li>
+
+                </ul>
+        </div>
+    </div>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="vue.js"></script>
+    <script>
+        let main = new Vue({
+            el:"#main",
+            data:{
+             list:[],
+            },
+            methods:{
+
+
+                getMovies:function(){
+                 $.ajax({
+                        url:`http://bufantec.com/api/douban/movie/in_theaters`,
+                        type:`GET`,
+                        data:{
+                            start:1,
+                            limit:10
+                        },
+                        success:(res)=>{
+
+                            console.log(res)
+                            this.list = res.data.list;
+                        }
+                    })
+
+                },
+                //获取电影
+            },
+
+        })
+
+
+    </script>
+</body>
+</html>

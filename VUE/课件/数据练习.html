@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="referrer" content="never"/>
+    <title>数据</title>
+	<style>
+		ul{
+			list-style: none;
+			display: flex;
+			justify-content: space-between;
+		}
+	</style>
+</head>
+<body>
+<div id="box">
+	<p v-html="str"></p>
+	<p v-text="str1"></p>
+	<p ></p>
+    <input type="text" placeholder="请输入" v-model="num">
+	<p>{{num}}</p>
+
+	<p v-if="score>=90">A</p>
+	<p v-else-if="score>80">B</p>
+	<p v-else-if="score>70">C</p>
+	<p v-else="score">D</p>
+
+	<ul v-show="true">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	<ul v-if="true">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	<p v-for="item in books">{{item}}</p>
+	<p v-for="items in people">{{items}}</p>
+	<template v-for="item in goods">
+		<p>{{item.category}}</p>
+		<ul>
+			<li v-for="kind in item.items">{{kind}}</li>
+		</ul>
+	</template>
+	
+<!--	<p v-bind=>文章</p>-->
+	<a :href="url">点击</a>
+	<a :style="color" :href ="url">点击</a>
+	<p></p>
+	<button @click="get()">点击获取电影</button>
+	<ul>
+		<li v-for="item in list">
+
+			<img :src="item.medium" alt="">
+			<p>{{item.title}}</p>
+			<p>{{item.longtime}}</p>
+		</li>
+	</ul>
+	<p></p>
+
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+	<script src="../vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		let nu = new Vue({
+			el:`#box`,
+			data:{
+				num:``,
+				str:`<p>你好啊</p>`,
+				str1:`你好`,
+				score:60,
+				color:`color:red`,
+				url:`http://www.baidu.com`,
+				goods:[
+					{
+						category:'手机',
+						items:['iPhone','荣耀','小米','华为','vivo','OPPO']
+					},
+					{
+						category:'电脑',
+						items:['笔记本','轻薄本','游戏本','台式机','一体机','平板电脑']
+					},
+					{
+						category:'家纺',
+						items:['床品套件','被子被芯','毛巾浴巾','枕头枕芯','凉席','蚊帐']
+					},
+					{
+						category:'男鞋',
+						items:['小白鞋','椰子鞋','帆布鞋','工装鞋','板鞋','老爹鞋']
+					}
+				],
+				books:['三国演义','水浒传','红楼梦','西游记'],
+				people:{
+					name:'lemo',
+					age:30,
+					address:'中山西路188号'
+				},
+				list:[]
+
+			},
+			methods:{
+				get:function(){				//此处使用箭头函数会将this指向window
+					$.ajax({
+						url: `http://bufantec.com/api/douban/movie/in_theaters?start=1&limit=10`,
+						type:`GET`,
+						success:(res)=>{
+							this.list=res.data.list;
+							console.log(res)
+						}
+					})
+				}
+			}
+
+		})
+
+
+	</script>
+</body>
+</html>

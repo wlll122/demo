@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>循环指令</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		ul{
+			margin-top: 100px;
+		}
+	</style>
+	<script src="vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<p v-for="(book , index) in books" :key="index">{{book}} --- {{index}}</p>
+		<!-- 如果是span 标签包裹,则会在一行显示,取决是行内元素还是块元素 -->
+		<ul v-for="(item , attr) in people">
+			<li>{{attr}}-{{item}}</li>
+		</ul>
+		<!-- <div v-for = "good in goods" class="box">
+			<h3>{{good.category}}</h3>
+			<ul>
+				<li v-for = "item in good.items">{{item}}</li>
+			</ul>
+		</div> -->
+	</div>
+
+	<script>
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				books: ['三国演义', '水浒传', '红楼梦', '西游记'],
+				people: {
+					name: 'lemo',
+					age: 30,
+					address: '中山西路188号'
+				},
+				goods: [
+					{
+						category: '手机',
+						items: ['iPhone', '荣耀', '小米', '华为', 'vivo', 'OPPO']
+					},
+					{
+						category: '电脑',
+						items: ['笔记本', '轻薄本', '游戏本', '台式机', '一体机', '平板电脑']
+					},
+					{
+						category: '家纺',
+						items: ['床品套件', '被子被芯', '毛巾浴巾', '枕头枕芯', '凉席', '蚊帐']
+					},
+					{
+						category: '男鞋',
+						items: ['小白鞋', '椰子鞋', '帆布鞋', '工装鞋', '板鞋', '老爹鞋']
+					}
+				]
+			}
+		})
+	</script>
+	<!-- 循环指令: v-for  -->
+</body>
+
+</html>

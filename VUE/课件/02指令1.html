@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.box{
+				width: 200px;
+				height: 200px;
+				background: pink;
+			}
+		</style>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			
+			<p v-text="msg"></p>
+			<p>{{msg}}</p>
+			<!-- <a href="#"></a> -->
+			<p v-text="str"></p>
+			<p v-html="str"></p>
+		<input type="text" v-model="phone" placeholder="请输入手机号" />	
+			<h3>{{phone}}</h3>
+			
+		<!-- <img v-bind:src="'image/01.jpg'" />	 -->
+			<img v-bind:src="url" title="" />
+			<!-- <a  v-bind:href="urls">百度一下，你就知道</a> -->
+			<a :href="urls">百度一下，你就知道</a>
+			
+			
+			<!-- <div class="box" v-show="show"></div> -->
+			<div class="box" v-if="show"></div>
+			
+		<p v-if="socre>=90">A</p>
+		<p v-else-if="socre>80">B</p>
+		<p v-else-if="socre>60" >C</p>
+		<p v-else>D</p>
+		
+		<template v-if="true">
+			<ul>
+				<li>1111</li>
+				<li>11111</li>
+			</ul>
+		</template>
+			
+		
+		</div>
+		
+	<script>
+	var vm=new Vue({
+		el:"#app",
+		data:{
+			msg:'hello',
+			str:'<strong>你好！！</strong>',
+			phone:'',
+			url:'image/01.jpg',
+			urls:'http://www.baidu.com',
+			show:true,
+			socre:8
+			
+		},
+		
+	})	
+	
+		
+		
+		//var str="hello"
+	</script>
+	
+<!-- 数据绑定指令：v-html  v-text（{{}}） v-model
+数据《--》视图
+属性指令：v-bind  :
+条件指令：v-if/v-show
+循环指令: v-for -->
+
+	<div style="height: 500px;"></div>	
+	</body>
+</html>

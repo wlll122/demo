@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p v-for="(item,index) in books"  :key="index"  >{{item}}----{{index}}</p>
+			<ul v-for="(item,attr) in people">
+				<li>{{attr}}----{{item}}</li>
+			</ul>
+			
+		<template v-for="good in goods">
+			<h3>{{good.category}}</h3>
+			<ul>
+				<li v-for="kinds in good.items">{{kinds}}</li>
+			</ul>	
+		</template>	
+			
+			
+			
+		</div>
+	<script>
+	var vm=new Vue({
+		el:"#app",
+		data:{
+			books:['三国演义','水浒传','红楼梦','西游记'],
+			people:{			
+				name:'lemo',
+				age:30,
+				address:'中山西路188号'
+			},
+			goods:[
+				{
+				  category:'手机',
+				  items:['iPhone','荣耀','小米','华为','vivo','OPPO']
+				},
+				{
+				  category:'电脑',
+				  items:['笔记本','轻薄本','游戏本','台式机','一体机','平板电脑']
+				},
+				{
+				  category:'家纺',
+				  items:['床品套件','被子被芯','毛巾浴巾','枕头枕芯','凉席','蚊帐']
+				},
+				{
+				  category:'男鞋',
+				  items:['小白鞋','椰子鞋','帆布鞋','工装鞋','板鞋','老爹鞋']
+				}
+			]
+		}
+	})	
+		
+		
+		
+		
+	</script>
+	<div style="height: 500px;"></div>	
+	</body>
+</html>

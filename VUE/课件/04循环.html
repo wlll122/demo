@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<button @click="init">点击获取新闻</button>
+			
+		<ul>
+			<li v-for="item in list">
+				<h3><img :src="item.image" /> <span>{{item.title}}</span> </h3>
+				<p>{{item.passtime}}</p>
+				<a :href="item.path">点击查看详情</a>
+			</li>
+		</ul>	
+			
+			
+		</div>
+	<script>
+		var vm=new Vue({
+			el:"#app",
+			data:{
+			    list:[]
+			},
+			methods:{
+				init(urls){
+					//console.log(this)
+					var _this=this;
+					$.ajax({
+						url:urls,
+						type:'POST',
+						data:{
+							page:1,
+							count:5
+						},
+						success:function(msg){
+							console.log(msg.result)
+							_this.list=msg.result;
+							//console.log(this)
+							
+						}
+						
+					})
+					
+					
+				}
+			}
+			
+		})
+		
+	</script>	
+	</body>
+</html>
