@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+  <p v-press:top="200">定位方式</p>
+  <input type="text" v-focus>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+Vue.directive('press',{
+  bind(el,binding,vnode){
+    el.style.position=`relative`;
+    const  s = binding.arg == `left`?`left`:`top`;
+    el.style[s]=binding.value+`px`;
+  }
+})
+Vue.directive('pra',{
+  bind(el,binding,vnode){
+    el.style.position="fixes";
+    const a = binding.arg == `left`?`left`:`top`;
+    el.
+  }
+})
+Vue.directive('focus',{
+  inserted(el,binding,vnode){
+    el.focus();
+  }
+})
+Vue.directive(`pr`,{
+  bind(el,binding,vnode){
+    el.style.position="relative";
+    el.style.top=binding.value+"px";
+  }
+})
+let vm = new Vue({
+    el:`#main`,
+    data:{
+
+    },
+    methods:{
+
+    },
+    computed:{
+
+    },
+    filters:{
+
+    }
+
+})
+</script>
+</body>
+</html>

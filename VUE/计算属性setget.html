@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <p>{{fullName}}</p>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+let vm = new Vue({
+    el:`#main`,
+    data:{
+        firstName:`小明`,
+        lastName:`小张`
+    },
+    methods:{
+
+    },
+    computed:{
+        fullName:{
+            set:function (newValue) {
+                console.log(newValue)
+                const names = newValue.split(" ");
+                this.firstName = names[0],
+                this.lastName = names[1]
+            },
+            get:function () {    //一般使用get属性
+                return this.firstName +" "+this.lastName
+            }
+        }
+    },
+    filters:{
+
+    }
+
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 600px;
+            height: 600px;
+            margin: 100px auto;
+            border: 1px solid beige;
+        }
+        table{
+            width: 100%;
+            height: 300px;
+            text-align: center;
+            border: 1px solid #b2b2b2;
+        }
+        th{
+            border: 1px solid #b2b2b2;
+        }
+        td{
+            border: 1px solid #b2b2b2;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div id="main">
+        <p><strong>商品列表</strong></p>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>价格</th>
+                <th>库存</th>
+                <th>颜色</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item,index) in list">
+                <td>{{item.ID}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td  ><input type="text" v-model="item.inStock"></td>
+                <td>{{item.color}}</td>
+                <td><input type="button" value="添加至购物车" @click.stop="buy(index)"
+                ></td>
+            </tr>
+        </table>
+        <template>
+           <table cellpadding="0" cellspacing="0">
+               <tr>
+                   <th>编号</th>
+                   <th>名称</th>
+                   <th>颜色</th>
+                   <th>价格</th>
+                   <th>商品数量</th>
+                   <th>购买数量</th>
+                   <th>操作</th>
+               </tr>
+               <tr v-for="(item,index) in sell">
+                   <td>{{item.ID}}</td>
+                   <td>{{item.name}}</td>
+                   <td>{{item.color}}</td>
+                   <td >{{item.price}}</td>
+                   <td >{{item.inStock}}</td>
+                   <td></td>
+                   <td @click="del(index)">删除</td>
+               </tr>
+           </table>
+        </template>
+    </div>
+</div>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+let vm = new Vue({
+    el:`#main`,
+    data:{
+        buynumb:0,
+        index:``,
+        sell:[
+
+            ],
+
+        list:[
+            {
+                id:0,
+                ID:1,
+                name:`X900su`,
+                price:2900,
+                inStock:9,
+                color:`白色`,
+
+            },
+            {
+                id:1,
+                ID:2,
+                name:`suaceGo`,
+                price:180,
+                inStock:50,
+                color:`黑色`,
+
+            },
+            {
+                id:2,
+                ID:3,
+                name:`hpp`,
+                price:2900,
+                inStock:9,
+                color:`灰色`,
+
+            },
+            {
+                id:3,
+                ID:4,
+                name:`leveo`,
+                price:2900,
+                inStock:9,
+                color:`绿色`,
+
+            },
+
+        ],
+        current:0,
+    },
+    methods:{
+        buy:function (index) {
+            this.buynumb++
+            this.list[index].inStock = this.list[index].inStock-1;
+            if (this.list[index].inStock<=0){
+                this.list[index].inStock=0
+            }
+
+            if (!this.sell.includes(this.list[index])){
+                this.sell.push(this.list[index]);
+            }else {
+                this.sell[index].inStock = this.list[index].inStock
+            }
+        },
+        del:function (index) {
+            console.log(this.sell[index])
+            // this.sell.split(this.sell[index].index,1)
+        }
+    },
+    computed:{
+
+    },
+    filters:{
+
+    }
+
+})
+</script>
+</body>
+</html>

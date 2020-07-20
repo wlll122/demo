@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    table {
+      margin: 100px auto;
+      width: 600px;
+      height: 300px;
+
+      text-align: center;
+      border: 1px solid #b2b2b2;
+    }
+
+    th {
+      border: 1px solid #b2b2b2;
+    }
+
+    td {
+      border: 1px solid #b2b2b2;
+    }
+  </style>
+</head>
+<body>
+<div id="main">
+  <table cellpadding="0" cellspacing="0">
+    <tr v-for="(item,index) in list">
+      <td>{{item.ID}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.maxNum}}</td>
+      <td>{{item.color}}</td>
+      <td><input type="button" value="添加至购物车" @click="toCar(index)" :disabled="item.maxNum==0"></td>
+
+    </tr>
+
+  </table>
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <th>编号</th>
+      <th>名称</th>
+      <th>颜色</th>
+      <th>价格</th>
+      <th>商品数量</th>
+      <th>购买数量</th>
+      <th>操作</th>
+    </tr>
+    <tr v-for="(item,index) in cars" :key="item.ID">
+      <td>{{item.ID}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.color}}</td>
+      <td>{{item.price}}</td>
+      <td>{{item.count}}</td>
+      <td>
+        <input type="button" value="-" @click="down(index)">
+        <input type="text" v-model="item.count">
+        <input type="button" value="+" @click="up(index)">
+      </td>
+      <td><input type="button" value="删除" @click="del(index)"></td>
+      <td>合计:{{sum}}</td>
+
+    </tr>
+  </table>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: `#main`,
+    data: {
+      cars: [],
+      list: [
+        {
+          ID: 1,
+          name: `X900su`,
+          price: 2900,
+          maxNum: 9,
+          color: `白色`,
+        },
+        {
+          ID: 2,
+          name: `suaceGo`,
+          price: 180,
+          maxNum: 50,
+          color: `黑色`,
+
+        },
+        {
+
+          ID: 3,
+          name: `hpp`,
+          price: 2900,
+          maxNum: 9,
+          color: `灰色`,
+
+        },
+        {
+
+          ID: 4,
+          name: `leveo`,
+          price: 2900,
+          maxNum: 9,
+          color: `绿色`,
+
+        }
+
+      ],
+
+    },
+    methods: {
+      //点击添加购物车
+      toCar(index) {
+        //判定是否存在
+        let num = this.cars.findIndex((val) => val.ID == this.list[index].ID)
+        this.list[index].maxNum--;
+        console.log(num);
+        // 返回值-1
+        if (num == -1) {
+          let obj = {};
+          obj = {
+            ...this.list[index],
+            // ID:this.list[index].ID,
+            // name:this.list[index].name,
+            // price:this.list[index].price,
+            // color:this.list[index].color,
+            // maxNum:this.list[index].inStock,
+            count:1
+          };
+
+          console.log(obj)
+          this.cars.push(obj)
+        } else {
+          this.cars[num].count++;
+        }
+      },
+      down(index) {
+        this.cars[index].count--;
+        if (this.cars[index].count < 0) {
+          this.cars[index].count = 0
+        }
+        let num1 = this.list.findIndex(val => val.ID == this.cars[index].ID)
+        this.list[num1].maxNum++;
+      },
+      up(index) {
+        let num2 = this.list.findIndex(val => val.ID == this.cars[index].ID)
+        if (this.cars[index].count <= this.cars[index].maxNum) {
+          this.cars[index].count++
+          this.list[num2].maxNum--;
+        }
+      },
+      del(index) {
+        this.cars.splice(index, 1)
+      },
+
+
+    },
+    computed: {
+      sum() {
+        let add = 0;
+        this.cars.forEach(el => {
+          add += el.price * el.count;
+        })
+        return add;
+      }
+    },
+    filters: {}
+
+  })
+</script>
+</body>
+</html>

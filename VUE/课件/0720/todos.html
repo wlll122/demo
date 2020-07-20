@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			table{
+				width: 500px;
+				text-align: center;
+				/* height: 200px; */
+			}
+			td,th{
+				border-bottom: 1px solid #ccc;
+				height: 50px;
+			}
+			.title{
+				border: 1px solid #C5C5C5;
+				height: 38px;
+				outline: none;
+				padding-left: 15px;
+				width: 300px;
+				font-size: 22px;
+			}
+			.danger{
+				background: red;
+				color: #fff;
+			}
+			.warning{
+				background: #1E90FF;
+				color: #fff;
+			}
+			
+			 
+		</style>
+		<script src="../../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h3>my todos list <span v-if="list.length!==complated"  :class="showClass"  >{{list.length-complated}}</span>   </h3>
+		<input type="text" class="title" placeholder="请输入要做的内容" v-model.trim="val"    @keyup.enter="addTodos" />
+		<br />
+		<hr />
+		<table>	
+			<tr>
+				<th>#</th>
+				<th>任务列表</th>
+				<th>状态</th>
+				<th>筛选</th>
+				<th>操作</th>
+			</tr>
+		
+		<tr v-for="(item,index) in filtersList">
+			<td>{{index+1}}</td>
+			<td>{{item.text}}</td>
+			<td><input type="checkbox" v-model="item.done"  /> </td>
+			<td>{{item.done}}</td>
+			<td><a href="#" @click="delTodos(index)" >删除</a> </td>
+		</tr>	
+		</table>
+		<p><input type="checkbox"  v-model="all" />显示全部 </p>
+		<p>已完成 <strong>{{complated}}</strong> / 总数 <strong>{{list.length}}</strong> </p>
+		
+		</div>
+	<script>
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				list:[
+					{
+					  text:"吃饭",
+					  done:true
+					},
+					{
+					  text:"睡觉",
+					  done:false
+					},
+					{
+					  text:"打豆豆",
+					  done:false
+					}
+				],
+				val:'',
+				all:''
+				
+			},
+			methods:{
+				addTodos(){
+					if(!this.val){
+						alert('任务不能为空')
+						return
+					}else{
+						var obj={
+							  text:this.val,
+							  done:false
+							}
+						this.list.push(obj)		
+					}
+					
+				this.val=''	
+				},
+			delTodos(index){
+				this.list.splice(index,1);
+			}
+			},
+			computed:{
+				complated(){
+					var sum=0;
+					this.list.forEach(el=>{
+						if(el.done){
+							sum++
+						}
+					})
+					return sum;					
+				},
+				filtersList(){
+					var arr=[];
+					this.list.forEach(el=>{
+						if(!el.done||this.all){
+							arr.push(el)
+						}
+					})
+					return arr
+					
+					
+					
+				},
+				showClass(){
+					return this.list.length-this.complated>3 ? 'danger' : 'warning'
+				}
+			}
+		})
+	</script>	
+	</body>
+</html>

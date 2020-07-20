@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .box {
+      width: 1000px;
+      margin: 100px auto;
+      border: 1px solid #b2b2b2;
+    }
+    ul {
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+<div id="main">
+  <div class="box">
+    <ul>
+      <li v-for="(item,index) in list">
+        <img :src="item.medium" alt="">
+        <div v-show="!(idx == item.id)" >
+          <span @click="changeShow(item.id)">{{item.txt}}</span>
+          <span>删除</span>
+        </div>
+        <div>
+          <input type="text" v-if="idx == item.id" @keyup.enter="showTxt()" v-model="item.txt">
+        </div>
+      </li>
+    </ul>
+    <button @click="get()">获取数据</button>
+  </div>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  let vm = new Vue({
+    el: `#main`,
+    data: {
+      list: [],
+      show:true,
+      txt:`未知数`,
+      idx:''
+    },
+    methods: {
+      get() {
+        let that = this;
+        $.ajax({
+          url: 'http://bufantec.com/api/douban/movie/top250',
+          type: 'GET',
+          success(res) {
+            let dat = res.data.list;
+
+            for(let i = 0; i<dat.length;i++){
+              dat[i].txt = `未知`
+            };
+            that.list=dat.map(n=>n);
+            console.log(that.list)
+
+          }
+        })
+      },
+      changeShow(index){
+        this.show=!this.show;
+        this.idx=index;
+
+      },
+      showTxt(){
+        this.changeShow();
+      },
+      // showUP(){
+      //   this.changeShow();
+      // }
+    },
+    computed: {},
+    filters: {}
+
+  })
+</script>
+</body>
+</html>

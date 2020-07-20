@@ -1,0 +1,27 @@
+.box{
+  width: 1000px;
+  height: 600px;
+  background-color: #1E9FFF;
+  margin: 100px auto;
+
+  .box2{
+    width: 300px;
+    height: 200px;
+    background-color: #00F7DE;
+  }
+}
+//在最外层添加父元素,内部写子元素形成嵌套
+//&嵌套外层选择器
+a{
+  font-weight: bold;
+  text-decoration:none;
+  &:hover{text-decoration: underline;}
+  body.firefox & {font-weight: normal}
+}
+.check{
+  color: beige;
+  a {
+    font-weight: bold;
+    &:hover
+  }
+}

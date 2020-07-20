@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+  <cpn2></cpn2>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="../vue.js"></script>
+<script>
+//第一个组件(子类组件)   无法直接使用,如果项使用必须再次去Vue实例去注册
+ let cpnc1= Vue.extend({
+    template:`<div>
+  <h2>我是标题1</h2>
+  <p>我是内容</p>
+  <p>我是内容,哈哈哈哈</p>
+  </div>`
+  })
+//第二个组件(父类组件)
+ let cpnc2= Vue.extend({
+   template:`<div>
+  <h2>我是标题2</h2>
+  <p>我是内容</p>
+  <p>我是内容,哈哈哈哈</p>
+     <cpns></cpns>
+  </div>`,              //显示组件1 的内容
+   components:{
+     cpns:cpnc1        //组件1注册至组件2
+   }
+ })
+  //Vue实例就是root组件即根组件
+let vm = new Vue({
+    el:`#main`,
+    data:{
+
+    },
+    methods:{
+
+    },
+    computed:{
+
+    },
+    filters:{
+
+    },
+  components:{
+    cpn2:cpnc2
+  }
+
+})
+</script>
+</body>
+</html>

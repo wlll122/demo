@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+  <span v-if="type ===`userName`">
+    <label>用户名:</label>
+    <input type="text" key="user">
+  </span>
+  <span v-else>
+    <label>密码:</label>
+    <input type="password" ket="pass">
+  </span>
+  <button @click="chang()">登录切换</button>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+let vm = new Vue({
+    el:`#main`,
+    data:{
+      type:`userName`
+    },
+    methods:{
+      chang(){
+        this.type = this.type ===`password`?`userName`:`password`
+      }
+    },
+    computed:{
+
+    },
+    filters:{
+
+    }
+
+})
+</script>
+</body>
+</html>

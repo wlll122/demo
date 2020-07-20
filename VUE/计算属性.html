@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <p>{{total}}</p>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+let vm = new Vue({
+    el:`#main`,
+    data:{
+        books:[
+            {id:1,name:`小明`,price:120},
+            {id:2,name:`小红`,price:123},
+            {id:3,name:`小杠`,price:145},
+            {id:4,name:`小李`,price:165}
+            ]
+    },
+    methods:{
+
+    },
+    computed:{
+        //定义函数,只用于计算,无动词
+
+        total:function () {
+            let a = 0;
+            // this.books.forEach(el=>{
+            //     a += el.price;
+            // })
+            for (let book of this.books) {  //直接可以拿到对象   //计算属性内部有缓存可以再次调用并不进行计算
+                console.log(book)
+               a+= book.price
+            }
+            return a;
+        },
+
+
+    },
+    filters:{
+
+    }
+
+})
+</script>
+</body>
+</html>

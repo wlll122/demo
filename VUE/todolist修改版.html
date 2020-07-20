@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 300px;
+            height: 200px;
+            border: 1px solid #c0a16b;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="box">
+        <p>my todo list</p>
+        <input type="text" v-model="txt1">
+        <button @click="che()">添加</button>
+        <table>
+            <tr>
+                <th>任务列表</th>
+                <th>状态</th>
+                <th>筛选</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item, index) in list" >
+                <td>{{item.txts}}</td>
+                <td>{{item.isCheck == true?`完成`:`未完成`}}</td>
+                <td><input type="checkbox" v-model="item.isCheck"></td>
+                <td><input type="button" value="删除" @click="del()"></td>
+
+            </tr>
+            <td><input type="checkbox" value="">显示全部</td>
+            <td>完成{{crrayOut}}项/未完成{{undown}}项</td>
+        </table>
+
+
+    </div>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+let vm = new Vue({
+    el:`#main`,
+    data:{
+        txt1:``,
+        list:[],
+        ch:``
+    },
+    methods:{
+        che(){
+            if(this.txt1 == false){
+               return
+            };
+            let obj={};
+            obj={
+                txts :this.txt1,
+                isCheck:false
+            };
+            this.list.push(obj);
+            this.txt1=``;
+        },
+        del(index){
+            this.list.splice(index,1)
+        }
+    },
+    computed:{
+        crrayOut(){
+            let str = 0;
+            this.list.forEach(el=>{
+                if (el.isCheck == true){
+                    str =str+ 1
+                };
+
+            })
+            return str
+        },
+        undown(){
+         return     this.list.length-this.crrayOut;
+        }
+    },
+    filters:{
+
+    }
+})
+</script>
+</body>
+</html>

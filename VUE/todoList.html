@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 300px;
+            height: 180px;
+            margin: 100px auto;
+            border: 1px solid #b8d4ff;
+
+        }
+        span{
+            cursor: pointer;
+            background-color: #b2b2b2;
+        }
+        .active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="box">
+        <p :class="classobj">My to do list </p>
+        <input type="text" v-model="val" @blur="fun()" placeholder="请输入你要做的事">
+        <ol v-for="(item,index) in list" v-show="!(item.isCheck)">
+            <li>
+                {{item.text}}
+                <input type="checkbox" v-model="item.isCheck">
+                <span @click="del()">删除</span>
+            </li>
+
+        </ol>
+        <input type="checkbox"  @click="show()" v-model="che"> 全部展示
+        <p>未完成{{num}}/已完成{{add}}</p>
+    </div>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+let vm = new Vue({
+    el:`#main`,
+    data:{
+        val:``,
+        list:[],
+        che:false
+    },
+    methods:{
+        fun(){
+            //失去焦点事件
+            let obj={};
+            obj={
+                text:this.val,
+                isCheck:false,
+            }
+            this.list.push(obj);
+            this.val = ``;
+        },
+       show(){
+            // console.log(this.che);
+            this.list.forEach(el=>{
+                console.log(el.isCheck)
+                if (el.isCheck){
+                    el.isCheck=false
+                }
+            })
+       },
+        del(index){
+            this.list.splice(index,1)
+        },
+
+
+    },
+    computed:{
+        num(){
+            let str = 0;
+            this.list.forEach(el=>{
+                if (el.isCheck == false){
+                    str =str+1;
+                }
+            });
+            return str;
+        },
+        add(){
+            let ad1 = 0;
+            this.list.forEach(el=>{
+                if (el.isCheck == true){
+                    ad1 =ad1+1;
+                }
+            });
+            return ad1;
+        },
+       classobj:function () {
+            return{
+                active:this.num>=4
+            }
+       }
+
+    },
+    filters:{
+
+    }
+
+})
+</script>
+</body>
+</html>

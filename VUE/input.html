@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <ul>
+      <li v-for="(item,index) in list">
+        <input type="text"  @keyup.enter="showTxt()" :key="item.id" v-model="item.id" @click="chang(index)">
+        <p>{{item.id}}</p>
+      </li>
+    </ul>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+let vm = new Vue({
+    el:`#main`,
+    data:{
+        list:[{
+          id:1,
+          name:`未知`
+        },{
+          id:2,
+          name:`未知`
+        },{
+          id:3,
+          name:`未知`
+        },{
+          id:4,
+          name:`未知`
+        },{
+          id:5,
+          name:`未知`
+        },
+        ],
+        txt:``
+    },
+    methods:{
+      showTxt(){
+      for(let a=0;a<this.list.length;a++){
+        console.log(this.list[a].name)
+        this.list[a].id=a;
+        this.txt = this.list[a].value;
+      }
+      },
+      chang(index){
+        var v=this.list[index].value;
+      }
+    },
+    computed:{
+
+    },
+    filters:{
+
+    }
+
+})
+</script>
+</body>
+</html>

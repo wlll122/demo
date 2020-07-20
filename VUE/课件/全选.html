@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			table{
+				width:700px;
+				height: 300px;
+				text-align: center;
+			}
+		</style>
+		<script src="../vue.js"></script>
+	</head>
+	<body>
+	 <div id="app">
+		<table border="1px solid #ccc" cellspacing="0" cellpadding="0" >
+			<tr>
+				<th><input type="checkbox"  v-model="allIschecked" />全选 </th>
+				<th>#</th>
+				<th>商品名称</th>
+				<th>价格</th>
+				<th>购买数量</th>
+				<th>小计</th>
+			</tr>
+			<tr v-for="item in list">
+				<td><input type="checkbox" v-model="item.isCheck"  /> </td>
+				<td>{{item.id}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.price}}</td>
+				<td><input style="width: 50px; text-align: center;"  type="number" v-model="item.num" min="1"  /> </td>
+				<td>{{item.price*item.num}}</td>
+			</tr>
+			<tr>
+				<td>总计：</td>
+				<td colspan="5">{{total}}</td>
+			</tr>
+		</table>
+			
+			
+	</div>
+	<script>
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				list:[
+					{
+						id:100,
+						name:'realme 真我X50 Pro 5G 6400万变焦四摄',
+						price:3699.00,
+						num:1,
+						isCheck:false
+					},
+					{
+						id:102,
+						name:'OPPO Find X2 超感官',
+						price:5499.00,
+						num:1,
+						isCheck:false
+					},
+					{
+						id:104,
+						name:'三星Galaxy Note10+ 5G',
+						price:6499.00,
+						num:1,
+						isCheck:false
+					},
+					{
+						id:109,
+						name:'Apple iPhone 8 Plus ',
+						price:4399.00,
+						num:1,
+						isCheck:false
+					}
+				],
+				person:[
+					{
+						name:'张三',
+						isCheck:false
+					},
+					{
+						name:'李四',
+						isCheck:false
+					},
+					{
+						name:'王五',
+						isCheck:false
+					}
+				],
+				allIschecked:false
+				
+			},
+			computed:{
+				total(){
+					var sum=0
+					this.list.forEach(el=>{
+						if(el.isCheck){
+						 sum+=el.price*el.num
+						}
+					 
+					})
+					return sum;
+				},
+				// allIschecked:{
+				// 	get(){
+				// 	  return this.list.every(el=>el.isCheck)
+				// 	},
+				// 	set(val){
+				// 		this.list.forEach(el=>el.isCheck=val)
+				// 	}
+				// }
+			},
+			watch:{
+				allIschecked(newval,oldval){
+					if(newval){
+						this.list.forEach(el=>el.isCheck=true)
+					}else{
+						this.list.forEach(el=>el.isCheck=false)
+					}
+				},
+				list:{
+					handler(){
+						this.allIschecked = this.list.every(el=>el.isCheck)
+					},
+					deep:true
+				}
+				
+			}
+		})
+		
+		// 第一个handler:其值是一个回调函数,即监听到变化时应该执行该函数,
+		// 第二个是deep:其值是true或者false;确认是否深度监听(一般监听的时候不能监听到对象属性的变化,数组的变化是可以监听到的)
+		// 第三个是immediate,其值是true或者false 确认是否以初始值执行handler 
+	</script>
+		
+	</body>
+</html>

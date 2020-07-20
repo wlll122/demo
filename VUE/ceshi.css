@@ -1,0 +1,46 @@
+/*
+Error: Invalid CSS after "    &:hover": expected "{", was "}"
+        on line 26 of ceshi.scss
+
+21: .check{
+22:   color: beige;
+23:   a {
+24:     font-weight: bold;
+25:     &:hover
+26:   }
+27: }
+
+Backtrace:
+ceshi.scss:26
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:1207:in `expected'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:1137:in `expected'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:1132:in `tok!'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:665:in `block'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:735:in `declaration_or_ruleset'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:685:in `block_child'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:677:in `block_contents'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:666:in `block'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:735:in `declaration_or_ruleset'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:685:in `block_child'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:677:in `block_contents'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:666:in `block'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:658:in `ruleset'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:684:in `block_child'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:677:in `block_contents'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:125:in `stylesheet'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/scss/parser.rb:41:in `parse'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/engine.rb:409:in `_to_tree'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/engine.rb:384:in `_render_with_sourcemap'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/engine.rb:301:in `render_with_sourcemap'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/exec/sass_scss.rb:391:in `run'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/exec/sass_scss.rb:63:in `process_result'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/exec/base.rb:52:in `parse'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/lib/sass/exec/base.rb:19:in `parse!'
+F:/Ruby27/lib/ruby/gems/2.7.0/gems/sass-3.4.25/bin/sass:13:in `<top (required)>'
+F:/Ruby27/bin/sass:23:in `load'
+F:/Ruby27/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"    &:hover\": expected \"{\", was \"}\"\A         on line 26 of ceshi.scss\A \A 21: .check{\A 22:   color: beige;\A 23:   a {\A 24:     font-weight: bold;\A 25:     &:hover\A 26:   }\A 27: }"; }

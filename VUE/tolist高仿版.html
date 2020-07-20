@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 100%;
+            height: 50px;
+            background-color: #323232;
+        }
+
+        .box .boxmin {
+            width: 400px;
+            height: 50px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .txt {
+            color: white;
+        }
+
+        .txt2 {
+            width: 100%;
+            height: 1200px;
+            margin: 0 auto;
+            background-color: #CDCDCD;
+            overflow: hidden;
+            font-size: 24px;
+        }
+
+        .txt2 .minbox {
+            width: 400px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .txt2 .minbox1 {
+            width: 400px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="box">
+        <div class="boxmin">
+            <div class="txt">Todo List</div>
+            <div><input type="text" style="width: 200px;border-radius: 10%" v-on:keyup.enter="get()" v-model="todo" placeholder="请输入待办事项">
+            </div>
+
+        </div>
+        <div class="txt2">
+            <div class="minbox">
+                <p style="font-weight: bolder">正在进行</p>
+                <div>{{num}}</div>
+            </div>
+                <div v-for="(item ,index) in gettodo" style="width: 400px; margin: 10px auto;display: flex;justify-content: space-between;align-items: center">
+                    <input type="checkbox" style="width: 10%;height: 20px;" v-model="item.isCheck" @change="changTo(index)">
+                    <input type="text" style="width: 70%;" v-model="item.todos">
+                    <input type="button" style="width: 10%;" value="delate" @click="del(index)">
+                </div>
+            <div class="minbox1">
+                <p style="font-weight: bolder">已经完成</p>
+                <div>{{num2}}</div>
+            </div>
+            <div v-for="(item ,index) in downtodo" style="width: 400px; margin: 10px auto;display: flex;justify-content: space-between;align-items: center">
+                <input type="checkbox" style="width: 10%;height: 20px;" v-model="item.isCheck" @change="changTos(index)">
+                <input type="text" style="width: 70%;" v-model="item.todos">
+                <input type="button" style="width: 10%;" value="delate" @click="dels(index)">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: `#main`,
+        data: {
+            todo: ``,
+            gettodo: [],
+            downtodo:[]
+        },
+        methods: {
+            get() {
+                if (this.todo ==false){
+                    return
+                }
+                let obj = {
+                    todos: this.todo,
+                    isCheck:false
+                }
+                this.gettodo.push(obj)
+                console.log(`1`)
+                this.todo=``;
+            },
+            del(index){
+                this.gettodo.splice(index,1)
+            },
+            changTo(index){
+
+                  let a=  this.gettodo.splice(index,1)
+
+                this.downtodo.push(a[0])
+                console.log(this.downtodo)
+
+
+            },
+            changTos(index){
+                let b=  this.downtodo.splice(index,1)
+
+                this.gettodo.push(b[0])
+            },
+            dels(index){
+                this.downtodo.splice(index,1)
+            }
+
+        },
+        computed: {
+            num(){
+              return    this.gettodo.length;
+            },
+            num2(){
+                return    this.downtodo.length;
+            }
+        },
+        filters: {}
+
+    })
+</script>
+</body>
+</html>

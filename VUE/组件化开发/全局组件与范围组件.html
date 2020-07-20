@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="../vue.js"></script>
+<script>
+let cpnc= Vue.extend({
+    template:`<div>
+      <h2>我是标题</h2>
+      <p>我是内容</p>
+      <p>我是内容,哈哈哈哈</p>
+    </div>`
+  })
+// Vue.component(`my-cpn`,cpnc); //全局注册方式,可以在多个Vue实例下使用
+
+// 如何注册非全局组件
+
+let vm = new Vue({
+    el:`#main`,
+    data:{
+
+    },
+    methods:{
+
+    },
+    computed:{
+
+    },
+    filters:{
+
+    },
+  components:{
+      key值是名称,value是组件名
+      cpn:cpnc
+  }
+
+})
+</script>
+</body>
+</html>

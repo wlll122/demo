@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+	<div id="app">
+      <h3>当前的年龄是：{{age}}</h3>
+	   
+	  <h3>年龄是：{{ages}}</h3>
+	 
+	 <input type="text" v-model="fistname" />+ <input type="text" v-model="lastname" /> =
+	  <input type="text" v-model="fullname" />
+	   
+	</div>
+	<script>
+		var vm=new Vue({
+			el:"#app",
+			data:{
+			   birthday:'2018-10-24',
+			   ages:2,
+			   fistname:'',
+			   lastname:'',
+			   fullname:''
+			},
+			computed:{
+				age(){
+					setTimeout(()=>{
+						return new Date().getFullYear()-new Date(this.birthday).getFullYear()
+					},1000)
+				}
+			},
+			watch:{
+				birthday(){
+					setTimeout(()=>{
+						this.ages= new Date().getFullYear()-new Date(this.birthday).getFullYear()
+					},1000)
+					//this.ages=new Date().getFullYear()-new Date(this.birthday).getFullYear()
+				},
+				fistname(newval,oldval){
+					//newval:当前的数据,
+					//oldval:上一次操作的数据
+					//console.log(newval+"------"+oldval)
+					this.fullname=newval+this.lastname
+				},
+				lastname(newval,oldval){
+					this.fullname=this.fistname+newval
+				}
+			}
+			
+		})
+		
+	</script>	
+	</body>
+</html>

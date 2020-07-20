@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		
+		</style>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+		<!-- 	<p v-bind:class="current"></p> -->
+		
+			<!-- <p v-press>我是固定位</p> -->
+			
+			<!-- <p v-press="100">我是固定位</p> -->
+			
+			<!-- <p v-press:left="200">我是固定位</p> -->
+			<input type="text" />
+			<p v-press:top="200">我是固定位</p>
+			<input type="text" id="txt"  v-focus />
+			
+	</div>
+		
+	<script>
+		//Vue.directive('press')
+	
+		// Vue.directive('press',{
+		// 	bind(el,binding,vnode){
+		// 		el.style.position="fixed"
+		// 	}
+		// })
+		
+		// Vue.directive('press',{
+		// 	bind(el,binding,vnode){
+		// 		el.style.position="relative";
+		// 		el.style.top=binding.value+"px";
+				
+		// 	}
+		// })
+		
+		
+		Vue.directive('press',{
+			bind(el,binding,vnode){
+				el.style.position="relative";
+				const s=binding.arg=='left'?'left':'top';
+				el.style[s]=binding.value+"px";
+				
+			}
+		})
+		
+		Vue.directive('focus',{
+			inserted(el,binding,vnode){
+				el.focus();
+				
+			}
+		})
+		
+		
+		
+		
+		
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				
+			},
+			
+		})
+		
+	
+		
+	</script>
+	<!-- 
+	指令定义函数提供了几个钩子函数：
+	1.bind 只调用一次啊，指令第一次绑定到元素时调用  一般进行样式之类的操作
+	2.insert 被绑定元素插入父节点时调用  一般进行js相关的操作
+	3.update 所在组件的Vnode更新时调用，但是可能发生在其子元素的Vnode更新之前
+	4.componentUpdate 所在组件的Vnode及其子元素的Vnode全部更新时调用
+	5.unbind 只调用一次，指令与元素解绑时
+	
+	他们中的每一个都有可以用的：el, binding和vnode参数，除了updata和componentUpdate之外，还会暴露oldVnode，以区分传递的
+	旧值和新值
+	
+	el:指令绑定的元素，可以直接操作DOM 
+     binding：一个对象，包含以下属性：name value oldvalue expression arg和modefiers
+			 binding：一个对象，包含以下属性
+			 
+			     name：指令名，不包含v-的前缀；
+			 
+			     value：指令的绑定值；例如：v-my-directive="1+1"，value的值是2；
+			     oldValue：指令绑定的前一个值，仅在update和componentUpdated钩子函数中可用，无论值是否改变都可用；
+			 
+			     expression：绑定值的字符串形式；例如：v-my-directive="1+1"，expression的值是'1+1'；
+			 
+			     arg：传给指令的参数；例如：v-my-directive:foo，arg的值为 'foo'；
+			 
+			     modifiers：一个包含修饰符的对象；例如：v-my-directive.a.b，modifiers的值为{'a':true,'b':true}
+			 
+			 vnode：Vue编译的生成虚拟节点；
+			 
+			 oldVnode：上一次的虚拟节点，仅在update和componentUpdated钩子函数中可用。
+			
+     vnode: vue编译生成的虚拟节点
+	 binding和Vnode都是只读的
+				  -->
+		
+		
+	<div style="height: 2000px;"></div>
+		
+		
+		
+	</body>
+</html>

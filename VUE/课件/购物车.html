@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			table{
+				width: 900px;
+				height: 150px;
+				text-align: center;
+			}
+			.num{
+				width: 50px;
+				text-align: center;
+			}
+		</style>
+		<script src="../vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h3>商品列表</h3>
+			<table border="1px solid #ccc" cellpadding="0" cellspacing="0">
+				<tr v-for="(good,index) in goods">
+					<td>{{good.id}}</td>
+					<td>{{good.name}}</td>
+					<td>{{good.price}}</td>
+					<td>{{good.storage}}</td>
+					<td>{{good.colors}}</td>
+					<td><input type="button" value="添加到购物车" :disabled="good.storage==0"    @click="addCarts(index)" /> </td>
+				</tr>
+			</table>
+			<br />
+			<hr />
+			<h3>购物车列表</h3>
+			<table border="1px solid #ccc" cellpadding="0" cellspacing="0">
+				<tr>
+					<th>#</th>
+					<th>商品名称</th>
+					<th>商品价格</th>
+					<th>商品颜色</th>
+					<th>购买数量</th>
+					<th>小计</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="(item,index) in carts">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.price}}</td>
+					<td>{{item.colors}}</td>
+					<td>
+						<input type="button" value="-"  @click="des(index)" />
+						<input type="text" class="num" v-model="item.count" />
+						<input type="button" value="+" @click="incrate(index)" />
+					</td>
+					<td>{{item.price*item.count}}</td>
+					<td><input type="button" value="删除" @click="delCarts(index)"  /> </td>
+
+				</tr>
+
+				<tr>
+					<td v-if="carts.length==0" colspan="7">购物车空空如也，快去购物吧！！！</td>
+					<td v-else colspan="7">总计：{{total}}</td>
+				</tr>
+
+			</table>
+
+
+
+		</div>
+
+		<script>
+			// funtion getIndex(arr,id){
+			// 	for(var i=0;i<arr.length;i++){
+			// 		if(arr[i].id==id){
+			// 			return i;
+			// 		}
+			// 	}
+			// 	return -1;
+			// }
+
+			function getIndex(arr, id) {
+				return arr.findIndex(el => {
+					return el.id == id
+				})
+			}
+
+
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					goods: [{
+							id: 100007206105,
+							name: "真我X50 Pro 玩家版",
+							price: 3399,
+							storage: 10,
+							colors: '白色'
+						},
+						{
+							id: 0622440018,
+							name: "花花公子夏季薄款冰爽男士休闲裤透气宽松网眼速干运动裤",
+							price: 99,
+							storage: 122,
+							colors: '黑色'
+						},
+						{
+							id: 67048247577,
+							name: "阿玛尼（ARMANI）男士",
+							price: 289,
+							storage: 8,
+							colors: '灰色'
+						},
+						{
+							id: 31386939498,
+							name: "欧米茄（OMEGA）431.33",
+							price: 37819.00,
+							storage: 5,
+							colors: '白色'
+						},
+					],
+					carts: []
+				},
+				methods: {
+					addCarts(index) {
+						// var i=this.carts.findIndex(el=>{
+						// 		return el.id==this.goods[index].id
+						// 	})
+						// console.log(i)
+						var i = getIndex(this.carts, this.goods[index].id)
+						//console.log(i);
+						if (i == -1) {
+							var obj = {
+								id: this.goods[index].id,
+								name: this.goods[index].name,
+								price: this.goods[index].price,
+								max: this.goods[index].storage,
+								count: 1,
+								colors: this.goods[index].colors
+							}
+							this.carts.push(obj)
+						}else{
+							this.carts[i].count++
+						}
+						this.goods[index].storage--;
+
+					},
+				des(index){
+					if(this.carts[index].count>1){
+						this.carts[index].count--
+						var ids=getIndex(this.goods,this.carts[index].id);
+						this.goods[ids].storage++;
+					}
+					
+				},
+				incrate(index){
+					if(this.carts[index].count<this.carts[index].max){
+						this.carts[index].count++
+						var ids=getIndex(this.goods,this.carts[index].id);
+						this.goods[ids].storage--;
+					}
+					
+				},
+				delCarts(index){
+					var ids=getIndex(this.goods,this.carts[index].id);
+					this.goods[ids].storage+=this.carts[index].count;
+					this.carts.splice(index,1);
+				}
+
+
+
+
+				},
+				computed:{
+					total(){
+						var sum=0;
+						this.carts.forEach(el=>{
+							sum+=el.price*el.count
+						})
+					  return sum;	
+					}
+				}
+			})
+		</script>
+
+
+
+	</body>
+</html>
