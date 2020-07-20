@@ -9,26 +9,150 @@
             margin: 0;
             padding: 0;
         }
+
     </style>
 </head>
 <body>
 <div id="main">
+  <div class="box">
+    <div class="title">
+      <div class="box1">
+        <span>ID: <input type="text" v-model.trim="id"></span>
+        <span>名字: <input type="text" v-model.trim="name"></span>
+        <span>数量: <input type="text" v-model.number.trim="num"></span>
+        <input type="button" value="添加" @click="up()">
+      </div>
+      <div class="box2">
+        <input type="text" v-model="serachVal">
+      </div>
+    </div>
+    <div class="temp">
+      <table border="1px solid #000" cellspacing="0" cellpadding="0">
+        <tr>
+          <th>全选 <input type="checkbox" v-model="all"></th>
+          <th>id</th>
+          <th>名字</th>
+          <th>数量</th>
+          <th>时间</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="(item,index) in serach" :class="{active:item.ischeck}">
+          <td><input type="checkbox" v-model="item.ischeck"></td>
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td >
+            <span v-if="item.isshow" @click="item.isshow=!item.isshow" >{{item.num}}</span>
+            <input v-else type="text" v-focus @blur="item.isshow=!item.isshow" v-model.number="item.num">
+          </td>
+          <td>{{item.time}}</td>
+          <td><input type="button" value="删除" @click="del(index)"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="foot">
 
+      <div>总和:{{fullsum}}</div>
+    </div>
+
+  </div>
 </div>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<script src="vue.js"></script>
+<script src="../vue.js"></script>
 <script>
+  Vue.directive(`focus`,{
+    inserted(el){
+      el.focus();
+    }
+  })
 let vm = new Vue({
     el:`#main`,
     data:{
-
+      list:[
+          {
+            ischeck:false,
+            id:1,
+            name:`张三`,
+            num:12,
+            isshow:true,
+            time: new Date().toLocaleDateString(),
+          },
+          {
+            ischeck:false,
+            id:2,
+            name:`李四`,
+            num:10,
+            isshow:true,
+            time: new Date().toLocaleDateString()
+          },
+          {
+            ischeck:false,
+            id:3,
+            name:`王五`,
+            num:60,
+            isshow:true,
+            time: new Date().toLocaleDateString(),
+          },
+          ],
+      id:``,
+      name:``,
+      num:``,
+      isshow:true,
+      serachVal:``,
+      isActive: false,
     },
     methods:{
+      up(){
+        if (this.list.some((el=>el.id == this.id))){
+          alert('ID重复')
+          return;
+        }
+        if(this.id==''||this.name==''||this.num==''){
+          alert('选项不能为空')
+          return
+        }
+        let obj={
+          isCheck:false,
+          id : this.id,
+          name:this.name,
+          num:this.num,
+          time:new Date().toLocaleDateString(),
+        }
+        this.list.push(obj)
+
+      },
+      del(index){
+        this.list.splice(index,1)
+      },
 
     },
+
     computed:{
+      all:{
+        set(val){
+          this.list.forEach(el=>el.ischeck=val); //将val赋值给每一个对象
+        },
+        get(){
+          return this.list.every(el=>el.ischeck)   //如果全部为true返回true
+        }
+      },
+     fullsum(){
+      return   this.list.reduce((pre,val)=>{
+          if (val.ischeck){
+            return pre + val.num;
+          }else {
+            return pre
+          }
+        },0)
+     },
+
+      serach(){
+        return this.list.filter(el=>el.name.includes(this.serachVal))
+
+      },
 
     },
+
+
     filters:{
 
     }

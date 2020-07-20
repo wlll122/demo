@@ -1,5 +1,31 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0; }
+
+#main {
+  width: 1200px;
+  border: 1px solid red;
+  margin: 100px auto; }
+  #main .title {
+    width: 1200px;
+    height: 60px;
+    display: flex;
+    line-height: 60px;
+    justify-content: space-between; }
+  #main .temp table {
+    width: 800px;
+    margin: 0 auto;
+    text-align: center; }
+  #main .foot {
+    width: 800px;
+    height: 40px; }
+  #main .active {
+    background-color: #00F7DE; }
+  #main .act1 {
+    background-color: #1daee9; }
+  #main .box2 input::before {
+    content: '🔍';
+    color: #4cae4c; }
 
 /*# sourceMappingURL=css.css.map */

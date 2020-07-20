@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		    /* .ipts{
+		        border: none;
+		    } */
+		    #app{
+		        width: 1200px;
+		        margin: 0 auto;
+		    }
+		    .top{
+		        display: flex;
+		        align-items: center;
+		        justify-content: space-between;
+		        padding: 30px 0;
+		        border-bottom: 1px solid #ccc;
+		    }
+		    .main{
+		        padding: 30px 0;
+		    }
+		    table{
+		        width: 600px;
+		        margin: 0 auto;
+				text-align: center;
+		    }
+		    th,td{
+		        padding: 10px;
+		    }
+		    .foot{
+		        border-top: 1px solid #ccc;
+		    }
+		</style>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+	<div id="app">
+			<div class="top">
+				<div>
+					id:<input type="text" v-model.trim="id" />
+					名字：<input type="text" v-model.trim="username" />
+					数量：<input type="text" v-model.trim="num" />
+					<input type="button" value="添加" @click="add"   />
+				</div> 
+				<div>
+				  <input type="text" v-model="searchVal" />	
+				</div>
+			</div>
+		<div  class="main">
+			<table border="1px solid #000" cellpadding="0" cellspacing="0">
+				<tr>
+					<th><input type="checkbox" v-model="isAllchecked" />全选 </th>
+					<th>id</th>
+					<th>名字</th>
+					<th>数量</th>
+					<th>时间</th>
+					<th>操作</th>
+				</tr>
+			
+			<!-- <tr v-for="item in list"> -->
+			<tr v-for="item in filtersList">
+				<td><input type="checkbox" v-model="item.isChecked" /> </td>
+				<td>{{item.id}}</td>
+				<td>{{item.name}}</td>
+				<td>
+					<span v-if="!item.isIptShow" @click="item.isIptShow=!item.isIptShow">{{item.num}}</span>
+					<input v-else  type="text" v-model.number="item.num" v-focus @blur="item.isIptShow=!item.isIptShow" />
+				</td>
+				<td>{{item.time}}</td>
+				<td><a href="#" @click="del(item.id)">删除</a> </td>
+			</tr>
+	
+			</table>
+			<br />
+		<div class="foot">
+			<p>总量为：{{total}}</p>
+		</div>	
+			
+			
+		</div>	
+	</div>
+    <script>
+		Vue.directive('focus',{
+			inserted(el){
+				el.focus();
+			}
+		})
+		
+		
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				id:'',
+				username:'',
+				num:'',
+				searchVal:'',
+				list:[
+				    {
+				        isChecked:false,
+				        id:1,
+				        name:"张三",
+				        isIptShow:false,
+				        num:10,
+				        time:new Date().toLocaleString()
+				    },
+				    {
+				        isChecked:false,
+				        id:2,
+				        name:"李四",
+				        num:10,
+				        isIptShow:false,
+				        time:new Date().toLocaleString()
+				    },
+				    {
+				        isChecked:false,
+				        id:3,
+				        isIptShow:false,
+				        name:"王五",
+				        num:10,
+				        time:new Date().toLocaleString()
+				    }
+				]
+			},
+			methods:{
+				add(){
+					if(this.list.some(el=>el.id==this.id)){
+						alert('id不能重复！！')
+						return ;
+					}
+					if(this.id==''||this.username==''||this.num==''){
+						alert('选项不能为空')
+						return
+					}
+					
+				var obj={
+				        isChecked:false,
+				        id:this.id,
+				        isIptShow:false,
+				        name:this.username,
+				        num:this.num,
+				        time:new Date().toLocaleString()
+				    }
+				 this.list.push(obj)		
+				this.id=this.username=this.num='';	
+				},
+				del(id){
+					var index=this.list.findIndex(el=>{
+					  return el.id==id
+					});
+					//console.log(index)
+					this.list.splice(index,1);
+				}
+			},
+			computed:{
+			  isAllchecked:{
+				 get(){
+					return this.list.every(el=>el.isChecked) 
+				 },
+				 set(val){
+					 this.list.forEach(el=>el.isChecked=val)
+				 }
+			 },
+			total(){
+			 return	this.list.reduce((cur,val)=>{
+					if(val.isChecked){
+						return cur+val.num
+					}else{
+						return cur
+					}
+				},0)
+				
+			},
+			filtersList(){
+				return  this.list.filter(el=>el.name.includes(this.searchVal))
+			}
+			}
+		})
+	</script>	
+	</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  let a = [1,15,43,42,45,34,25];
+  let b = [4,452,52,62,35,3,43];
+  let str = `sdhssjh`
+  console.log(a.concat(b))  //连接数组
+  console.log(str.split("")) // 字符串转数组
+  a.forEach((val,index)=>{   //改变原数组
+    val = val*2;
+    console.log(val)
+  })
+ let c= a.map(val=>{          //map返回新的数组
+  val= val*3;
+   return val
+  })
+  console.log(c)
+ let c1= a.filter((val,index)=>{
+    console.log(val)
+   val>10;
+  })
+  let arr = [1,2,3,4,5]
+  let arr1 = arr.filter( (value, index) => value<3)
+  console.log(arr1)    // [1, 2]
+  console.log(a)
+let arr3 =a.filter((value,index)=>value>10);    //返回符合条件的新数组
+
+
+  // every判断是否全部满足,满足返回true
+  let C3 = a.every(val=>val>10);
+  console.log(C3)
+
+
+  let c4 = a.some(val=>val>10)
+  console.log(c4)
+
+
+  // 计算元素出现的次数
+  let names = ['peter', 'tom', 'mary', 'bob', 'tom','peter'];
+
+  let nameNumb= names.reduce((pre,cur)=>{
+    if(cur in pre){
+      pre[cur]++
+    }else {
+      pre[cur]=1;
+
+    }
+    return pre;
+  },{})
+  console.log(nameNumb)
+
+
+  //数组去重
+  let arr6 = [1,2,3,4,4,1];
+  let newArr = arr6.reduce((pre,cur)=>{
+    if(!pre.includes(cur)){
+      return pre.concat(cur)
+    }else {
+      return pre;
+    }
+  },[])
+  console.log(newArr)
+
+  //多维数组转一维
+
+  let arrs = [[0, 1], [2, 3], [4,[5,6,7]]]
+  const newArrs = function(arr){
+    return arr.reduce((pre,cur)=>pre.concat(Array.isArray(cur)?newArrs(cur):cur),[])
+  }
+  console.log(newArrs(arr)); //[0, 1, 2, 3, 4, 5, 6, 7]
+
+// .from   将为数组转换为数组
+//   find    返回第一个符合条件的元素
+//   findindex    返回符合条件成员的索引
+//   includes           判断是否返回包含给定的值
+// indexof   返回数值,   includes返回布尔值
+// index 不能判断nan   include   可以判断
+//   .keys   遍历键名
+//   .values   遍历键值
+//
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

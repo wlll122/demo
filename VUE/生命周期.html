@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+  <p>{{msg}}</p>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="vue.js"></script>
+<script>
+let vm = new Vue({
+    el:`#main`,
+    data:{
+      msg:`diyige`
+    },
+
+    methods:{
+      init(){
+        $.ajax({
+          url:` http://bufantec.com/api/douban/movie/top250 `,
+          type:`GET`,
+          success(res){
+            console.log(res)
+          }
+        })
+      }
+    },
+    computed:{
+
+    },
+    filters:{
+
+    },
+  beforeCreated(){
+    console.log(this.msg)
+  },
+  created(){
+    this.init();
+
+  }
+
+})
+</script>
+</body>
+</html>

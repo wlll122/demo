@@ -3,5 +3,34 @@
   padding: 0;
 }
 #main{
+  width: 1200px;
+  border: 1px solid red;
+  margin: 100px auto;
+  .title{
+    width: 1200px;
+    height: 60px;
+    display: flex;
+    line-height: 60px;
+    justify-content: space-between;
+  }
+  .temp table{
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .foot{
+    width: 800px;
+    height: 40px;
+  }
+  .active{
+    background-color: #00F7DE;
+  }
+  .act1{
+    background-color: #1daee9;
+  }
+  .box2 input::before{
+    content: '🔍';
+    color: #4cae4c;
 
+  }
 }
